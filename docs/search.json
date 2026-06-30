@@ -1,0 +1,279 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "",
+    "text": "Préface\nCe livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de [Nom du superviseur], [Département/Institution].",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "index.html#objectifs-du-projet",
+    "href": "index.html#objectifs-du-projet",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Objectifs du projet",
+    "text": "Objectifs du projet\n\nCe projet vise à …",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "index.html#organisation-du-document",
+    "href": "index.html#organisation-du-document",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Organisation du document",
+    "text": "Organisation du document\nLe rapport est structuré comme suit :\n\nChapitre 1 – Introduction : contexte, problématique et revue de littérature sommaire\nChapitre 2 – Méthodologie : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)\nChapitre 3 – Simulations : description et résultats des simulations réalisées en R\nChapitre 4 – Résultats : analyse et interprétation des résultats\nChapitre 5 – Discussion : limites, extensions possibles et conclusion",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "index.html#reproductibilité",
+    "href": "index.html#reproductibilité",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Reproductibilité",
+    "text": "Reproductibilité\nTout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :\ngit clone https://github.com/TON-USERNAME/feux-foret-book.git\ncd feux-foret-book\nquarto render\nLes packages R nécessaires sont listés dans le fichier packages.R à la racine du projet.",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "index.html#environnement-de-travail",
+    "href": "index.html#environnement-de-travail",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Environnement de travail",
+    "text": "Environnement de travail\n\n\nInformations sur l’environnement R\nsessionInfo()\n\n\nR version 4.6.0 (2026-04-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26200)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=French_Canada.utf8  LC_CTYPE=French_Canada.utf8   \n[3] LC_MONETARY=French_Canada.utf8 LC_NUMERIC=C                  \n[5] LC_TIME=French_Canada.utf8    \n\ntime zone: America/Toronto\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.6.0  fastmap_1.2.0   cli_3.6.6       tools_4.6.0    \n [5] htmltools_0.5.9 yaml_2.3.12     rmarkdown_2.31  knitr_1.51     \n [9] jsonlite_2.0.0  xfun_0.57       digest_0.6.39   rlang_1.2.0    \n[13] evaluate_1.0.5",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "01-introduction.html",
+    "href": "01-introduction.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 Contexte et motivation\nLes feux de forêt constituent un phénomène naturel dont la fréquence et l’intensité sont en augmentation dans le contexte des changements climatiques (Jones et al., 2022). La modélisation probabiliste de leur occurrence permet d’évaluer, par exemple, les risques qu’a un chalet placé à un certain endroit d’étre consumé partiellement ou totalement par les flammes. Le problème est intéressant, d’abord d’un point de vue climatique, car en sachant où les feux ont plus tendance à se propager et comment ils se propagent, il est plus facile de s’y préparer. Ensuite, d’un point de vue humain, il est utile de savoir quels endroits sont plus ou moins susceptibles d’être dans une zone de risque et, par conséquent, d’éviter que de nouvelles personnes s’installent à ces endroits et mettent leur vie en danger.Également, d’un point de vue économique, il est intéressant de connaître la probabilité, par exemple, qu’une propriété brûle au cours d’un feu de forêt et d’ajuster leurs tarifs en conséquence. Finalement, d’un point de vue probabiliste, le problème est intéressant, car les feux se propagent à partir de foyers et se développent de différentes manières. Le modèle booléen semble parfait pour ce problème. En ce qui concerne l’apparition des foyers, le processus de Poisson spatial inhomogène a du sens. En effet, on ne peut pas prédire exactement le nombre de feux qui se propagera dans une certaine surface, mais on peut essayer de l’estimer avec une intensité qui varie selon les régions. Par exemple, il sera plus probable pour un feu de prendre forme près d’endroits fréquentés par les humains que d’endroits qui ne le sont pas.",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction.html#problématique",
+    "href": "01-introduction.html#problématique",
+    "title": "1  Introduction",
+    "section": "1.2 Problématique",
+    "text": "1.2 Problématique\n\nEst-il possible de simuler des feux de forêts où les foyers sont générés selon des processus de Poisson de telle sorte que ces simulations peuvent assez bien prédire la probabilité qu’un point soit recouvert par l’enveloppe d’un feu?",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction.html#revue-de-littérature",
+    "href": "01-introduction.html#revue-de-littérature",
+    "title": "1  Introduction",
+    "section": "1.3 Revue de littérature",
+    "text": "1.3 Revue de littérature\n\nPlusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. Morisette et al. (2001) ont montré que … Les processus de Poisson spatiaux ont été utilisés dans ce contexte par …",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "01-introduction.html#objectifs-spécifiques",
+    "href": "01-introduction.html#objectifs-spécifiques",
+    "title": "1  Introduction",
+    "section": "1.4 Objectifs spécifiques",
+    "text": "1.4 Objectifs spécifiques\nLes objectifs de ce travail sont les suivants :\n\nObserver comment les feux se sont propagés par le passé et trouver des manières de reconnaître les différentes intensités pour ensuite en faire des simulations et des comparaisons.\nMieux comprendre les propriétés de certaines familles de modèles de géométrie stochastique\n\n\n\n\n\n\n\nJones, M. W., Abatzoglou, J. T., Veraverbeke, S., et al. (2022). Global and Regional Trends and Drivers of Fire Under Climate Change. Reviews of Geophysics, 60(3). https://doi.org/10.1029/2020RG000726\n\n\nMorisette, J. T., Giglio, L., Csiszar, I., & Justice, C. O. (2001). Validation of the MODIS Active Fire Product over Southern Africa with ASTER Data. International Journal of Remote Sensing, 26(19), 4239‑4264.",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "02-methodologie.html",
+    "href": "02-methodologie.html",
+    "title": "2  Méthodologie",
+    "section": "",
+    "text": "2.1 Processus de Poisson homogène\nSoit \\((N(t);t \\ge 0)\\) un processus de renouvellement avec distribution de renouvellement avec distribution de durée de vie \\(\\text{exp}(\\lambda )\\) , alors \\(N(t) \\sim \\text{Poisson}( \\lambda t), \\text{ } \\forall t \\ge 0\\) , d’où le nom \\(\\textit{processus de Poisson}\\) (Bélisle, 2021).",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "02-methodologie.html#processus-ponctuels-spatiaux",
+    "href": "02-methodologie.html#processus-ponctuels-spatiaux",
+    "title": "2  Méthodologie",
+    "section": "2.2 Processus ponctuels spatiaux",
+    "text": "2.2 Processus ponctuels spatiaux\nUn processus ponctuel spatial est un ensemble de données qui donne l’endroit de certains évènements ou objets (Baddeley et al., 2015). Par exemple, les foyers de feux de forêts, la position des voitures dans le stationnement d’un centre commercial, les endroits où on trouve des chalets, etc.\n\n2.2.1 Processus de Poisson homogène spatial\nPour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface \\(A\\) (car on s’intéresse, dans ce cas-ci, à la dimension \\(d=2\\)). La mesure du temps est remplacée par\\(\\vert A \\vert\\) et \\[N( A ) \\sim Poisson(\\lambda \\vert A \\vert ).\\]\n\n\n2.2.2 Processus de Poisson inhomogène spatial\nLe principe est le même qu’avec le processus de Poisson homogène, toutefois, l’intensité \\(\\lambda\\) devient une fonction \\(\\lambda (x,y)\\). L’intensité deépend donc de la position sur A. La fonction de moyenne est définie par \\(m (t_1,t_2)= \\int_{0}^{t_2} \\int_{0}^{t_1} \\lambda (x,y)dxdy\\), de plus \\(\\mathbb{E}(N(t_3,t_4)-N(t_1,t_2))=m(t_3,t_4)-m(t_1,t_2)\\).",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "02-methodologie.html#géométrie-stochastique",
+    "href": "02-methodologie.html#géométrie-stochastique",
+    "title": "2  Méthodologie",
+    "section": "2.3 Géométrie Stochastique",
+    "text": "2.3 Géométrie Stochastique\n\n2.3.1 Opérations de Minkowski\nSoient deux ensembles \\(A\\) et \\(B\\). La somme de Minkowski \\(\\oplus\\) est définie par \\[A \\oplus B= \\left\\{ a+b \\vert a \\in A \\wedge b \\in B  \\right\\}.\\] Autrement dit, on fait la somme de tous les éléments de \\(A\\) avec ceux de \\(B\\). La différence de Minkowski\\(\\ominus\\), quant à elle, est définie par \\[A \\ominus B=(A^c \\oplus B)^c.\\](Chiu et al., 2013)\n\n\n2.3.2 Modèle booléen\nLe \\(\\textit{modèle booléen }  \\Xi\\) est construit de germes \\(x_i\\) (des points) et de grains\\(\\Xi_i\\) (des ensembles compacts (fermés et bornés) dans \\(\\mathbb{R}^2\\)) comme suit \\[ \\Xi= \\cup_{i=1}^\\infty( \\Xi_i \\oplus x_i).\\] Pour un ensemble compact \\(K\\), la probabilité de recouvrement \\(T_{ \\Xi}(k)= \\mathbb{P}( \\check{ \\Xi} \\cap K \\ne \\emptyset)\\) est donnée par \\[T_{ \\Xi}(k)=1- \\text{exp}(- \\lambda \\mathbb{E}( \\nu_2( \\check{ \\Xi}_0 \\oplus K))).\\] Il s’agit de la probabilité qu’il existe une intersection entre \\(K\\) et \\(\\Xi\\).(Chiu et al., 2013)",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "02-methodologie.html#estimations",
+    "href": "02-methodologie.html#estimations",
+    "title": "2  Méthodologie",
+    "section": "2.4 Estimations",
+    "text": "2.4 Estimations\nCe projet est ancré sur des phénomènes réels, il est alors important de pouvoir estimer ce qu’il se passe dans le monde réel afin de comprendre pourquoi certaines choses se sont produites par le passé et estimer les risques qu’autres choses se produisent dans le futur.\n\n2.4.1 Estimation de l’intensité homogène\nUne manière assez intuitive d’estimer l’intensité d’un certain processus est de prendre la moyenne de points pour une certaine aire: \\[\\bar{ \\lambda}= \\frac{n(x)}{ \\vert A \\vert}.\\] de variance \\(var \\bar{ \\lambda}= \\frac{ \\bar{ \\lambda}}{ \\vert A \\vert}\\) et d’écart-type \\(\\sigma= \\sqrt{ \\frac{ \\bar{ \\lambda}}{ \\vert A \\vert}}\\) s’il s’agit d’un processus de Poisson homogène. Cette technique n’est toutefois pas adaptée dans le cas d’un processus de Poisson non homogène. (Baddeley et al., 2015)\n\n\n2.4.2 Estimation de l’intensité non homogène\nDans le cas où l’hypothèse d’un processus non homogène est la plus vraisemblable, la technique du comptage de quadrats est simple et efficace. Elle consiste à diviser la région étudiée en ntuiles \\(B_i\\) de même dimension (par exemple: rectangles ou hexagones) et on compte le nombre de points dans chaque région. Puisque le nombre de points de chaque région est indépendant, l’espérance du nombre de points dans chaque région \\(\\mathbb{E}(n(X \\cap B_i))\\) devrait être la même \\(\\forall i \\in \\mathbb{N} \\star \\vert i \\le n\\), une quelconque tendance spatiale apparente suggère la non homogénéité du processus étudié.(Baddeley et al., 2015)\n\n\n2.4.3 Estimation de la fonction d’intensité\nSi un processus a une fonction d’intensité \\(\\lambda (u)\\), alors cette fonction peut être estimée avec l’estimation de noyau. Il existe plusieurs estimateurs de noyau, en voici un: \\[\\tilde{ \\lambda}^{(0)} (u)= \\sum_{i=1}^n  \\kappa (u-x_i)\\] où \\(\\kappa(u)\\) est la fonction de noyau (la forme autour du point).(Baddeley et al., 2015)\n\n\n2.4.4 Estimation des paramètres de la fonction de densité de rayon\nDans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l’écart-type sur l’échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. (Chiu et al., 2013)\n\n\n\n\n\n\nBaddeley, A., Rubak, E., & Turner, R. (2015). Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nBélisle, C. (2021). STT-4700 Processus aléatoires.\n\n\nChiu, S. N., Stoyan, D., Kendall, W., & Mecke, J. (2013). Stochastic Geometry and Its Applications, 3rd Edition. Wiley.",
+    "crumbs": [
+      "Cadre théorique",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Méthodologie</span>"
+    ]
+  },
+  {
+    "objectID": "03-simulations.html",
+    "href": "03-simulations.html",
+    "title": "3  Simulations",
+    "section": "",
+    "text": "3.1 Simulation d’un modèle booléen avec disques\nOn fait apparaître des points \\(x_i\\) sur une région selon un processus de Poisson homogène sur la région \\([0,1] \\times [0,1]\\) du plan, et on pose un disque \\(\\Xi_i\\) sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a \\(R(x_i) \\sim \\text{exp}(\\lambda)\\).Ici, le modèle booléen est \\[ \\Xi= \\cup_{i  \\in I}( \\Xi_i \\oplus x_i)\\]\nCode\nlibrary(ggplot2)\n\n\n\nborne_inferieure_axe_x &lt;- 0; borne_superieure_axe_x &lt;- 1\nborne_inferieure_axe_y &lt;- 0; borne_superieure_axe_y &lt;- 1\nlongueur_intervalle_x &lt;- (borne_superieure_axe_x) - (borne_inferieure_axe_x)\nlongueur_intervalle_y &lt;- (borne_superieure_axe_y) - (borne_inferieure_axe_y)\n\nnombre_points &lt;- rpois(1, lambda=17*longueur_intervalle_x*longueur_intervalle_y)\n\ncentres_x_cercles&lt;- runif(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)\ncentres_y_cercles&lt;- runif(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)\nrayons_cercles&lt;-rexp(nombre_points,11)\ntheta &lt;- seq(0, 2 * pi, length.out = 200)\n\nnombre_cordes &lt;- rpois(1, lambda=17*longueur_intervalle_x*longueur_intervalle_y)\n\ncentres_x_cordes&lt;- runif(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)\ncentres_y_cordes&lt;- runif(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)\nlongueurs_cordes&lt;-rexp(nombre_cordes,11)\n\norientations_cordes&lt;-runif(nombre_cordes,0,pi)\n\n# 1. Génération des cercles sans aucun package externe\ndf_cercles &lt;- do.call(rbind, lapply(1:nombre_points, function(i) {\n  data.frame(\n    id = i,\n    x  = centres_x_cercles[i] + rayons_cercles[i] * cos(theta),\n    y  = centres_y_cercles[i] + rayons_cercles[i] * sin(theta)\n  )\n}))\n\n# 2. Génération des cordes (calcul vectoriel direct)\ndf_cordes &lt;- data.frame(\n  x    = centres_x_cordes - longueurs_cordes * cos(orientations_cordes),\n  y    = centres_y_cordes - longueurs_cordes * sin(orientations_cordes),\n  xend = centres_x_cordes + longueurs_cordes * cos(orientations_cordes),\n  yend = centres_y_cordes + longueurs_cordes * sin(orientations_cordes),\n  cx   = centres_x_cordes,\n  cy   = centres_y_cordes\n)\nset.seed(41)\n\n\n\n# 3. Tracé avec ggplot2 uniquement\nggplot() +\n  # Cercles (cyan avec bordure bleue)\n  geom_polygon(data = df_cercles, aes(x = x, y = y, group = id), \n               fill = \"cyan\", alpha = 0.4, color = \"blue\", linewidth = 0.6) +\n  \n  # Centres des cercles (points noirs)\n  geom_point(data = data.frame(x = centres_x_cercles, y = centres_y_cercles), \n             aes(x = x, y = y), color = \"black\", size = 0.5) +\n  \n  # Contraintes d'affichage (Strictement limité entre 0 et 1 comme clip)\n  coord_equal(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),\n              ylim = c(borne_inferieure_axe_y, borne_superieure_axe_y),\n              expand = FALSE) +\n  \n  labs(title = \"Modèle booléen avec disques\", x = \"x\", y = \"y\") +\n  theme_minimal()",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulations</span>"
+    ]
+  },
+  {
+    "objectID": "03-simulations.html#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes",
+    "href": "03-simulations.html#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes",
+    "title": "3  Simulations",
+    "section": "3.2 Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes",
+    "text": "3.2 Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes\nOn crée d’abord un modèle booléen \\(\\Xi_d\\) avec des disques comme à la section précédente. On crée ensuite un second modéle booléen \\(\\Xi_c\\) où les points\\(x_{ci}\\) sont à nouveau placés sur la partie du plan \\([0,1] \\times [0,1]\\) selon un deuxiàme processus de Poisson, pour l’orientation de chaque corde\\(\\Xi_{ci}\\), on a \\(\\theta_i \\sim  \\text{uniforme}(0, \\pi)\\) et pour la longueur, on a \\(\\mathscr{l}_i \\sim \\text{exp}( \\lambda_{ci})\\). On peut calculer la longueur moyenne de chaque corde qui se trouve dans \\(\\Xi_d\\) et la probabilité \\(\\mathbb{P}(x \\in \\Xi_d  \\vert x \\in \\Xi_c)\\).\n\n\nCode\nlibrary(spatstat)\nlibrary(ggplot2)\n\n# --- 1. CONFIGURATION ET PARAMÈTRES ---\nborne_inferieure_axe_x &lt;- 0\nborne_superieure_axe_x &lt;- 1\nborne_inferieure_axe_y &lt;- 0\nborne_superieure_axe_y &lt;- 1\n\nlongueur_intervalle_x &lt;- (borne_superieure_axe_x) - (borne_inferieure_axe_x)\nlongueur_intervalle_y &lt;- (borne_superieure_axe_y) - (borne_inferieure_axe_y)\n\nset.seed(40)\n\n# Définition de la fenêtre d'observation principale\nW_obs &lt;- owin(c(borne_inferieure_axe_x, borne_superieure_axe_x), \n              c(borne_inferieure_axe_y, borne_superieure_axe_y))\n\n# Fenêtre élargie pour éviter les effets de bord lors de la génération\nW_large &lt;- owin(c(borne_inferieure_axe_x - longueur_intervalle_x, borne_superieure_axe_x + longueur_intervalle_x), \n                c(borne_inferieure_axe_y - longueur_intervalle_y, borne_superieure_axe_y + longueur_intervalle_y))\n\n# --- 2. SIMULATION DES PROCESSUS ---\nnombre_points &lt;- rpois(1, lambda = 20 * longueur_intervalle_x * longueur_intervalle_y)\nnombre_cordes &lt;- rpois(1, lambda = 20 * longueur_intervalle_x * longueur_intervalle_y)\n\ncentres_x_cercles &lt;- runif(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)\ncentres_y_cercles &lt;- runif(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)\nrayons_cercles    &lt;- rexp(nombre_points, 20)\n\ncentres_x_cordes    &lt;- runif(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)\ncentres_y_cordes    &lt;- runif(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)\nlongueurs_cordes    &lt;- rexp(nombre_cordes, 5) / 2\norientations_cordes &lt;- runif(nombre_cordes, 0, pi)\n\n# --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---\n# Résolution du masque augmentée (dimyx=512) pour éviter l'erreur d'approximation numérique\nliste_cercles &lt;- list()\nfor(i in 1:nombre_points) {\n  liste_cercles[[i]] &lt;- disc(r = rayons_cercles[i], \n                             centre = c(centres_x_cercles[i], centres_y_cercles[i]), \n                             mask = TRUE, dimyx = 512)\n}\nzone_cercles &lt;- do.call(union.owin, liste_cercles)\n\n# Construction des segments\nx0 &lt;- centres_x_cordes - longueurs_cordes * cos(orientations_cordes)\ny0 &lt;- centres_y_cordes - longueurs_cordes * sin(orientations_cordes)\nx1 &lt;- centres_x_cordes + longueurs_cordes * cos(orientations_cordes)\ny1 &lt;- centres_y_cordes + longueurs_cordes * sin(orientations_cordes)\n\n# Utilisation de la fenêtre élargie pour ne pas couper les cordes de base\ntoutes_les_cordes &lt;- psp(x0, y0, x1, y1, window = W_large)\n\n# Intersection des cordes avec l'union des cercles\ncordes_dans_cercles &lt;- toutes_les_cordes[zone_cercles]\n\n# Calcul des statistiques d'intersection\nlongueurs_intersections       &lt;- lengths_psp(cordes_dans_cercles)\nlongueur_totale_initiale      &lt;- sum(lengths_psp(toutes_les_cordes))\nlongueur_totale_intersections &lt;- sum(longueurs_intersections)\npourcentage_dans_cercles      &lt;- (longueur_totale_intersections / longueur_totale_initiale)\n\n# --- 4. EXTRACATION DES SEGMENTS INTERSECTÉS POUR GGPLOT2 ---\n# Conversion de l'objet psp spatstat en DataFrame\ndf_cordes_inter &lt;- as.data.frame(cordes_dans_cercles)\n\n# --- 5. PRÉPARATION DES DONNÉES DE BASE POUR GGPLOT2 ---\ntheta &lt;- seq(0, 2 * pi, length.out = 200)\ndf_cercles_contours &lt;- do.call(rbind, lapply(1:nombre_points, function(i) {\n  data.frame(\n    id = i,\n    x  = centres_x_cercles[i] + rayons_cercles[i] * cos(theta),\n    y  = centres_y_cercles[i] + rayons_cercles[i] * sin(theta)\n  )\n}))\n\ndf_cordes_initiales &lt;- data.frame(x0 = x0, y0 = y0, x1 = x1, y1 = y1)\n\n# --- 6. VISUALISATION AVEC GGPLOT2 ---\ntitre_graphe &lt;- paste(\"Proba d'intersection :\", round(pourcentage_dans_cercles , 3))\n\nggplot() +\n  # 1. Tracé des cercles (Masque booléen)\n  geom_polygon(data = df_cercles_contours, aes(x = x, y = y, group = id), \n               fill = \"cyan\", alpha = 0.3, color = \"blue\", linewidth = 0.5) +\n  \n  # 2. Tracé des cordes initiales complètes (en rouge)\n  geom_segment(data = df_cordes_initiales, aes(x = x0, y = y0, xend = x1, yend = y1), \n               color = \"red\", linewidth = 0.9) +\n  \n  # 3. Tracé exclusif des segments intersectés calculés par spatstat (En rouge foncé)\n  geom_segment(data = df_cordes_inter, aes(x = x0, y = y0, xend = x1, yend = y1), \n               color = \"darkred\", linewidth = 0.9) +\n  \n  # 4. Points centraux\n  geom_point(data = data.frame(x = centres_x_cercles, y = centres_y_cercles), aes(x = x, y = y), \n             color = \"black\", size = 0.6) +\n  geom_point(data = data.frame(x = centres_x_cordes, y = centres_y_cordes), aes(x = x, y = y), \n             color = \"forestgreen\", size = 0.6) +\n  \n  # Rognage strict de la fenêtre d'observation finale [0,1]\n  coord_equal(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),\n              ylim = c(borne_inferieure_axe_y, borne_superieure_axe_y),\n              expand = FALSE) +\n  \n  labs(title = \"Modèle Booléen & Intersection spatiale\",\n       subtitle = titre_graphe, x = \"Axe X\", y = \"Axe Y\") +\n  theme_minimal()",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulations</span>"
+    ]
+  },
+  {
+    "objectID": "03-simulations.html#simulation-dintersection-entre-un-carré-et-plusieurs-disques",
+    "href": "03-simulations.html#simulation-dintersection-entre-un-carré-et-plusieurs-disques",
+    "title": "3  Simulations",
+    "section": "3.3 Simulation d’intersection entre un carré et plusieurs disques",
+    "text": "3.3 Simulation d’intersection entre un carré et plusieurs disques\nOn crée un modèle booléen \\(\\Xi_d\\) avec des disques de la manière qu’aux deux sections précédentes sur la portion \\([0,1] \\times[0,1]\\) du plan. On pose ensuite un point \\(p_c=(x_c,y_c)\\) tel que \\(x_c \\sim  \\text{uniforme}(0,1)\\) et \\(y_c \\sim  \\text{uniforme}(0,1)\\). Ce point sert de centre au carré que l’on pose sur cette portion du plan. La longueur de sa diagonale est donnée par \\(d_c \\sim  \\text{exp}( \\lambda_c)\\) et son orientation est donnée par \\(\\theta_c \\sim uniforme(0, \\pi /2)\\). Ainsi, les coordonnées de ses sommets sont \\(p_{kc}=(x_c+d_c \\text{cos} ( \\theta_c+ \\frac{k\\pi}{2})/2,y_c+d_c \\text{sin}( \\theta_c+ \\frac{k\\pi}{2})/2))\\) où \\(k \\in  \\text{{1,2,3,4}}\\) .On peut estimer avec un certain nombre de simulations la probabilité qu’il y ait une intersection entre le carré et au moins un des disques.\n\n\nCode\nlibrary(spatstat)\nlibrary(ggplot2)\n\n# --- 1. CONFIGURATION ET PARAMÈTRES ---\nborne_inferieure_x &lt;- 0\nborne_superieure_x &lt;- 1\nborne_inferieure_y &lt;- 0\nborne_superieure_y &lt;- 1\n\nlongueur_intervalle_x &lt;- borne_superieure_x - borne_inferieure_x\nlongueur_intervalle_y &lt;- borne_superieure_y - borne_inferieure_y\n\nset.seed(40) # Fixé pour la reproductibilité\n\n# --- 2. GÉNÉRATION DES DONNÉES ---\nnombre_points &lt;- rpois(1, lambda = 10 * longueur_intervalle_x * longueur_intervalle_y)\n\ncoordonnees_x_points &lt;- runif(nombre_points, borne_inferieure_x, borne_superieure_x)\ncoordonnees_y_points &lt;- runif(nombre_points, borne_inferieure_y, borne_superieure_y)\nrayons_cercles        &lt;- rexp(nombre_points, 20)\n\ncoordonnees_x_centre_carre &lt;- runif(1, borne_inferieure_x, borne_superieure_x)\ncoordonnees_y_centre_carre &lt;- runif(1, borne_inferieure_y, borne_superieure_y)\n\nlongueur_demie_diagonale_carre &lt;- rexp(1, 4) / 2\norientation_carre              &lt;- runif(1, 0, pi / 2)\n\n# Calcul des sommets du carré tourné\nangles_toutes_diagonales &lt;- seq(0, 2 * pi, length.out = 5)\ncoordonnees_carre_x &lt;- coordonnees_x_centre_carre + longueur_demie_diagonale_carre * cos(orientation_carre + angles_toutes_diagonales)\ncoordonnees_carre_y &lt;- coordonnees_y_centre_carre + longueur_demie_diagonale_carre * sin(orientation_carre + angles_toutes_diagonales)\n\n# --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---\n# Utilisation d'une grille plus fine (dimyx = 512) pour éviter les erreurs d'arrondi numérique\nliste_cercles &lt;- list()\nif (nombre_points &gt; 0) {\n  for(i in 1:nombre_points) {\n    liste_cercles[[i]] &lt;- disc(r = rayons_cercles[i], \n                               centre = c(coordonnees_x_points[i], coordonnees_y_points[i]), \n                               mask = TRUE, dimyx = 100)\n  }\n  zone_cercles &lt;- do.call(union.owin, liste_cercles)\n} else {\n  # Si aucun point n'est généré par la loi de Poisson, on crée une zone vide\n  zone_cercles &lt;- emptywindow(owin(c(borne_inferieure_x, borne_superieure_x), c(borne_inferieure_y, borne_superieure_y)))\n}\n\n# Définition du carré dans spatstat (vignettage automatique des sommets 1 à 4)\nzone_carre &lt;- owin(poly = list(x = coordonnees_carre_x[1:4], \n                               y = coordonnees_carre_y[1:4]))\n\n# Intersection géométrique globale\nintersection_globale &lt;- intersect.owin(zone_carre, zone_cercles)\na_une_intersection   &lt;- area(intersection_globale) &gt; 0\n\n# --- 4. PRÉPARATION DES DATA FRAMES POUR GGPLOT2 ---\n# Contours des cercles\ntheta &lt;- seq(0, 2 * pi, length.out = 200)\ndf_cercles_contours &lt;- data.frame()\nif (nombre_points &gt; 0) {\n  df_cercles_contours &lt;- do.call(rbind, lapply(1:nombre_points, function(i) {\n    data.frame(\n      id = i,\n      x  = coordonnees_x_points[i] + rayons_cercles[i] * cos(theta),\n      y  = coordonnees_y_points[i] + rayons_cercles[i] * sin(theta)\n    )\n  }))\n}\n\n# Coordonnées du carré (les 5 points pour fermer le tracé du polygone)\ndf_carre &lt;- data.frame(\n  x = coordonnees_carre_x,\n  y = coordonnees_carre_y\n)\n\n# Extraction des pixels de la zone d'intersection de manière sécurisée\nif (a_une_intersection) {\n  df_intersection &lt;- as.data.frame(as.im(intersection_globale))\n  # Sécurité : on vérifie que la colonne 'v' existe bien avant de filtrer\n  if (\"v\" %in% names(df_intersection)) {\n    df_intersection &lt;- df_intersection[df_intersection$v == TRUE, ]\n  } else {\n    df_intersection &lt;- data.frame() # DataFrame vide si la colonne n'existe pas\n  }\n} else {\n  df_intersection &lt;- data.frame() # DataFrame vide s'il n'y a aucune intersection\n}\n# --- 5. VISUALISATION AVEC GGPLOT2 ---\nstatut_intersection &lt;- if(a_une_intersection) \"OUI\" else \"NON\"\n\nggplot() +\n  # 1. Zone d'intersection réelle calculée par spatstat (remplissage jaune en arrière-plan)\n  { if(nrow(df_intersection) &gt; 0) \n    geom_tile(data = df_intersection, aes(x = x, y = y), fill = \"gold\", alpha = 0.6) \n  } +\n  \n  # 2. Dessin des cercles (cyan avec bordure bleue)\n  { if(nombre_points &gt; 0) \n    geom_polygon(data = df_cercles_contours, aes(x = x, y = y, group = id), \n                 fill = \"cyan\", alpha = 0.3, color = \"blue\", linewidth = 0.5) \n  } +\n  \n  # 3. Dessin du carré (corail avec bordure rose)\n  geom_polygon(data = df_carre, aes(x = x, y = y), \n               fill = rgb(1, 0, 0.3, 0.3), color = \"pink\", linewidth = 1.5) +\n  \n  # 4. Points centraux (centres des cercles et du carré)\n  { if(nombre_points &gt; 0) \n    geom_point(data = data.frame(x = coordonnees_x_points, y = coordonnees_y_points), \n               aes(x = x, y = y), color = \"black\", size = 0.8) \n  } +\n  geom_point(data = data.frame(x = coordonnees_x_centre_carre, y = coordonnees_y_centre_carre), \n             aes(x = x, y = y), color = \"red\", size = 1.2) +\n  \n  # Contraintes d'affichage (Strictement limité à la fenêtre d'observation)\n  coord_equal(xlim = c(borne_inferieure_x, borne_superieure_x),\n              ylim = c(borne_inferieure_y, borne_superieure_y),\n              expand = FALSE) +\n  \n  # Titres et habillage\n  labs(title = \"Intersection : Modèle Booléen & Carré\",\n       subtitle = paste(\"Intersection:\", statut_intersection),\n       x = \"Axe X\", y = \"Axe Y\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nCode\n# --- 6. AFFICHAGE DU RÉSULTAT DANS LA CONSOLE ---\nprint(paste(\"Intersection:\", a_une_intersection)) \n\n\n[1] \"Intersection: TRUE\"\n\n\n\n\nCode\nlibrary(spatstat)\n\n# --- 1. CONFIGURATION ET PARAMÈTRES FIXES ---\nborne_inferieure_x &lt;- 0\nborne_superieure_x &lt;- 1\nborne_inferieure_y &lt;- 0\nborne_superieure_y &lt;- 1\n\nlongueur_intervalle_x &lt;- borne_superieure_x - borne_inferieure_x\nlongueur_intervalle_y &lt;- borne_superieure_y - borne_inferieure_y\n\nset.seed(42) # Assure la reproductibilité\n\n# --- 2. DÉFINITION DE LA FONCTION DE SIMULATION PURE ---\n# Cette fonction calcule uniquement si l'intersection a lieu (TRUE/FALSE)\nsimuler_intersection_pure &lt;- function() {\n  \n  # Génération des objets (Cercles)\n  nombre_points &lt;- rpois(1, lambda = 5 * longueur_intervalle_x * longueur_intervalle_y)\n  \n   if (nombre_points &gt; 0) {\n    coordonnees_x_points &lt;- runif(nombre_points, borne_inferieure_x, borne_superieure_x)\n    coordonnees_y_points &lt;- runif(nombre_points, borne_inferieure_y, borne_superieure_y)\n    rayons_cercles        &lt;- rexp(nombre_points, 20)\n    \n    # 1. On définit une fenêtre d'analyse fixe avec une résolution bloquée (ex: 256x256)\n    cadre_fixe &lt;- owin(c(borne_inferieure_x, borne_superieure_x), \n                       c(borne_inferieure_y, borne_superieure_y))\n    masque_fixe &lt;- as.mask(cadre_fixe, dimyx = 256) # Bloque la résolution globale\n    \n    # 2. On crée les disques sous forme de polygones vectoriels (très léger en mémoire)\n    liste_cercles &lt;- list()\n    for(i in 1:nombre_points) {\n      # mask = FALSE force spatstat à rester en mode vectoriel (polygone)\n      liste_cercles[[i]] &lt;- disc(r = rayons_cercles[i], \n                                 centre = c(coordonnees_x_points[i], coordonnees_y_points[i]), \n                                 mask = FALSE)\n    }\n    \n    # 3. On fait l'union vectorielle, puis SEULEMENT À LA FIN, on convertit en masque fixe\n    zone_cercles_vectorielle &lt;- do.call(union.owin, liste_cercles)\n    zone_cercles &lt;- as.mask(zone_cercles_vectorielle, xy = masque_fixe)\n    \n  } else {\n    return(FALSE)\n  }\n  \n  # Génération de l'objet (Carré)\n  coordonnees_x_centre_carre     &lt;- runif(1, borne_inferieure_x, borne_superieure_x)\n  coordonnees_y_centre_carre     &lt;- runif(1, borne_inferieure_y, borne_superieure_y)\n  longueur_demie_diagonale_carre &lt;- rexp(1, 5) / 2\n  orientation_carre              &lt;- runif(1, 0, pi / 2)\n  \n  angles_toutes_diagonales &lt;- seq(0, 2 * pi, length.out = 5)\n  coordonnees_carre_x &lt;- coordonnees_x_centre_carre + longueur_demie_diagonale_carre * cos(orientation_carre + angles_toutes_diagonales)\n  coordonnees_carre_y &lt;- coordonnees_y_centre_carre + longueur_demie_diagonale_carre * sin(orientation_carre + angles_toutes_diagonales)\n  \n  # Création du carré dans spatstat\n  zone_carre &lt;- owin(poly = list(x = coordonnees_carre_x[1:4], y = coordonnees_carre_y[1:4]))\n  \n  # Calcul rapide de l'existence d'une intersection\n  intersection_globale &lt;- intersect.owin(zone_carre, zone_cercles)\n  return(area(intersection_globale) &gt; 0)\n}\n\n# --- 3. EXÉCUTION DU MULTI-TIRAGE (MONTE-CARLO) ---\nnombre_simulations &lt;- 1000\n\n# replicate() génère directement un vecteur logique propre (TRUE/FALSE)\nvecteur_intersections &lt;- replicate(nombre_simulations, simuler_intersection_pure())\n\n# Calcul de la probabilité empirique\nprobabilite_intersection &lt;- mean(vecteur_intersections)\n\n# --- 4. AFFICHAGE DES RÉSULTATS ---\ncat(\"=== RÉSULTATS DE LA SIMULATION ===\\n\")\n\n\n=== RÉSULTATS DE LA SIMULATION ===\n\n\nCode\ncat(\"Nombre de simulations exécutées :\", nombre_simulations, \"\\n\")\n\n\nNombre de simulations exécutées : 1000 \n\n\nCode\ncat(\"Nombre d'intersections trouvées :\", sum(vecteur_intersections), \"\\n\")\n\n\nNombre d'intersections trouvées : 255 \n\n\nCode\ncat(\"Probabilité estimée d'intersection :\", round(probabilite_intersection, 4)) \n\n\nProbabilité estimée d'intersection : 0.255",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulations</span>"
+    ]
+  },
+  {
+    "objectID": "03-simulations.html#estimation-de-lintensité-par-noyau",
+    "href": "03-simulations.html#estimation-de-lintensité-par-noyau",
+    "title": "3  Simulations",
+    "section": "3.4 Estimation de l’intensité par noyau",
+    "text": "3.4 Estimation de l’intensité par noyau\nOn estime l’intensité à partir des points simulés à l’aide d’un estimateur à noyau gaussien.\n\nCode\nden &lt;- density(pp_inho, sigma = bw.diggle(pp_inho))\n\nplot(den, main = \"Intensité estimée\")\npersp(den, main = \"Surface d'intensité\", theta = 30, phi = 20, col = \"lightblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n(a) Carte d’intensité estimée\n\n\n\n\n\n\n\n\n\n\n\n(b) Surface 3D\n\n\n\n\n\n\n\nFigure 3.1: Estimation de l’intensité par noyau (processus inhomogène)",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulations</span>"
+    ]
+  },
+  {
+    "objectID": "03-simulations.html#statistiques-descriptives",
+    "href": "03-simulations.html#statistiques-descriptives",
+    "title": "3  Simulations",
+    "section": "3.5 Statistiques descriptives",
+    "text": "3.5 Statistiques descriptives\n\n\nCode\nstats &lt;- data.frame(\n  Modèle           = c(\"Homogène\", \"Inhomogène\"),\n  `N points`       = c(pp_homo$n, pp_inho$n),\n  `Intensité moy.` = c(\n    round(intensity(pp_homo), 1),\n    round(mean(lambda_fn(pp_inho$x, pp_inho$y)), 1)\n  )\n)\n\nknitr::kable(stats, align = \"lcc\")\n\n\n\n\nTable 3.1: Comparaison des deux simulations\n\n\n\n\n\n\nModèle\nN.points\nIntensité.moy.\n\n\n\n\nHomogène\n162\n162.0\n\n\nInhomogène\n193\n205.2",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simulations</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultats.html",
+    "href": "04-resultats.html",
+    "title": "4  Résultats",
+    "section": "",
+    "text": "4.1 Analyse de la structure spatiale",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Résultats</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultats.html#analyse-de-la-structure-spatiale",
+    "href": "04-resultats.html#analyse-de-la-structure-spatiale",
+    "title": "4  Résultats",
+    "section": "",
+    "text": "4.1.1 Fonction K de Ripley\nLa fonction \\(K\\) de Ripley permet de détecter des écarts à la complète aléatoire spatiale (CAS). Sous un processus de Poisson homogène, \\(K(r) = \\pi r^2\\).\n\n\nCode\nK_obs &lt;- Kest(pp_homo, correction = \"Ripley\")\n\n# Enveloppe Monte Carlo\nenv_K &lt;- envelope(pp_homo, Kest, nsim = 99, correction = \"Ripley\", verbose = FALSE)\n\nplot(env_K,\n     main    = \"Fonction K de Ripley\",\n     shadecol = \"lightblue\",\n     lwd     = 2)\n\n\n\n\n\n\n\n\nFigure 4.1: Fonction K de Ripley avec enveloppe de simulation (999 simulations)\n\n\n\n\n\n\n\n\n4.1.2 Fonction L\nLa transformation \\(L(r) = \\sqrt{K(r)/\\pi}\\) stabilise la variance et facilite l’interprétation. Sous la CAS, \\(L(r) - r = 0\\).\n\n\nCode\nL_obs &lt;- Lest(pp_homo, correction = \"Ripley\")\n\nplot(L_obs, . - r ~ r,\n     main = \"Fonction L centrée\",\n     lwd  = 2,\n     col  = \"firebrick\")\nabline(h = 0, lty = 2, col = \"grey40\")\n\n\n\n\n\n\n\n\nFigure 4.2: Fonction L centrée — écart à la complète aléatoire spatiale",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Résultats</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultats.html#test-dajustement",
+    "href": "04-resultats.html#test-dajustement",
+    "title": "4  Résultats",
+    "section": "4.2 Test d’ajustement",
+    "text": "4.2 Test d’ajustement\n\n\n\nCode\nce &lt;- clarkevans.test(pp_homo, nsim = 999, verbose = FALSE)\nprint(ce)\n\n\n\n    Clark-Evans test\n    Donnelly correction\n    Z-test\n\ndata:  pp_homo\nR = 1.0069, p-value = 0.8629\nalternative hypothesis: two-sided",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Résultats</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultats.html#synthèse-des-résultats",
+    "href": "04-resultats.html#synthèse-des-résultats",
+    "title": "4  Résultats",
+    "section": "4.3 Synthèse des résultats",
+    "text": "4.3 Synthèse des résultats\n\n\n\n\nCritère\nProcessus homogène\nProcessus inhomogène\n\n\n\n\nNombre de points\n162\n193\n\n\nStructure (K de Ripley)\nÀ compléter\nÀ compléter\n\n\nInterprétation\nÀ compléter\nÀ compléter",
+    "crumbs": [
+      "Analyse",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Résultats</span>"
+    ]
+  },
+  {
+    "objectID": "05-discussion.html",
+    "href": "05-discussion.html",
+    "title": "5  Discussion et conclusion",
+    "section": "",
+    "text": "5.1 Discussion",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussion et conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "05-discussion.html#discussion",
+    "href": "05-discussion.html#discussion",
+    "title": "5  Discussion et conclusion",
+    "section": "",
+    "text": "5.1.1 Interprétation des résultats\n\n\n\n5.1.2 Limites du modèle\n\n\nDépendance temporelle : le modèle actuel est purement spatial et ne tient pas compte de la dynamique temporelle des feux\nCovariables : l’intensité inhomogène utilisée est simplifiée ; dans un contexte réel, on intégrerait des données météo, de végétation, de topographie\nInteractions : le processus de Poisson suppose l’indépendance entre les points, ce qui peut ne pas refléter la propagation réelle d’un feu\n\n\n\n5.1.3 Extensions possibles\n\n\nProcessus de Cox : modéliser \\(\\lambda\\) comme un champ aléatoire pour capturer l’hétérogénéité non observée\nProcessus de Neyman-Scott : modéliser les clusters (foyers multiples dans une même zone)\nModèles spatio-temporels : étendre à une dimension temporelle avec des processus de Hawkes\nIntégration de données réelles : utiliser des données d’incendies historiques (ex. : base de données CIFFC au Canada)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussion et conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "05-discussion.html#conclusion",
+    "href": "05-discussion.html#conclusion",
+    "title": "5  Discussion et conclusion",
+    "section": "5.2 Conclusion",
+    "text": "5.2 Conclusion\n\nCe projet a permis de …\nLes principaux résultats montrent que …\nCes travaux constituent une base pour …",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussion et conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Références",
+    "section": "",
+    "text": "Baddeley, A., Rubak, E., & Turner, R. (2015). Spatial point\npatterns: Methodology and applications with R. CRC\nPress.\n\n\nBélisle, C. (2021). STT-4700 processus aléatoires.\n\n\nChiu, S. N., Stoyan, D., Kendall, W., & Mecke, J. (2013).\nStochastic geometry and its applications, 3rd edition. Wiley.\n\n\nJones, M. W., Abatzoglou, J. T., Veraverbeke, S.,\net al. (2022). Global and regional trends and drivers of fire\nunder climate change. Reviews of Geophysics, 60(3). https://doi.org/10.1029/2020RG000726\n\n\nMorisette, J. T., Giglio, L., Csiszar, I., & Justice, C. O. (2001).\nValidation of the MODIS active fire product over southern\nAfrica with ASTER data. International\nJournal of Remote Sensing, 26(19), 4239–4264.",
+    "crumbs": [
+      "Références"
+    ]
+  }
+]

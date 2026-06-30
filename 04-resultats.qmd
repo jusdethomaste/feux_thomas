@@ -1,0 +1,89 @@
+# Résultats
+
+```{r}
+#| label: setup-res
+#| include: false
+
+library(spatstat)
+set.seed(2024)
+
+# Recréer les objets si le cache est vide
+W       <- owin(xrange = c(0, 1), yrange = c(0, 1))
+pp_homo <- rpoispp(lambda = 150, win = W)
+pp_inho <- rpoispp(lambda = function(x, y) 300 * x, win = W)
+```
+
+## Analyse de la structure spatiale
+
+### Fonction K de Ripley
+
+La fonction $K$ de Ripley permet de détecter des écarts à la complète aléatoire spatiale (CAS). Sous un processus de Poisson homogène, $K(r) = \pi r^2$.
+
+```{r}
+#| label: fig-ripley
+#| fig-cap: "Fonction K de Ripley avec enveloppe de simulation (999 simulations)"
+
+K_obs <- Kest(pp_homo, correction = "Ripley")
+
+# Enveloppe Monte Carlo
+env_K <- envelope(pp_homo, Kest, nsim = 99, correction = "Ripley", verbose = FALSE)
+
+plot(env_K,
+     main    = "Fonction K de Ripley",
+     shadecol = "lightblue",
+     lwd     = 2)
+```
+
+<!-- 
+Commente ce que tu observes :
+- Les points sont-ils dans l'enveloppe ? → cohérent avec la CAS
+- Au-dessus ? → agrégation
+- En dessous ? → régularité (inhibition)
+-->
+
+### Fonction L
+
+La transformation $L(r) = \sqrt{K(r)/\pi}$ stabilise la variance et facilite l'interprétation. Sous la CAS, $L(r) - r = 0$.
+
+```{r}
+#| label: fig-Lest
+#| fig-cap: "Fonction L centrée — écart à la complète aléatoire spatiale"
+
+L_obs <- Lest(pp_homo, correction = "Ripley")
+
+plot(L_obs, . - r ~ r,
+     main = "Fonction L centrée",
+     lwd  = 2,
+     col  = "firebrick")
+abline(h = 0, lty = 2, col = "grey40")
+```
+
+## Test d'ajustement
+
+<!-- 
+Ajoute ici des tests formels si tu en as réalisés.
+Par exemple : test de Clark-Evans, test de quadrats, etc.
+-->
+
+```{r}
+#| label: clark-evans
+
+ce <- clarkevans.test(pp_homo, nsim = 999, verbose = FALSE)
+print(ce)
+```
+
+<!-- 
+Interprète le résultat du test :
+- p-value > 0.05 → pas d'évidence contre la CAS
+- p-value faible → structure significative (agrégation ou régularité)
+-->
+
+## Synthèse des résultats
+
+<!-- Résume les principales observations de tes analyses -->
+
+| Critère | Processus homogène | Processus inhomogène |
+|---|---|---|
+| Nombre de points | `r pp_homo$n` | `r pp_inho$n` |
+| Structure (K de Ripley) | À compléter | À compléter |
+| Interprétation | À compléter | À compléter |

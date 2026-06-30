@@ -1,0 +1,41 @@
+# Préface {.unnumbered}
+
+Ce livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de [Nom du superviseur], [Département/Institution].
+
+## Objectifs du projet
+
+<!-- Décris brièvement ce que tu cherches à modéliser et pourquoi -->
+
+Ce projet vise à ...
+
+## Organisation du document
+
+Le rapport est structuré comme suit :
+
+- **Chapitre 1 – Introduction** : contexte, problématique et revue de littérature sommaire
+- **Chapitre 2 – Méthodologie** : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)
+- **Chapitre 3 – Simulations** : description et résultats des simulations réalisées en R
+- **Chapitre 4 – Résultats** : analyse et interprétation des résultats
+- **Chapitre 5 – Discussion** : limites, extensions possibles et conclusion
+
+## Reproductibilité
+
+Tout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :
+
+```bash
+git clone https://github.com/TON-USERNAME/feux-foret-book.git
+cd feux-foret-book
+quarto render
+```
+
+Les packages R nécessaires sont listés dans le fichier `packages.R` à la racine du projet.
+
+## Environnement de travail
+
+```{r}
+#| label: session-info
+#| code-fold: true
+#| code-summary: "Informations sur l'environnement R"
+
+sessionInfo()
+```

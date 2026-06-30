@@ -1,0 +1,53 @@
+project:
+  type: book
+  output-dir: docs
+
+lang: fr
+
+book:
+  title: "Modélisation spatiale des feux de forêt"
+  author: "Prénom Nom"
+  date: today
+  date-format: "D MMMM YYYY"
+  repo-url: https://github.com/TON-USERNAME/feux-foret-book
+  repo-actions: [edit, issue]
+  sharing: [twitter, linkedin]
+
+  sidebar:
+    style: docked
+    background: light
+
+  chapters:
+    - index.qmd
+    - part: "Cadre théorique"
+      chapters:
+        - 01-introduction.qmd
+        - 02-methodologie.qmd
+    - part: "Analyse"
+      chapters:
+        - 03-simulations.qmd
+        - 04-resultats.qmd
+    - 05-discussion.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    code-fold: true
+    code-tools: true
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    fig-align: center
+    fig-dpi: 150
+    highlight-style: github
+
+execute:
+  warning: false
+  message: false
+  cache: true

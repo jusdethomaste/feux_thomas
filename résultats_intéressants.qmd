@@ -1,0 +1,31 @@
+# Introduction
+
+## chapitre 1 - Théorie des ensembles
+
+Un ensemble S est ouvert si, pour tout x dans S, il existe $/epsilon >0 tq B(x,$/epsilon ) est élément de S, L'ensemble S est fermé si son complément est ouvert.
+
+
+
+## Problématique
+
+<!-- 
+Formule clairement la question de recherche.
+Par exemple : "Comment modéliser la distribution spatiale des ignitions de feux de forêt à l'aide de processus ponctuels ?"
+-->
+
+## Revue de littérature
+
+<!-- 
+Présente brièvement les approches existantes.
+Tu peux citer des articles avec la syntaxe [@cle_reference].
+-->
+
+Plusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. @morisette2001 ont montré que ... Les processus de Poisson spatiaux ont été utilisés dans ce contexte par ...
+
+## Objectifs spécifiques
+
+Les objectifs de ce travail sont les suivants :
+
+1. ...
+2. ...
+3. ...
