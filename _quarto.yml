@@ -1,16 +1,14 @@
 project:
   type: book
-  site-url:  https://jusdethomaste.github.io/feux_thomas/
-  output-dir: docs
 
 lang: fr
 
 book:
   title: "Modélisation spatiale des feux de forêt"
-  author: "Thomas Serré"
+  author: "Prénom Nom"
   date: today
   date-format: "D MMMM YYYY"
-  repo-url: https://github.com/jusdethomaste/feux_thomas.git
+  repo-url: https://github.com
   repo-actions: [edit, issue]
   sharing: [twitter, linkedin]
 
@@ -46,14 +44,9 @@ format:
     fig-align: center
     fig-dpi: 150
     highlight-style: github
-    fig-format: svg
-    embed-resources: true
 
 execute:
   warning: false
   message: false
-  cache: true
+  cache: false
   freeze: true
-
-resources:
-  - "*_files/**"
