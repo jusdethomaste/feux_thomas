@@ -73,7 +73,7 @@ ggplot() +
              aes(x = x, y = y), color = "black", size = 0.5) +
   
   # Contraintes d'affichage (Strictement limité entre 0 et 1 comme clip)
-  coord_equal(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),
+  coord_cartesian(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),
               ylim = c(borne_inferieure_axe_y, borne_superieure_axe_y),
               expand = FALSE) +
   
@@ -189,7 +189,7 @@ ggplot() +
              color = "forestgreen", size = 0.6) +
   
   # Rognage strict de la fenêtre d'observation finale [0,1]
-  coord_equal(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),
+  coord_cartesian(xlim = c(borne_inferieure_axe_x, borne_superieure_axe_x),
               ylim = c(borne_inferieure_axe_y, borne_superieure_axe_y),
               expand = FALSE) +
   
@@ -321,7 +321,7 @@ ggplot() +
              aes(x = x, y = y), color = "red", size = 1.2) +
   
   # Contraintes d'affichage (Strictement limité à la fenêtre d'observation)
-  coord_equal(xlim = c(borne_inferieure_x, borne_superieure_x),
+  coord_cartesian(xlim = c(borne_inferieure_x, borne_superieure_x),
               ylim = c(borne_inferieure_y, borne_superieure_y),
               expand = FALSE) +
   
