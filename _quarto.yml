@@ -50,4 +50,5 @@ execute:
   warning: false
   message: false
   cache: true
+  freeze: true
   
