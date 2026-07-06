@@ -31,7 +31,6 @@ book:
     - references.qmd
 
 bibliography: references.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 
 format:
   html:
@@ -50,4 +49,5 @@ format:
 execute:
   warning: false
   message: false
-  cache: true
+  cache: false
+  
