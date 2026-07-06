@@ -13,7 +13,7 @@ set.seed(2024)  # Reproductibilité
 
 ## Simulation d'un modèle booléen avec disques
 
-On fait apparaître des points $x_i$ sur une région selon un processus de Poisson homogène sur la région $[0,1] \times [0,1]$ du plan, et on pose un disque $\Xi_i$ sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a $R(x_i) \sim \text{exp}(\lambda)$.Ici, le modèle booléen est $$ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i)$$
+On fait apparaître des points $x_i$ sur une région selon un processus de Poisson homogène sur la région $[0,1] \times [0,1]$ du plan, et on pose un disque $\Xi_i$ sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a $R(x_i) \sim \text{exp}(\lambda)$.Ici, le modèle booléen est $$ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).$$
 
 
 ```{r}
