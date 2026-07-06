@@ -8,3 +8,4 @@
 *.Rproj
 
 **/*.quarto_ipynb
+.positai
