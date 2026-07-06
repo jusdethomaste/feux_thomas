@@ -7,7 +7,6 @@
 library(spatstat)
 library(ggplot2)
 
-set.seed(2024)  # Reproductibilité
 ```
 
 
@@ -19,7 +18,7 @@ On fait apparaître des points $x_i$ sur une région selon un processus de Poiss
 ```{r}
 library(ggplot2)
 
-
+set.seed(41)
 
 borne_inferieure_axe_x <- 0; borne_superieure_axe_x <- 1
 borne_inferieure_axe_y <- 0; borne_superieure_axe_y <- 1
@@ -59,7 +58,7 @@ df_cordes <- data.frame(
   cx   = centres_x_cordes,
   cy   = centres_y_cordes
 )
-set.seed(41)
+
 
 
 
@@ -90,6 +89,8 @@ On crée d'abord un modèle booléen $\Xi_d$ avec des disques comme à la sectio
 library(spatstat)
 library(ggplot2)
 
+set.seed(40)
+
 # --- 1. CONFIGURATION ET PARAMÈTRES ---
 borne_inferieure_axe_x <- 0
 borne_superieure_axe_x <- 1
@@ -99,7 +100,6 @@ borne_superieure_axe_y <- 1
 longueur_intervalle_x <- (borne_superieure_axe_x) - (borne_inferieure_axe_x)
 longueur_intervalle_y <- (borne_superieure_axe_y) - (borne_inferieure_axe_y)
 
-set.seed(40)
 
 # Définition de la fenêtre d'observation principale
 W_obs <- owin(c(borne_inferieure_axe_x, borne_superieure_axe_x), 
@@ -207,6 +207,8 @@ On crée un modèle booléen $\Xi_d$ avec des disques de la manière qu'aux deux
 library(spatstat)
 library(ggplot2)
 
+set.seed(40)
+
 # --- 1. CONFIGURATION ET PARAMÈTRES ---
 borne_inferieure_x <- 0
 borne_superieure_x <- 1
@@ -216,7 +218,7 @@ borne_superieure_y <- 1
 longueur_intervalle_x <- borne_superieure_x - borne_inferieure_x
 longueur_intervalle_y <- borne_superieure_y - borne_inferieure_y
 
-set.seed(40) # Fixé pour la reproductibilité
+ # Fixé pour la reproductibilité
 
 # --- 2. GÉNÉRATION DES DONNÉES ---
 nombre_points <- rpois(1, lambda = 10 * longueur_intervalle_x * longueur_intervalle_y)
