@@ -1,12 +1,12 @@
-#project:
-#  type: book
-#  output-dir: docs
+project:
+  type: book
+  output-dir: docs
 
 lang: fr
 
 book:
   title: "Modélisation spatiale des feux de forêt"
-  author: "Prénom Nom"
+  author: "Thomas Serré"
   date: today
   date-format: "D MMMM YYYY"
   repo-url: https://github.com/jusdethomaste/feux_thomas.git
