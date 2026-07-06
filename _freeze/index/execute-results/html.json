@@ -1,0 +1,15 @@
+{
+  "hash": "b92dbdd98230483a822998c22a3bc1c6",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Préface {.unnumbered}\n\nCe livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de [Nom du superviseur], [Département/Institution].\n\n## Objectifs du projet\n\n<!-- Décris brièvement ce que tu cherches à modéliser et pourquoi -->\n\nCe projet vise à ...\n\n## Organisation du document\n\nLe rapport est structuré comme suit :\n\n- **Chapitre 1 – Introduction** : contexte, problématique et revue de littérature sommaire\n- **Chapitre 2 – Méthodologie** : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)\n- **Chapitre 3 – Simulations** : description et résultats des simulations réalisées en R\n- **Chapitre 4 – Résultats** : analyse et interprétation des résultats\n- **Chapitre 5 – Discussion** : limites, extensions possibles et conclusion\n\n## Reproductibilité\n\nTout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :\n\n```bash\ngit clone https://github.com/TON-USERNAME/feux-foret-book.git\ncd feux-foret-book\nquarto render\n```\n\nLes packages R nécessaires sont listés dans le fichier `packages.R` à la racine du projet.\n\n## Environnement de travail\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"true\" code-summary=\"Informations sur l'environnement R\"}\nsessionInfo()\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nR version 4.6.0 (2026-04-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26200)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=French_Canada.utf8  LC_CTYPE=French_Canada.utf8   \n[3] LC_MONETARY=French_Canada.utf8 LC_NUMERIC=C                  \n[5] LC_TIME=French_Canada.utf8    \n\ntime zone: America/Toronto\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.6.0  fastmap_1.2.0   cli_3.6.6       tools_4.6.0    \n [5] htmltools_0.5.9 yaml_2.3.12     rmarkdown_2.31  knitr_1.51     \n [9] jsonlite_2.0.0  xfun_0.57       digest_0.6.39   rlang_1.2.0    \n[13] evaluate_1.0.5 \n```\n\n\n:::\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

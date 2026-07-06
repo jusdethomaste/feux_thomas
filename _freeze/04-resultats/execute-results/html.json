@@ -1,0 +1,15 @@
+{
+  "hash": "259dac29dc571e26f0f068eaa76a8e1f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Résultats\n\n\n\n## Analyse de la structure spatiale\n\n### Fonction K de Ripley\n\nLa fonction $K$ de Ripley permet de détecter des écarts à la complète aléatoire spatiale (CAS). Sous un processus de Poisson homogène, $K(r) = \\pi r^2$.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nK_obs <- Kest(pp_homo, correction = \"Ripley\")\n\n# Enveloppe Monte Carlo\nenv_K <- envelope(pp_homo, Kest, nsim = 99, correction = \"Ripley\", verbose = FALSE)\n\nplot(env_K,\n     main    = \"Fonction K de Ripley\",\n     shadecol = \"lightblue\",\n     lwd     = 2)\n```\n\n::: {.cell-output-display}\n![Fonction K de Ripley avec enveloppe de simulation (999 simulations)](04-resultats_files/figure-html/fig-ripley-1.png){#fig-ripley width=1050}\n:::\n:::\n\n\n<!-- \nCommente ce que tu observes :\n- Les points sont-ils dans l'enveloppe ? → cohérent avec la CAS\n- Au-dessus ? → agrégation\n- En dessous ? → régularité (inhibition)\n-->\n\n### Fonction L\n\nLa transformation $L(r) = \\sqrt{K(r)/\\pi}$ stabilise la variance et facilite l'interprétation. Sous la CAS, $L(r) - r = 0$.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nL_obs <- Lest(pp_homo, correction = \"Ripley\")\n\nplot(L_obs, . - r ~ r,\n     main = \"Fonction L centrée\",\n     lwd  = 2,\n     col  = \"firebrick\")\nabline(h = 0, lty = 2, col = \"grey40\")\n```\n\n::: {.cell-output-display}\n![Fonction L centrée — écart à la complète aléatoire spatiale](04-resultats_files/figure-html/fig-Lest-1.png){#fig-Lest width=1050}\n:::\n:::\n\n\n## Test d'ajustement\n\n<!-- \nAjoute ici des tests formels si tu en as réalisés.\nPar exemple : test de Clark-Evans, test de quadrats, etc.\n-->\n\n\n::: {.cell}\n\n```{.r .cell-code}\nce <- clarkevans.test(pp_homo, nsim = 999, verbose = FALSE)\nprint(ce)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n\n\tClark-Evans test\n\tDonnelly correction\n\tZ-test\n\ndata:  pp_homo\nR = 1.0069, p-value = 0.8629\nalternative hypothesis: two-sided\n```\n\n\n:::\n:::\n\n\n<!-- \nInterprète le résultat du test :\n- p-value > 0.05 → pas d'évidence contre la CAS\n- p-value faible → structure significative (agrégation ou régularité)\n-->\n\n## Synthèse des résultats\n\n<!-- Résume les principales observations de tes analyses -->\n\n| Critère | Processus homogène | Processus inhomogène |\n|---|---|---|\n| Nombre de points | 162 | 193 |\n| Structure (K de Ripley) | À compléter | À compléter |\n| Interprétation | À compléter | À compléter |\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
