@@ -1,5 +1,6 @@
 project:
   type: book
+  site-url:  https://jusdethomaste.github.io/feux_thomas/
   output-dir: docs
 
 lang: fr
@@ -45,10 +46,14 @@ format:
     fig-align: center
     fig-dpi: 150
     highlight-style: github
+    fig-format: svg
+    embed-resources: true
 
 execute:
   warning: false
   message: false
   cache: true
   freeze: true
-  
+
+resources:
+  - "*_files/**"
