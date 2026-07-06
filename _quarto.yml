@@ -9,7 +9,7 @@ book:
   author: "Prénom Nom"
   date: today
   date-format: "D MMMM YYYY"
-  repo-url: https://github.com/TON-USERNAME/feux-foret-book
+  repo-url: https://github.com/jusdethomaste/feux_thomas.git
   repo-actions: [edit, issue]
   sharing: [twitter, linkedin]
 
