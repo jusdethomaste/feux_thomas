@@ -352,7 +352,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Modélisation spatiale des feux de forêt</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/TON-USERNAME/feux-foret-book" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/jusdethomaste/feux_thomas.git" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -472,9 +472,10 @@ window.Quarto = {
   <li><a href="#estimation-de-lintensité-non-homogène" id="toc-estimation-de-lintensité-non-homogène" class="nav-link" data-scroll-target="#estimation-de-lintensité-non-homogène"><span class="header-section-number">2.4.2</span> Estimation de l’intensité non homogène</a></li>
   <li><a href="#estimation-de-la-fonction-dintensité" id="toc-estimation-de-la-fonction-dintensité" class="nav-link" data-scroll-target="#estimation-de-la-fonction-dintensité"><span class="header-section-number">2.4.3</span> Estimation de la fonction d’intensité</a></li>
   <li><a href="#estimation-des-paramètres-de-la-fonction-de-densité-de-rayon" id="toc-estimation-des-paramètres-de-la-fonction-de-densité-de-rayon" class="nav-link" data-scroll-target="#estimation-des-paramètres-de-la-fonction-de-densité-de-rayon"><span class="header-section-number">2.4.4</span> Estimation des paramètres de la fonction de densité de rayon</a></li>
+  <li><a href="#estimation-statistique" id="toc-estimation-statistique" class="nav-link" data-scroll-target="#estimation-statistique"><span class="header-section-number">2.4.5</span> Estimation statistique</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/TON-USERNAME/feux-foret-book/edit/main/02-methodologie.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/TON-USERNAME/feux-foret-book/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jusdethomaste/feux_thomas.git/edit/main/02-methodologie.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/jusdethomaste/feux_thomas.git/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -512,7 +513,7 @@ window.Quarto = {
 </section>
 <section id="processus-de-poisson-inhomogène-spatial" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="processus-de-poisson-inhomogène-spatial"><span class="header-section-number">2.2.2</span> Processus de Poisson inhomogène spatial</h3>
-<p>Le principe est le même qu’avec le processus de Poisson homogène, toutefois, l’intensité <span class="math inline">\(\lambda\)</span> devient une fonction <span class="math inline">\(\lambda (x,y)\)</span>. L’intensité deépend donc de la position sur A. La fonction de moyenne est définie par <span class="math inline">\(m (t_1,t_2)= \int_{0}^{t_2} \int_{0}^{t_1} \lambda (x,y)dxdy\)</span>, de plus <span class="math inline">\(\mathbb{E}(N(t_3,t_4)-N(t_1,t_2))=m(t_3,t_4)-m(t_1,t_2)\)</span>.</p>
+<p>Le principe est le même qu’avec le processus de Poisson homogène, toutefois, l’intensité <span class="math inline">\(\lambda\)</span> devient une fonction <span class="math inline">\(\lambda (x,y)\)</span>. L’intensité dépend donc de la position sur A.</p>
 </section>
 </section>
 <section id="géométrie-stochastique" class="level2" data-number="2.3">
@@ -544,6 +545,10 @@ window.Quarto = {
 <section id="estimation-des-paramètres-de-la-fonction-de-densité-de-rayon" class="level3" data-number="2.4.4">
 <h3 data-number="2.4.4" class="anchored" data-anchor-id="estimation-des-paramètres-de-la-fonction-de-densité-de-rayon"><span class="header-section-number">2.4.4</span> Estimation des paramètres de la fonction de densité de rayon</h3>
 <p>Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l’écart-type sur l’échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. <span class="citation" data-cites="chiu2013">(<a href="references.html#ref-chiu2013" role="doc-biblioref">Chiu et al., 2013</a>)</span></p>
+</section>
+<section id="estimation-statistique" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="estimation-statistique"><span class="header-section-number">2.4.5</span> Estimation statistique</h3>
+<p>chap 5.1: trouver max à partir d’un échantillon</p>
 
 
 <!-- -->
@@ -1063,7 +1068,7 @@ Chiu, S. N., Stoyan, D., Kendall, W., &amp; Mecke, J. (2013). <em>Stochastic Geo
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Processus de Poisson inhomogène spatial</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité deépend donc de la position sur A. La fonction de moyenne est définie par $m (t_1,t_2)= \int_{0}^{t_2} \int_{0}^{t_1} \lambda (x,y)dxdy$, de plus $\mathbb{E}(N(t_3,t_4)-N(t_1,t_2))=m(t_3,t_4)-m(t_1,t_2)$.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité dépend donc de la position sur A.</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Géométrie Stochastique</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
@@ -1094,6 +1099,10 @@ Chiu, S. N., Stoyan, D., Kendall, W., &amp; Mecke, J. (2013). <em>Stochastic Geo
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation des paramètres de la fonction de densité de rayon</span></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. <span class="co">[</span><span class="ot">@chiu2013</span><span class="co">]</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation statistique</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>chap 5.1: trouver max à partir d'un échantillon</span>
 </code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -1101,4 +1110,4 @@ Chiu, S. N., Stoyan, D., Kendall, W., &amp; Mecke, J. (2013). <em>Stochastic Geo
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TON-USERNAME/feux-foret-book/edit/main/02-methodologie.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/TON-USERNAME/feux-foret-book/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jusdethomaste/feux_thomas.git/edit/main/02-methodologie.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/jusdethomaste/feux_thomas.git/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div></div></footer></body></html>

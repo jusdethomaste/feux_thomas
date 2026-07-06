@@ -417,40 +417,7 @@ cat("Probabilité estimée d'intersection :", round(probabilite_intersection, 4)
 ```
 
 
-## Estimation de l'intensité par noyau
 
-On estime l'intensité à partir des points simulés à l'aide d'un estimateur à noyau gaussien.
-
-```{r}
-#| label: fig-densite
-#| fig-cap: "Estimation de l'intensité par noyau (processus inhomogène)"
-#| fig-subcap:
-#|   - "Carte d'intensité estimée"
-#|   - "Surface 3D"
-#| layout-ncol: 2
-
-den <- density(pp_inho, sigma = bw.diggle(pp_inho))
-
-plot(den, main = "Intensité estimée")
-persp(den, main = "Surface d'intensité", theta = 30, phi = 20, col = "lightblue")
-```
-
-## Statistiques descriptives
-
-```{r}
-#| label: tbl-stats
-#| tbl-cap: "Comparaison des deux simulations"
-
-stats <- data.frame(
-  Modèle           = c("Homogène", "Inhomogène"),
-  `N points`       = c(pp_homo$n, pp_inho$n),
-  `Intensité moy.` = c(
-    round(intensity(pp_homo), 1),
-    round(mean(lambda_fn(pp_inho$x, pp_inho$y)), 1)
-  )
-)
-
-knitr::kable(stats, align = "lcc")
 ```
 
 <!-- 
