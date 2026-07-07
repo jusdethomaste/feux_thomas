@@ -1,11 +1,11 @@
 /.quarto/
 /_book/
 *_cache/
-*_files/
 .Rproj.user
 .Rhistory
 .RData
 *.Rproj
-
 **/*.quarto_ipynb
 .positai
+
+/*_files/figure-pdf/
