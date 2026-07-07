@@ -1,16 +1,14 @@
-# Simulations
+# 3 Simulations
 
 ```{r}
 #| label: setup-sim
 #| include: false
-
 library(spatstat)
 library(ggplot2)
-
 ```
 
+## 3.1 Simulation d'un modèle booléen avec disques
 
-## Simulation d'un modèle booléen avec disques
 
 On fait apparaître des points $x_i$ sur une région selon un processus de Poisson homogène sur la région $[0,1] \times [0,1]$ du plan, et on pose un disque $\Xi_i$ sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a $R(x_i) \sim \text{exp}(\lambda)$.Ici, le modèle booléen est $$ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).$$
 
@@ -83,7 +81,7 @@ ggplot() +
   theme_minimal()
 ```
 
-## Simulation de deux modèles booléens superposés, l'un avec des disques, l'autre avec des cordes'intersection entre disques et cordes
+## 3.2 Simulation de deux modèles booléens superposés
 
 On crée d'abord un modèle booléen $\Xi_d$ avec des disques comme à la section précédente. On crée ensuite un second modéle booléen $\Xi_c$ où les points$x_{ci}$ sont à nouveau placés sur la partie du plan $[0,1] \times [0,1]$ selon un deuxiàme processus de Poisson, pour l'orientation de chaque corde$\Xi_{ci}$, on a $\theta_i \sim  \text{uniforme}(0, \pi)$ et pour la longueur, on a $\mathscr{l}_i \sim \text{exp}( \lambda_{ci})$. On peut calculer la longueur moyenne de chaque corde qui se trouve dans $\Xi_d$ et la probabilité $\mathbb{P}(x \in \Xi_d  \vert x \in \Xi_c)$.
 
@@ -203,6 +201,7 @@ ggplot() +
 
 
 ```
+
 ## Simulation d'intersection entre un carré et plusieurs disques
 
 On crée un modèle booléen $\Xi_d$ avec des disques de la manière qu'aux deux sections précédentes sur la portion $[0,1] \times[0,1]$ du plan. On pose ensuite un point $p_c=(x_c,y_c)$ tel que $x_c \sim  \text{uniforme}(0,1)$ et $y_c \sim  \text{uniforme}(0,1)$. Ce point sert de centre au carré que l'on pose sur cette portion du plan. La longueur de sa diagonale est donnée par $d_c \sim  \text{exp}( \lambda_c)$ et son orientation est donnée par $\theta_c \sim uniforme(0, \pi /2)$. Ainsi, les coordonnées de ses sommets sont $p_{kc}=(x_c+d_c \text{cos} ( \theta_c+ \frac{k\pi}{2})/2,y_c+d_c \text{sin}( \theta_c+ \frac{k\pi}{2})/2))$ où $k \in  \text{{1,2,3,4}}$ .On peut estimer avec un certain nombre de simulations la probabilité qu'il y ait une intersection entre le carré et au moins un des disques.
@@ -425,13 +424,3 @@ cat("Nombre de simulations exécutées :", nombre_simulations, "\n")
 cat("Nombre d'intersections trouvées :", sum(vecteur_intersections), "\n")
 cat("Probabilité estimée d'intersection :", round(probabilite_intersection, 4)) 
 ```
-
-
-
-```
-
-<!-- 
-Si tu veux insérer une de tes captures d'écran précédentes :
-
-![Description](figures/nom_image.png){fig-align="center" width="80%"}
--->
