@@ -46,6 +46,7 @@ format:
     highlight-style: github
 
 execute:
+  eval: true
   warning: false
   message: false
   cache: false
