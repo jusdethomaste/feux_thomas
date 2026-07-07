@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Simulations – Modélisation spatiale des feux de forêt</title>
+<title>3&nbsp; 3 Simulations – Modélisation spatiale des feux de forêt</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -315,7 +315,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-simulations.html">Analyse</a></li><li class="breadcrumb-item"><a href="./03-simulations.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-simulations.html">Analyse</a></li><li class="breadcrumb-item"><a href="./03-simulations.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">3 Simulations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -330,11 +330,9 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">
-      Modélisation spatiale des feux de forêt
-      </a> 
+      <a href="./">Modélisation spatiale des feux de forêt</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/jusdethomaste/feux_thomas.git" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="https://github.com" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -404,7 +402,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-simulations.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">3 Simulations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -437,22 +435,19 @@ window.Quarto = {
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#simulation-dun-modèle-booléen-avec-disques" id="toc-simulation-dun-modèle-booléen-avec-disques" class="nav-link active" data-scroll-target="#simulation-dun-modèle-booléen-avec-disques"><span class="header-section-number">3.1</span> Simulation d’un modèle booléen avec disques</a></li>
-  <li><a href="#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes" id="toc-simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes" class="nav-link" data-scroll-target="#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes"><span class="header-section-number">3.2</span> Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes</a></li>
+  <li><a href="#simulation-dun-modèle-booléen-avec-disques" id="toc-simulation-dun-modèle-booléen-avec-disques" class="nav-link active" data-scroll-target="#simulation-dun-modèle-booléen-avec-disques"><span class="header-section-number">3.1</span> 3.1 Simulation d’un modèle booléen avec disques</a></li>
+  <li><a href="#simulation-de-deux-modèles-booléens-superposés" id="toc-simulation-de-deux-modèles-booléens-superposés" class="nav-link" data-scroll-target="#simulation-de-deux-modèles-booléens-superposés"><span class="header-section-number">3.2</span> 3.2 Simulation de deux modèles booléens superposés</a></li>
   <li><a href="#simulation-dintersection-entre-un-carré-et-plusieurs-disques" id="toc-simulation-dintersection-entre-un-carré-et-plusieurs-disques" class="nav-link" data-scroll-target="#simulation-dintersection-entre-un-carré-et-plusieurs-disques"><span class="header-section-number">3.3</span> Simulation d’intersection entre un carré et plusieurs disques</a></li>
-  <li><a href="#simulation-dun-modèle-booléen-avec-disques-1" id="toc-simulation-dun-modèle-booléen-avec-disques-1" class="nav-link" data-scroll-target="#simulation-dun-modèle-booléen-avec-disques-1"><span class="header-section-number">3.4</span> Simulation d’un modèle booléen avec disques</a></li>
-  <li><a href="#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes-1" id="toc-simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes-1" class="nav-link" data-scroll-target="#simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes-1"><span class="header-section-number">3.5</span> Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes</a></li>
-  <li><a href="#simulation-dintersection-entre-un-carré-et-plusieurs-disques-1" id="toc-simulation-dintersection-entre-un-carré-et-plusieurs-disques-1" class="nav-link" data-scroll-target="#simulation-dintersection-entre-un-carré-et-plusieurs-disques-1"><span class="header-section-number">3.6</span> Simulation d’intersection entre un carré et plusieurs disques</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jusdethomaste/feux_thomas.git/edit/main/03-simulations.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/jusdethomaste/feux_thomas.git/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/edit/main/03-simulations.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-simulations.html">Analyse</a></li><li class="breadcrumb-item"><a href="./03-simulations.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-simulations.html">Analyse</a></li><li class="breadcrumb-item"><a href="./03-simulations.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">3 Simulations</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulations</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Montrer tout le code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Cacher tout le code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Voir les sources</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">3 Simulations</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Montrer tout le code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Cacher tout le code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Voir les sources</a></li></ul></div></div>
 </div>
 
 
@@ -470,7 +465,7 @@ window.Quarto = {
 
 
 <section id="simulation-dun-modèle-booléen-avec-disques" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="simulation-dun-modèle-booléen-avec-disques"><span class="header-section-number">3.1</span> Simulation d’un modèle booléen avec disques</h2>
+<h2 data-number="3.1" class="anchored" data-anchor-id="simulation-dun-modèle-booléen-avec-disques"><span class="header-section-number">3.1</span> 3.1 Simulation d’un modèle booléen avec disques</h2>
 <p>On fait apparaître des points <span class="math inline">\(x_i\)</span> sur une région selon un processus de Poisson homogène sur la région <span class="math inline">\([0,1] \times [0,1]\)</span> du plan, et on pose un disque <span class="math inline">\(\Xi_i\)</span> sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a <span class="math inline">\(R(x_i) \sim \text{exp}(\lambda)\)</span>.Ici, le modèle booléen est <span class="math display">\[ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).\]</span></p>
 <div class="cell">
 <details class="code-fold">
@@ -532,7 +527,7 @@ window.Quarto = {
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité entre 0 et 1 comme clip)</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -548,8 +543,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes"><span class="header-section-number">3.2</span> Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes</h2>
+<section id="simulation-de-deux-modèles-booléens-superposés" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="simulation-de-deux-modèles-booléens-superposés"><span class="header-section-number">3.2</span> 3.2 Simulation de deux modèles booléens superposés</h2>
 <p>On crée d’abord un modèle booléen <span class="math inline">\(\Xi_d\)</span> avec des disques comme à la section précédente. On crée ensuite un second modéle booléen <span class="math inline">\(\Xi_c\)</span> où les points<span class="math inline">\(x_{ci}\)</span> sont à nouveau placés sur la partie du plan <span class="math inline">\([0,1] \times [0,1]\)</span> selon un deuxiàme processus de Poisson, pour l’orientation de chaque corde<span class="math inline">\(\Xi_{ci}\)</span>, on a <span class="math inline">\(\theta_i \sim  \text{uniforme}(0, \pi)\)</span> et pour la longueur, on a <span class="math inline">\(\mathscr{l}_i \sim \text{exp}( \lambda_{ci})\)</span>. On peut calculer la longueur moyenne de chaque corde qui se trouve dans <span class="math inline">\(\Xi_d\)</span> et la probabilité <span class="math inline">\(\mathbb{P}(x \in \Xi_d  \vert x \in \Xi_c)\)</span>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -657,7 +652,7 @@ window.Quarto = {
 <span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"forestgreen"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
 <span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rognage strict de la fenêtre d'observation finale [0,1]</span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
 <span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
 <span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -797,7 +792,7 @@ window.Quarto = {
 <span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
 <span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité à la fenêtre d'observation)</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_x, borne_superieure_x),</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_x, borne_superieure_x),</span>
 <span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y),</span>
 <span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -928,468 +923,10 @@ window.Quarto = {
 <pre><code>Probabilité estimée d'intersection : 0.255</code></pre>
 </div>
 </div>
-<pre><code>
-&lt;!-- 
-Si tu veux insérer une de tes captures d'écran précédentes :
-
-![Description](figures/nom_image.png){fig-align="center" width="80%"}
---&gt;
 
 
+<!-- -->
 
-
-:::{#quarto-navigation-envelope .hidden}
-[Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl"}
-[Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU="}
-[&lt;span class='chapter-number'&gt;4&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Résultats&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uZXh0"}
-[&lt;span class='chapter-number'&gt;2&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Méthodologie&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1wcmV2"}
-[Préface]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sUHLDqWZhY2U="}
-[Cadre théorique]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMQ=="}
-[&lt;span class='chapter-number'&gt;1&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Introduction&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi8wMS1pbnRyb2R1Y3Rpb24uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbnRyb2R1Y3Rpb248L3NwYW4+"}
-[&lt;span class='chapter-number'&gt;2&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Méthodologie&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi8wMi1tZXRob2RvbG9naWUuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Mjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Nw6l0aG9kb2xvZ2llPC9zcGFuPg=="}
-[Analyse]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMg=="}
-[&lt;span class='chapter-number'&gt;3&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Simulations&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi8wMy1zaW11bGF0aW9ucy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlNpbXVsYXRpb25zPC9zcGFuPg=="}
-[&lt;span class='chapter-number'&gt;4&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Résultats&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi8wNC1yZXN1bHRhdHMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Sw6lzdWx0YXRzPC9zcGFuPg=="}
-[&lt;span class='chapter-number'&gt;5&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Discussion et conclusion&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi8wNS1kaXNjdXNzaW9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+RGlzY3Vzc2lvbi1ldC1jb25jbHVzaW9uPC9zcGFuPg=="}
-[Références]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZlcmVuY2VzLmh0bWxSw6lmw6lyZW5jZXM="}
-[Analyse]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWJyZWFkY3J1bWJzLUFuYWx5c2U="}
-[&lt;span class='chapter-number'&gt;3&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;Simulations&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Mzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TaW11bGF0aW9uczwvc3Bhbj4="}
-:::
-
-
-
-:::{#quarto-meta-markdown .hidden}
-[[3]{.chapter-number}&nbsp; [Simulations]{.chapter-title} – Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW1ldGF0aXRsZQ=="}
-[[3]{.chapter-number}&nbsp; [Simulations]{.chapter-title} – Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="}
-[[3]{.chapter-number}&nbsp; [Simulations]{.chapter-title} – Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW9nY2FyZHRpdGxl"}
-[Modélisation spatiale des feux de forêt]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ=="}
-[]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="}
-[]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW9nY2FyZGRkZXNj"}
-:::
-
-
-
-
-&lt;!-- --&gt;
-
-::: {.quarto-embedded-source-code}
-```````````````````{.markdown shortcodes="false"}
-# Simulations
-
-quarto-executable-code-5450563D
-
-```r
-#| label: setup-sim
-#| include: false
-
-library(spatstat)
-library(ggplot2)
-</code></pre>
-</section>
-<section id="simulation-dun-modèle-booléen-avec-disques-1" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="simulation-dun-modèle-booléen-avec-disques-1"><span class="header-section-number">3.4</span> Simulation d’un modèle booléen avec disques</h2>
-<p>On fait apparaître des points <span class="math inline">\(x_i\)</span> sur une région selon un processus de Poisson homogène sur la région <span class="math inline">\([0,1] \times [0,1]\)</span> du plan, et on pose un disque <span class="math inline">\(\Xi_i\)</span> sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a <span class="math inline">\(R(x_i) \sim \text{exp}(\lambda)\)</span>.Ici, le modèle booléen est <span class="math display">\[ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).\]</span></p>
-<p>quarto-executable-code-5450563D</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">41</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_x <span class="ot">&lt;-</span> <span class="dv">0</span>; borne_superieure_axe_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_y <span class="ot">&lt;-</span> <span class="dv">0</span>; borne_superieure_axe_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> (borne_superieure_axe_x) <span class="sc">-</span> (borne_inferieure_axe_x)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> (borne_superieure_axe_y) <span class="sc">-</span> (borne_inferieure_axe_y)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda=</span><span class="dv">17</span><span class="sc">*</span>longueur_intervalle_x<span class="sc">*</span>longueur_intervalle_y)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>centres_x_cercles<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>centres_y_cercles<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>rayons_cercles<span class="ot">&lt;-</span><span class="fu">rexp</span>(nombre_points,<span class="dv">11</span>)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>nombre_cordes <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda=</span><span class="dv">17</span><span class="sc">*</span>longueur_intervalle_x<span class="sc">*</span>longueur_intervalle_y)</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>centres_x_cordes<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>centres_y_cordes<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>longueurs_cordes<span class="ot">&lt;-</span><span class="fu">rexp</span>(nombre_cordes,<span class="dv">11</span>)</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>orientations_cordes<span class="ot">&lt;-</span><span class="fu">runif</span>(nombre_cordes,<span class="dv">0</span>,pi)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Génération des cercles sans aucun package externe</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>df_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> i,</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x  =</span> centres_x_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y  =</span> centres_y_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Génération des cordes (calcul vectoriel direct)</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>df_cordes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">x    =</span> centres_x_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes),</span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">y    =</span> centres_y_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes),</span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">xend =</span> centres_x_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes),</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">yend =</span> centres_y_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes),</span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">cx   =</span> centres_x_cordes,</span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">cy   =</span> centres_y_cordes</span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Tracé avec ggplot2 uniquement</span></span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cercles (cyan avec bordure bleue)</span></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Centres des cercles (points noirs)</span></span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cercles, <span class="at">y =</span> centres_y_cercles), </span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité entre 0 et 1 comme clip)</span></span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Modèle booléen avec disques"</span>, <span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes-1" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="simulation-de-deux-modèles-booléens-superposés-lun-avec-des-disques-lautre-avec-des-cordesintersection-entre-disques-et-cordes-1"><span class="header-section-number">3.5</span> Simulation de deux modèles booléens superposés, l’un avec des disques, l’autre avec des cordes’intersection entre disques et cordes</h2>
-<p>On crée d’abord un modèle booléen <span class="math inline">\(\Xi_d\)</span> avec des disques comme à la section précédente. On crée ensuite un second modéle booléen <span class="math inline">\(\Xi_c\)</span> où les points<span class="math inline">\(x_{ci}\)</span> sont à nouveau placés sur la partie du plan <span class="math inline">\([0,1] \times [0,1]\)</span> selon un deuxiàme processus de Poisson, pour l’orientation de chaque corde<span class="math inline">\(\Xi_{ci}\)</span>, on a <span class="math inline">\(\theta_i \sim  \text{uniforme}(0, \pi)\)</span> et pour la longueur, on a <span class="math inline">\(\mathscr{l}_i \sim \text{exp}( \lambda_{ci})\)</span>. On peut calculer la longueur moyenne de chaque corde qui se trouve dans <span class="math inline">\(\Xi_d\)</span> et la probabilité <span class="math inline">\(\mathbb{P}(x \in \Xi_d  \vert x \in \Xi_c)\)</span>.</p>
-<p>quarto-executable-code-5450563D</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES ---</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>borne_superieure_axe_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>borne_superieure_axe_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> (borne_superieure_axe_x) <span class="sc">-</span> (borne_inferieure_axe_x)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> (borne_superieure_axe_y) <span class="sc">-</span> (borne_inferieure_axe_y)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition de la fenêtre d'observation principale</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>W_obs <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x), </span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y))</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Fenêtre élargie pour éviter les effets de bord lors de la génération</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>W_large <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_axe_x <span class="sc">-</span> longueur_intervalle_x, borne_superieure_axe_x <span class="sc">+</span> longueur_intervalle_x), </span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(borne_inferieure_axe_y <span class="sc">-</span> longueur_intervalle_y, borne_superieure_axe_y <span class="sc">+</span> longueur_intervalle_y))</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. SIMULATION DES PROCESSUS ---</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">20</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>nombre_cordes <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">20</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>centres_x_cercles <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>centres_y_cercles <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>rayons_cercles    <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>centres_x_cordes    <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>centres_y_cordes    <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>longueurs_cordes    <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_cordes, <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>orientations_cordes <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, <span class="dv">0</span>, pi)</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---</span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Résolution du masque augmentée (dimyx=512) pour éviter l'erreur d'approximation numérique</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>                             <span class="at">centre =</span> <span class="fu">c</span>(centres_x_cercles[i], centres_y_cercles[i]), </span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mask =</span> <span class="cn">TRUE</span>, <span class="at">dimyx =</span> <span class="dv">512</span>)</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>zone_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Construction des segments</span></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> centres_x_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes)</span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>y0 <span class="ot">&lt;-</span> centres_y_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes)</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> centres_x_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes)</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> centres_y_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes)</span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilisation de la fenêtre élargie pour ne pas couper les cordes de base</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>toutes_les_cordes <span class="ot">&lt;-</span> <span class="fu">psp</span>(x0, y0, x1, y1, <span class="at">window =</span> W_large)</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersection des cordes avec l'union des cercles</span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>cordes_dans_cercles <span class="ot">&lt;-</span> toutes_les_cordes[zone_cercles]</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des statistiques d'intersection</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>longueurs_intersections       <span class="ot">&lt;-</span> <span class="fu">lengths_psp</span>(cordes_dans_cercles)</span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>longueur_totale_initiale      <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">lengths_psp</span>(toutes_les_cordes))</span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>longueur_totale_intersections <span class="ot">&lt;-</span> <span class="fu">sum</span>(longueurs_intersections)</span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>pourcentage_dans_cercles      <span class="ot">&lt;-</span> (longueur_totale_intersections <span class="sc">/</span> longueur_totale_initiale)</span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. EXTRACATION DES SEGMENTS INTERSECTÉS POUR GGPLOT2 ---</span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversion de l'objet psp spatstat en DataFrame</span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>df_cordes_inter <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(cordes_dans_cercles)</span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5. PRÉPARATION DES DONNÉES DE BASE POUR GGPLOT2 ---</span></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> i,</span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">x  =</span> centres_x_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">y  =</span> centres_y_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>df_cordes_initiales <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x0 =</span> x0, <span class="at">y0 =</span> y0, <span class="at">x1 =</span> x1, <span class="at">y1 =</span> y1)</span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 6. VISUALISATION AVEC GGPLOT2 ---</span></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>titre_graphe <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Proba d'intersection :"</span>, <span class="fu">round</span>(pourcentage_dans_cercles , <span class="dv">3</span>))</span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Tracé des cercles (Masque booléen)</span></span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles_contours, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Tracé des cordes initiales complètes (en rouge)</span></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_cordes_initiales, <span class="fu">aes</span>(<span class="at">x =</span> x0, <span class="at">y =</span> y0, <span class="at">xend =</span> x1, <span class="at">yend =</span> y1), </span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Tracé exclusif des segments intersectés calculés par spatstat (En rouge foncé)</span></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_cordes_inter, <span class="fu">aes</span>(<span class="at">x =</span> x0, <span class="at">y =</span> y0, <span class="at">xend =</span> x1, <span class="at">yend =</span> y1), </span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Points centraux</span></span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cercles, <span class="at">y =</span> centres_y_cercles), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cordes, <span class="at">y =</span> centres_y_cordes), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"forestgreen"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rognage strict de la fenêtre d'observation finale [0,1]</span></span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Modèle Booléen &amp; Intersection spatiale"</span>,</span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> titre_graphe, <span class="at">x =</span> <span class="st">"Axe X"</span>, <span class="at">y =</span> <span class="st">"Axe Y"</span>) <span class="sc">+</span></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="simulation-dintersection-entre-un-carré-et-plusieurs-disques-1" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="simulation-dintersection-entre-un-carré-et-plusieurs-disques-1"><span class="header-section-number">3.6</span> Simulation d’intersection entre un carré et plusieurs disques</h2>
-<p>On crée un modèle booléen <span class="math inline">\(\Xi_d\)</span> avec des disques de la manière qu’aux deux sections précédentes sur la portion <span class="math inline">\([0,1] \times[0,1]\)</span> du plan. On pose ensuite un point <span class="math inline">\(p_c=(x_c,y_c)\)</span> tel que <span class="math inline">\(x_c \sim  \text{uniforme}(0,1)\)</span> et <span class="math inline">\(y_c \sim  \text{uniforme}(0,1)\)</span>. Ce point sert de centre au carré que l’on pose sur cette portion du plan. La longueur de sa diagonale est donnée par <span class="math inline">\(d_c \sim  \text{exp}( \lambda_c)\)</span> et son orientation est donnée par <span class="math inline">\(\theta_c \sim uniforme(0, \pi /2)\)</span>. Ainsi, les coordonnées de ses sommets sont <span class="math inline">\(p_{kc}=(x_c+d_c \text{cos} ( \theta_c+ \frac{k\pi}{2})/2,y_c+d_c \text{sin}( \theta_c+ \frac{k\pi}{2})/2))\)</span> où <span class="math inline">\(k \in  \text{{1,2,3,4}}\)</span> .On peut estimer avec un certain nombre de simulations la probabilité qu’il y ait une intersection entre le carré et au moins un des disques.</p>
-<p>quarto-executable-code-5450563D</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES ---</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>borne_inferieure_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>borne_superieure_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>borne_inferieure_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>borne_superieure_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> borne_superieure_x <span class="sc">-</span> borne_inferieure_x</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> borne_superieure_y <span class="sc">-</span> borne_inferieure_y</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a> <span class="co"># Fixé pour la reproductibilité</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. GÉNÉRATION DES DONNÉES ---</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">10</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>coordonnees_x_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_x, borne_superieure_x)</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>coordonnees_y_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_y, borne_superieure_y)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>rayons_cercles        <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>coordonnees_x_centre_carre <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_x, borne_superieure_x)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>coordonnees_y_centre_carre <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_y, borne_superieure_y)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>longueur_demie_diagonale_carre <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>orientation_carre              <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, pi <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des sommets du carré tourné</span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>angles_toutes_diagonales <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>coordonnees_carre_x <span class="ot">&lt;-</span> coordonnees_x_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">cos</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>coordonnees_carre_y <span class="ot">&lt;-</span> coordonnees_y_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">sin</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilisation d'une grille plus fine (dimyx = 512) pour éviter les erreurs d'arrondi numérique</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>                               <span class="at">centre =</span> <span class="fu">c</span>(coordonnees_x_points[i], coordonnees_y_points[i]), </span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>                               <span class="at">mask =</span> <span class="cn">TRUE</span>, <span class="at">dimyx =</span> <span class="dv">100</span>)</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  zone_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Si aucun point n'est généré par la loi de Poisson, on crée une zone vide</span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  zone_cercles <span class="ot">&lt;-</span> <span class="fu">emptywindow</span>(<span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_x, borne_superieure_x), <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y)))</span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition du carré dans spatstat (vignettage automatique des sommets 1 à 4)</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>zone_carre <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="at">poly =</span> <span class="fu">list</span>(<span class="at">x =</span> coordonnees_carre_x[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> coordonnees_carre_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersection géométrique globale</span></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>intersection_globale <span class="ot">&lt;-</span> <span class="fu">intersect.owin</span>(zone_carre, zone_cercles)</span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>a_une_intersection   <span class="ot">&lt;-</span> <span class="fu">area</span>(intersection_globale) <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. PRÉPARATION DES DATA FRAMES POUR GGPLOT2 ---</span></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Contours des cercles</span></span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">id =</span> i,</span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">x  =</span> coordonnees_x_points[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">y  =</span> coordonnees_y_points[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>  }))</span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordonnées du carré (les 5 points pour fermer le tracé du polygone)</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>df_carre <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> coordonnees_carre_x,</span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> coordonnees_carre_y</span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraction des pixels de la zone d'intersection de manière sécurisée</span></span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a_une_intersection) {</span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>  df_intersection <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.im</span>(intersection_globale))</span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sécurité : on vérifie que la colonne 'v' existe bien avant de filtrer</span></span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="st">"v"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df_intersection)) {</span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>    df_intersection <span class="ot">&lt;-</span> df_intersection[df_intersection<span class="sc">$</span>v <span class="sc">==</span> <span class="cn">TRUE</span>, ]</span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>    df_intersection <span class="ot">&lt;-</span> <span class="fu">data.frame</span>() <span class="co"># DataFrame vide si la colonne n'existe pas</span></span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  df_intersection <span class="ot">&lt;-</span> <span class="fu">data.frame</span>() <span class="co"># DataFrame vide s'il n'y a aucune intersection</span></span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5. VISUALISATION AVEC GGPLOT2 ---</span></span>
-<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>statut_intersection <span class="ot">&lt;-</span> <span class="cf">if</span>(a_une_intersection) <span class="st">"OUI"</span> <span class="cf">else</span> <span class="st">"NON"</span></span>
-<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Zone d'intersection réelle calculée par spatstat (remplissage jaune en arrière-plan)</span></span>
-<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(<span class="fu">nrow</span>(df_intersection) <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
-<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">data =</span> df_intersection, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">fill =</span> <span class="st">"gold"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) </span>
-<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
-<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Dessin des cercles (cyan avec bordure bleue)</span></span>
-<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
-<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles_contours, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
-<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) </span>
-<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
-<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Dessin du carré (corail avec bordure rose)</span></span>
-<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_carre, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
-<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>), <span class="at">color =</span> <span class="st">"pink"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Points centraux (centres des cercles et du carré)</span></span>
-<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
-<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> coordonnees_x_points, <span class="at">y =</span> coordonnees_y_points), </span>
-<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.8</span>) </span>
-<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
-<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> coordonnees_x_centre_carre, <span class="at">y =</span> coordonnees_y_centre_carre), </span>
-<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité à la fenêtre d'observation)</span></span>
-<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_x, borne_superieure_x),</span>
-<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y),</span>
-<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titres et habillage</span></span>
-<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Intersection : Modèle Booléen &amp; Carré"</span>,</span>
-<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Intersection:"</span>, statut_intersection),</span>
-<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Axe X"</span>, <span class="at">y =</span> <span class="st">"Axe Y"</span>) <span class="sc">+</span></span>
-<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 6. AFFICHAGE DU RÉSULTAT DANS LA CONSOLE ---</span></span>
-<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Intersection:"</span>, a_une_intersection)) </span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<p>quarto-executable-code-5450563D</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES FIXES ---</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>borne_inferieure_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>borne_superieure_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>borne_inferieure_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>borne_superieure_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> borne_superieure_x <span class="sc">-</span> borne_inferieure_x</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> borne_superieure_y <span class="sc">-</span> borne_inferieure_y</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># Assure la reproductibilité</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. DÉFINITION DE LA FONCTION DE SIMULATION PURE ---</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette fonction calcule uniquement si l'intersection a lieu (TRUE/FALSE)</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>simuler_intersection_pure <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Génération des objets (Cercles)</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">5</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    coordonnees_x_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_x, borne_superieure_x)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    coordonnees_y_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_y, borne_superieure_y)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    rayons_cercles        <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. On définit une fenêtre d'analyse fixe avec une résolution bloquée (ex: 256x256)</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    cadre_fixe <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_x, borne_superieure_x), </span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y))</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    masque_fixe <span class="ot">&lt;-</span> <span class="fu">as.mask</span>(cadre_fixe, <span class="at">dimyx =</span> <span class="dv">256</span>) <span class="co"># Bloque la résolution globale</span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. On crée les disques sous forme de polygones vectoriels (très léger en mémoire)</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>      <span class="co"># mask = FALSE force spatstat à rester en mode vectoriel (polygone)</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>      liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">centre =</span> <span class="fu">c</span>(coordonnees_x_points[i], coordonnees_y_points[i]), </span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. On fait l'union vectorielle, puis SEULEMENT À LA FIN, on convertit en masque fixe</span></span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    zone_cercles_vectorielle <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>    zone_cercles <span class="ot">&lt;-</span> <span class="fu">as.mask</span>(zone_cercles_vectorielle, <span class="at">xy =</span> masque_fixe)</span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Génération de l'objet (Carré)</span></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>  coordonnees_x_centre_carre     <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_x, borne_superieure_x)</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>  coordonnees_y_centre_carre     <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_y, borne_superieure_y)</span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  longueur_demie_diagonale_carre <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>  orientation_carre              <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, pi <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>  angles_toutes_diagonales <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>  coordonnees_carre_x <span class="ot">&lt;-</span> coordonnees_x_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">cos</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>  coordonnees_carre_y <span class="ot">&lt;-</span> coordonnees_y_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">sin</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Création du carré dans spatstat</span></span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  zone_carre <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="at">poly =</span> <span class="fu">list</span>(<span class="at">x =</span> coordonnees_carre_x[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">y =</span> coordonnees_carre_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calcul rapide de l'existence d'une intersection</span></span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  intersection_globale <span class="ot">&lt;-</span> <span class="fu">intersect.owin</span>(zone_carre, zone_cercles)</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">area</span>(intersection_globale) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. EXÉCUTION DU MULTI-TIRAGE (MONTE-CARLO) ---</span></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>nombre_simulations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="co"># replicate() génère directement un vecteur logique propre (TRUE/FALSE)</span></span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>vecteur_intersections <span class="ot">&lt;-</span> <span class="fu">replicate</span>(nombre_simulations, <span class="fu">simuler_intersection_pure</span>())</span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la probabilité empirique</span></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>probabilite_intersection <span class="ot">&lt;-</span> <span class="fu">mean</span>(vecteur_intersections)</span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. AFFICHAGE DES RÉSULTATS ---</span></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"=== RÉSULTATS DE LA SIMULATION ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Nombre de simulations exécutées :"</span>, nombre_simulations, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Nombre d'intersections trouvées :"</span>, <span class="fu">sum</span>(vecteur_intersections), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Probabilité estimée d'intersection :"</span>, <span class="fu">round</span>(probabilite_intersection, <span class="dv">4</span>)) </span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>
-&lt;!-- 
-Si tu veux insérer une de tes captures d'écran précédentes :
-
-![Description](figures/nom_image.png){fig-align="center" width="80%"}
---&gt;</code></pre>
-<p>:::</p>
 </section>
 
 </main> <!-- /main -->
@@ -1868,10 +1405,438 @@ Si tu veux insérer une de tes captures d'écran précédentes :
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Résultats</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3 Simulations</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-sim</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1 Simulation d'un modèle booléen avec disques</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>On fait apparaître des points $x_i$ sur une région selon un processus de Poisson homogène sur la région $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$ du plan, et on pose un disque $\Xi_i$ sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a $R(x_i) \sim \text{exp}(\lambda)$.Ici, le modèle booléen est $$ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).$$</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">41</span>)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_x <span class="ot">&lt;-</span> <span class="dv">0</span>; borne_superieure_axe_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_y <span class="ot">&lt;-</span> <span class="dv">0</span>; borne_superieure_axe_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> (borne_superieure_axe_x) <span class="sc">-</span> (borne_inferieure_axe_x)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> (borne_superieure_axe_y) <span class="sc">-</span> (borne_inferieure_axe_y)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda=</span><span class="dv">17</span><span class="sc">*</span>longueur_intervalle_x<span class="sc">*</span>longueur_intervalle_y)</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>centres_x_cercles<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>centres_y_cercles<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>rayons_cercles<span class="ot">&lt;-</span><span class="fu">rexp</span>(nombre_points,<span class="dv">11</span>)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>nombre_cordes <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda=</span><span class="dv">17</span><span class="sc">*</span>longueur_intervalle_x<span class="sc">*</span>longueur_intervalle_y)</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>centres_x_cordes<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>centres_y_cordes<span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>longueurs_cordes<span class="ot">&lt;-</span><span class="fu">rexp</span>(nombre_cordes,<span class="dv">11</span>)</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>orientations_cordes<span class="ot">&lt;-</span><span class="fu">runif</span>(nombre_cordes,<span class="dv">0</span>,pi)</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Génération des cercles sans aucun package externe</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>df_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> i,</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">x  =</span> centres_x_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">y  =</span> centres_y_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Génération des cordes (calcul vectoriel direct)</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>df_cordes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">x    =</span> centres_x_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes),</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">y    =</span> centres_y_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes),</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">xend =</span> centres_x_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes),</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">yend =</span> centres_y_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes),</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">cx   =</span> centres_x_cordes,</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">cy   =</span> centres_y_cordes</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Tracé avec ggplot2 uniquement</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cercles (cyan avec bordure bleue)</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Centres des cercles (points noirs)</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cercles, <span class="at">y =</span> centres_y_cercles), </span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité entre 0 et 1 comme clip)</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Modèle booléen avec disques"</span>, <span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.2 Simulation de deux modèles booléens superposés</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>On crée d'abord un modèle booléen $\Xi_d$ avec des disques comme à la section précédente. On crée ensuite un second modéle booléen $\Xi_c$ où les points$x_{ci}$ sont à nouveau placés sur la partie du plan $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$ selon un deuxiàme processus de Poisson, pour l'orientation de chaque corde$\Xi_{ci}$, on a $\theta_i \sim  \text{uniforme}(0, \pi)$ et pour la longueur, on a $\mathscr{l}_i \sim \text{exp}( \lambda_{ci})$. On peut calculer la longueur moyenne de chaque corde qui se trouve dans $\Xi_d$ et la probabilité $\mathbb{P}(x \in \Xi_d  \vert x \in \Xi_c)$.</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES ---</span></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>borne_superieure_axe_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>borne_inferieure_axe_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>borne_superieure_axe_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> (borne_superieure_axe_x) <span class="sc">-</span> (borne_inferieure_axe_x)</span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> (borne_superieure_axe_y) <span class="sc">-</span> (borne_inferieure_axe_y)</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition de la fenêtre d'observation principale</span></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>W_obs <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x), </span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>              <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y))</span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Fenêtre élargie pour éviter les effets de bord lors de la génération</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>W_large <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_axe_x <span class="sc">-</span> longueur_intervalle_x, borne_superieure_axe_x <span class="sc">+</span> longueur_intervalle_x), </span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(borne_inferieure_axe_y <span class="sc">-</span> longueur_intervalle_y, borne_superieure_axe_y <span class="sc">+</span> longueur_intervalle_y))</span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. SIMULATION DES PROCESSUS ---</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">20</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>nombre_cordes <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">20</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>centres_x_cercles <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>centres_y_cercles <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>rayons_cercles    <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>centres_x_cordes    <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_x, borne_superieure_axe_x)</span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>centres_y_cordes    <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, borne_inferieure_axe_y, borne_superieure_axe_y)</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>longueurs_cordes    <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_cordes, <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>orientations_cordes <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_cordes, <span class="dv">0</span>, pi)</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---</span></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a><span class="co"># Résolution du masque augmentée (dimyx=512) pour éviter l'erreur d'approximation numérique</span></span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a>  liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>                             <span class="at">centre =</span> <span class="fu">c</span>(centres_x_cercles[i], centres_y_cercles[i]), </span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mask =</span> <span class="cn">TRUE</span>, <span class="at">dimyx =</span> <span class="dv">512</span>)</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>zone_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Construction des segments</span></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> centres_x_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes)</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>y0 <span class="ot">&lt;-</span> centres_y_cordes <span class="sc">-</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes)</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> centres_x_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">cos</span>(orientations_cordes)</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> centres_y_cordes <span class="sc">+</span> longueurs_cordes <span class="sc">*</span> <span class="fu">sin</span>(orientations_cordes)</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilisation de la fenêtre élargie pour ne pas couper les cordes de base</span></span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>toutes_les_cordes <span class="ot">&lt;-</span> <span class="fu">psp</span>(x0, y0, x1, y1, <span class="at">window =</span> W_large)</span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersection des cordes avec l'union des cercles</span></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>cordes_dans_cercles <span class="ot">&lt;-</span> toutes_les_cordes[zone_cercles]</span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des statistiques d'intersection</span></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>longueurs_intersections       <span class="ot">&lt;-</span> <span class="fu">lengths_psp</span>(cordes_dans_cercles)</span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>longueur_totale_initiale      <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">lengths_psp</span>(toutes_les_cordes))</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>longueur_totale_intersections <span class="ot">&lt;-</span> <span class="fu">sum</span>(longueurs_intersections)</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>pourcentage_dans_cercles      <span class="ot">&lt;-</span> (longueur_totale_intersections <span class="sc">/</span> longueur_totale_initiale)</span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. EXTRACATION DES SEGMENTS INTERSECTÉS POUR GGPLOT2 ---</span></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversion de l'objet psp spatstat en DataFrame</span></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>df_cordes_inter <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(cordes_dans_cercles)</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5. PRÉPARATION DES DONNÉES DE BASE POUR GGPLOT2 ---</span></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> i,</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">x  =</span> centres_x_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">y  =</span> centres_y_cercles[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>df_cordes_initiales <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x0 =</span> x0, <span class="at">y0 =</span> y0, <span class="at">x1 =</span> x1, <span class="at">y1 =</span> y1)</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 6. VISUALISATION AVEC GGPLOT2 ---</span></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a>titre_graphe <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Proba d'intersection :"</span>, <span class="fu">round</span>(pourcentage_dans_cercles , <span class="dv">3</span>))</span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Tracé des cercles (Masque booléen)</span></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles_contours, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Tracé des cordes initiales complètes (en rouge)</span></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_cordes_initiales, <span class="fu">aes</span>(<span class="at">x =</span> x0, <span class="at">y =</span> y0, <span class="at">xend =</span> x1, <span class="at">yend =</span> y1), </span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Tracé exclusif des segments intersectés calculés par spatstat (En rouge foncé)</span></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_cordes_inter, <span class="fu">aes</span>(<span class="at">x =</span> x0, <span class="at">y =</span> y0, <span class="at">xend =</span> x1, <span class="at">yend =</span> y1), </span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Points centraux</span></span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cercles, <span class="at">y =</span> centres_y_cercles), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> centres_x_cordes, <span class="at">y =</span> centres_y_cordes), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"forestgreen"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rognage strict de la fenêtre d'observation finale [0,1]</span></span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_axe_x, borne_superieure_axe_x),</span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_axe_y, borne_superieure_axe_y),</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Modèle Booléen &amp; Intersection spatiale"</span>,</span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> titre_graphe, <span class="at">x =</span> <span class="st">"Axe X"</span>, <span class="at">y =</span> <span class="st">"Axe Y"</span>) <span class="sc">+</span></span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simulation d'intersection entre un carré et plusieurs disques</span></span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>On crée un modèle booléen $\Xi_d$ avec des disques de la manière qu'aux deux sections précédentes sur la portion $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$ du plan. On pose ensuite un point $p_c=(x_c,y_c)$ tel que $x_c \sim  \text{uniforme}(0,1)$ et $y_c \sim  \text{uniforme}(0,1)$. Ce point sert de centre au carré que l'on pose sur cette portion du plan. La longueur de sa diagonale est donnée par $d_c \sim  \text{exp}( \lambda_c)$ et son orientation est donnée par $\theta_c \sim uniforme(0, \pi /2)$. Ainsi, les coordonnées de ses sommets sont $p_{kc}=(x_c+d_c \text{cos} ( \theta_c+ \frac{k\pi}{2})/2,y_c+d_c \text{sin}( \theta_c+ \frac{k\pi}{2})/2))$ où $k \in  \text{{1,2,3,4}}$ .On peut estimer avec un certain nombre de simulations la probabilité qu'il y ait une intersection entre le carré et au moins un des disques.</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES ---</span></span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>borne_inferieure_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a>borne_superieure_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>borne_inferieure_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>borne_superieure_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> borne_superieure_x <span class="sc">-</span> borne_inferieure_x</span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> borne_superieure_y <span class="sc">-</span> borne_inferieure_y</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a> <span class="co"># Fixé pour la reproductibilité</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. GÉNÉRATION DES DONNÉES ---</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">10</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>coordonnees_x_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_x, borne_superieure_x)</span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>coordonnees_y_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_y, borne_superieure_y)</span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a>rayons_cercles        <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a>coordonnees_x_centre_carre <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_x, borne_superieure_x)</span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>coordonnees_y_centre_carre <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_y, borne_superieure_y)</span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a>longueur_demie_diagonale_carre <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>orientation_carre              <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, pi <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des sommets du carré tourné</span></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>angles_toutes_diagonales <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>coordonnees_carre_x <span class="ot">&lt;-</span> coordonnees_x_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">cos</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>coordonnees_carre_y <span class="ot">&lt;-</span> coordonnees_y_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">sin</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. CALCULS GÉOMÉTRIQUES (spatstat) ---</span></span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilisation d'une grille plus fine (dimyx = 512) pour éviter les erreurs d'arrondi numérique</span></span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a>liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>    liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>                               <span class="at">centre =</span> <span class="fu">c</span>(coordonnees_x_points[i], coordonnees_y_points[i]), </span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>                               <span class="at">mask =</span> <span class="cn">TRUE</span>, <span class="at">dimyx =</span> <span class="dv">100</span>)</span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>  zone_cercles <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Si aucun point n'est généré par la loi de Poisson, on crée une zone vide</span></span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a>  zone_cercles <span class="ot">&lt;-</span> <span class="fu">emptywindow</span>(<span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_x, borne_superieure_x), <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y)))</span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition du carré dans spatstat (vignettage automatique des sommets 1 à 4)</span></span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>zone_carre <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="at">poly =</span> <span class="fu">list</span>(<span class="at">x =</span> coordonnees_carre_x[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> coordonnees_carre_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersection géométrique globale</span></span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>intersection_globale <span class="ot">&lt;-</span> <span class="fu">intersect.owin</span>(zone_carre, zone_cercles)</span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>a_une_intersection   <span class="ot">&lt;-</span> <span class="fu">area</span>(intersection_globale) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. PRÉPARATION DES DATA FRAMES POUR GGPLOT2 ---</span></span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a><span class="co"># Contours des cercles</span></span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a>  df_cercles_contours <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nombre_points, <span class="cf">function</span>(i) {</span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a>      <span class="at">id =</span> i,</span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a>      <span class="at">x  =</span> coordonnees_x_points[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">cos</span>(theta),</span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a>      <span class="at">y  =</span> coordonnees_y_points[i] <span class="sc">+</span> rayons_cercles[i] <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordonnées du carré (les 5 points pour fermer le tracé du polygone)</span></span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>df_carre <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> coordonnees_carre_x,</span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> coordonnees_carre_y</span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraction des pixels de la zone d'intersection de manière sécurisée</span></span>
+<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a_une_intersection) {</span>
+<span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a>  df_intersection <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.im</span>(intersection_globale))</span>
+<span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sécurité : on vérifie que la colonne 'v' existe bien avant de filtrer</span></span>
+<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="st">"v"</span> <span class="sc">%in%</span> <span class="fu">names</span>(df_intersection)) {</span>
+<span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a>    df_intersection <span class="ot">&lt;-</span> df_intersection[df_intersection<span class="sc">$</span>v <span class="sc">==</span> <span class="cn">TRUE</span>, ]</span>
+<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a>    df_intersection <span class="ot">&lt;-</span> <span class="fu">data.frame</span>() <span class="co"># DataFrame vide si la colonne n'existe pas</span></span>
+<span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-307"><a href="#cb14-307" aria-hidden="true" tabindex="-1"></a>  df_intersection <span class="ot">&lt;-</span> <span class="fu">data.frame</span>() <span class="co"># DataFrame vide s'il n'y a aucune intersection</span></span>
+<span id="cb14-308"><a href="#cb14-308" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-309"><a href="#cb14-309" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5. VISUALISATION AVEC GGPLOT2 ---</span></span>
+<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a>statut_intersection <span class="ot">&lt;-</span> <span class="cf">if</span>(a_une_intersection) <span class="st">"OUI"</span> <span class="cf">else</span> <span class="st">"NON"</span></span>
+<span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-313"><a href="#cb14-313" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Zone d'intersection réelle calculée par spatstat (remplissage jaune en arrière-plan)</span></span>
+<span id="cb14-314"><a href="#cb14-314" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(<span class="fu">nrow</span>(df_intersection) <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
+<span id="cb14-315"><a href="#cb14-315" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">data =</span> df_intersection, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">fill =</span> <span class="st">"gold"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) </span>
+<span id="cb14-316"><a href="#cb14-316" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
+<span id="cb14-317"><a href="#cb14-317" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Dessin des cercles (cyan avec bordure bleue)</span></span>
+<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
+<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_cercles_contours, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">group =</span> id), </span>
+<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"cyan"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) </span>
+<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
+<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Dessin du carré (corail avec bordure rose)</span></span>
+<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> df_carre, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), </span>
+<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>), <span class="at">color =</span> <span class="st">"pink"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb14-327"><a href="#cb14-327" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-328"><a href="#cb14-328" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Points centraux (centres des cercles et du carré)</span></span>
+<span id="cb14-329"><a href="#cb14-329" aria-hidden="true" tabindex="-1"></a>  { <span class="cf">if</span>(nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) </span>
+<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> coordonnees_x_points, <span class="at">y =</span> coordonnees_y_points), </span>
+<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.8</span>) </span>
+<span id="cb14-332"><a href="#cb14-332" aria-hidden="true" tabindex="-1"></a>  } <span class="sc">+</span></span>
+<span id="cb14-333"><a href="#cb14-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> coordonnees_x_centre_carre, <span class="at">y =</span> coordonnees_y_centre_carre), </span>
+<span id="cb14-334"><a href="#cb14-334" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb14-335"><a href="#cb14-335" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-336"><a href="#cb14-336" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contraintes d'affichage (Strictement limité à la fenêtre d'observation)</span></span>
+<span id="cb14-337"><a href="#cb14-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(borne_inferieure_x, borne_superieure_x),</span>
+<span id="cb14-338"><a href="#cb14-338" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y),</span>
+<span id="cb14-339"><a href="#cb14-339" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-340"><a href="#cb14-340" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-341"><a href="#cb14-341" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titres et habillage</span></span>
+<span id="cb14-342"><a href="#cb14-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Intersection : Modèle Booléen &amp; Carré"</span>,</span>
+<span id="cb14-343"><a href="#cb14-343" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Intersection:"</span>, statut_intersection),</span>
+<span id="cb14-344"><a href="#cb14-344" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Axe X"</span>, <span class="at">y =</span> <span class="st">"Axe Y"</span>) <span class="sc">+</span></span>
+<span id="cb14-345"><a href="#cb14-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb14-346"><a href="#cb14-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 6. AFFICHAGE DU RÉSULTAT DANS LA CONSOLE ---</span></span>
+<span id="cb14-348"><a href="#cb14-348" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Intersection:"</span>, a_une_intersection)) </span>
+<span id="cb14-349"><a href="#cb14-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-350"><a href="#cb14-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-351"><a href="#cb14-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-354"><a href="#cb14-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-355"><a href="#cb14-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb14-356"><a href="#cb14-356" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-357"><a href="#cb14-357" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb14-358"><a href="#cb14-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-359"><a href="#cb14-359" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1. CONFIGURATION ET PARAMÈTRES FIXES ---</span></span>
+<span id="cb14-360"><a href="#cb14-360" aria-hidden="true" tabindex="-1"></a>borne_inferieure_x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-361"><a href="#cb14-361" aria-hidden="true" tabindex="-1"></a>borne_superieure_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-362"><a href="#cb14-362" aria-hidden="true" tabindex="-1"></a>borne_inferieure_y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-363"><a href="#cb14-363" aria-hidden="true" tabindex="-1"></a>borne_superieure_y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-364"><a href="#cb14-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-365"><a href="#cb14-365" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_x <span class="ot">&lt;-</span> borne_superieure_x <span class="sc">-</span> borne_inferieure_x</span>
+<span id="cb14-366"><a href="#cb14-366" aria-hidden="true" tabindex="-1"></a>longueur_intervalle_y <span class="ot">&lt;-</span> borne_superieure_y <span class="sc">-</span> borne_inferieure_y</span>
+<span id="cb14-367"><a href="#cb14-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-368"><a href="#cb14-368" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># Assure la reproductibilité</span></span>
+<span id="cb14-369"><a href="#cb14-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-370"><a href="#cb14-370" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2. DÉFINITION DE LA FONCTION DE SIMULATION PURE ---</span></span>
+<span id="cb14-371"><a href="#cb14-371" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette fonction calcule uniquement si l'intersection a lieu (TRUE/FALSE)</span></span>
+<span id="cb14-372"><a href="#cb14-372" aria-hidden="true" tabindex="-1"></a>simuler_intersection_pure <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb14-373"><a href="#cb14-373" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-374"><a href="#cb14-374" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Génération des objets (Cercles)</span></span>
+<span id="cb14-375"><a href="#cb14-375" aria-hidden="true" tabindex="-1"></a>  nombre_points <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">5</span> <span class="sc">*</span> longueur_intervalle_x <span class="sc">*</span> longueur_intervalle_y)</span>
+<span id="cb14-376"><a href="#cb14-376" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-377"><a href="#cb14-377" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (nombre_points <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb14-378"><a href="#cb14-378" aria-hidden="true" tabindex="-1"></a>    coordonnees_x_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_x, borne_superieure_x)</span>
+<span id="cb14-379"><a href="#cb14-379" aria-hidden="true" tabindex="-1"></a>    coordonnees_y_points <span class="ot">&lt;-</span> <span class="fu">runif</span>(nombre_points, borne_inferieure_y, borne_superieure_y)</span>
+<span id="cb14-380"><a href="#cb14-380" aria-hidden="true" tabindex="-1"></a>    rayons_cercles        <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nombre_points, <span class="dv">20</span>)</span>
+<span id="cb14-381"><a href="#cb14-381" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-382"><a href="#cb14-382" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. On définit une fenêtre d'analyse fixe avec une résolution bloquée (ex: 256x256)</span></span>
+<span id="cb14-383"><a href="#cb14-383" aria-hidden="true" tabindex="-1"></a>    cadre_fixe <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(borne_inferieure_x, borne_superieure_x), </span>
+<span id="cb14-384"><a href="#cb14-384" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(borne_inferieure_y, borne_superieure_y))</span>
+<span id="cb14-385"><a href="#cb14-385" aria-hidden="true" tabindex="-1"></a>    masque_fixe <span class="ot">&lt;-</span> <span class="fu">as.mask</span>(cadre_fixe, <span class="at">dimyx =</span> <span class="dv">256</span>) <span class="co"># Bloque la résolution globale</span></span>
+<span id="cb14-386"><a href="#cb14-386" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-387"><a href="#cb14-387" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. On crée les disques sous forme de polygones vectoriels (très léger en mémoire)</span></span>
+<span id="cb14-388"><a href="#cb14-388" aria-hidden="true" tabindex="-1"></a>    liste_cercles <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-389"><a href="#cb14-389" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nombre_points) {</span>
+<span id="cb14-390"><a href="#cb14-390" aria-hidden="true" tabindex="-1"></a>      <span class="co"># mask = FALSE force spatstat à rester en mode vectoriel (polygone)</span></span>
+<span id="cb14-391"><a href="#cb14-391" aria-hidden="true" tabindex="-1"></a>      liste_cercles[[i]] <span class="ot">&lt;-</span> <span class="fu">disc</span>(<span class="at">r =</span> rayons_cercles[i], </span>
+<span id="cb14-392"><a href="#cb14-392" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">centre =</span> <span class="fu">c</span>(coordonnees_x_points[i], coordonnees_y_points[i]), </span>
+<span id="cb14-393"><a href="#cb14-393" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-394"><a href="#cb14-394" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-395"><a href="#cb14-395" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-396"><a href="#cb14-396" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. On fait l'union vectorielle, puis SEULEMENT À LA FIN, on convertit en masque fixe</span></span>
+<span id="cb14-397"><a href="#cb14-397" aria-hidden="true" tabindex="-1"></a>    zone_cercles_vectorielle <span class="ot">&lt;-</span> <span class="fu">do.call</span>(union.owin, liste_cercles)</span>
+<span id="cb14-398"><a href="#cb14-398" aria-hidden="true" tabindex="-1"></a>    zone_cercles <span class="ot">&lt;-</span> <span class="fu">as.mask</span>(zone_cercles_vectorielle, <span class="at">xy =</span> masque_fixe)</span>
+<span id="cb14-399"><a href="#cb14-399" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-400"><a href="#cb14-400" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb14-401"><a href="#cb14-401" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb14-402"><a href="#cb14-402" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-403"><a href="#cb14-403" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-404"><a href="#cb14-404" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Génération de l'objet (Carré)</span></span>
+<span id="cb14-405"><a href="#cb14-405" aria-hidden="true" tabindex="-1"></a>  coordonnees_x_centre_carre     <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_x, borne_superieure_x)</span>
+<span id="cb14-406"><a href="#cb14-406" aria-hidden="true" tabindex="-1"></a>  coordonnees_y_centre_carre     <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, borne_inferieure_y, borne_superieure_y)</span>
+<span id="cb14-407"><a href="#cb14-407" aria-hidden="true" tabindex="-1"></a>  longueur_demie_diagonale_carre <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb14-408"><a href="#cb14-408" aria-hidden="true" tabindex="-1"></a>  orientation_carre              <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, pi <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb14-409"><a href="#cb14-409" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-410"><a href="#cb14-410" aria-hidden="true" tabindex="-1"></a>  angles_toutes_diagonales <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb14-411"><a href="#cb14-411" aria-hidden="true" tabindex="-1"></a>  coordonnees_carre_x <span class="ot">&lt;-</span> coordonnees_x_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">cos</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
+<span id="cb14-412"><a href="#cb14-412" aria-hidden="true" tabindex="-1"></a>  coordonnees_carre_y <span class="ot">&lt;-</span> coordonnees_y_centre_carre <span class="sc">+</span> longueur_demie_diagonale_carre <span class="sc">*</span> <span class="fu">sin</span>(orientation_carre <span class="sc">+</span> angles_toutes_diagonales)</span>
+<span id="cb14-413"><a href="#cb14-413" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-414"><a href="#cb14-414" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Création du carré dans spatstat</span></span>
+<span id="cb14-415"><a href="#cb14-415" aria-hidden="true" tabindex="-1"></a>  zone_carre <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="at">poly =</span> <span class="fu">list</span>(<span class="at">x =</span> coordonnees_carre_x[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">y =</span> coordonnees_carre_y[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
+<span id="cb14-416"><a href="#cb14-416" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-417"><a href="#cb14-417" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calcul rapide de l'existence d'une intersection</span></span>
+<span id="cb14-418"><a href="#cb14-418" aria-hidden="true" tabindex="-1"></a>  intersection_globale <span class="ot">&lt;-</span> <span class="fu">intersect.owin</span>(zone_carre, zone_cercles)</span>
+<span id="cb14-419"><a href="#cb14-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">area</span>(intersection_globale) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb14-420"><a href="#cb14-420" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-421"><a href="#cb14-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-422"><a href="#cb14-422" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3. EXÉCUTION DU MULTI-TIRAGE (MONTE-CARLO) ---</span></span>
+<span id="cb14-423"><a href="#cb14-423" aria-hidden="true" tabindex="-1"></a>nombre_simulations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb14-424"><a href="#cb14-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-425"><a href="#cb14-425" aria-hidden="true" tabindex="-1"></a><span class="co"># replicate() génère directement un vecteur logique propre (TRUE/FALSE)</span></span>
+<span id="cb14-426"><a href="#cb14-426" aria-hidden="true" tabindex="-1"></a>vecteur_intersections <span class="ot">&lt;-</span> <span class="fu">replicate</span>(nombre_simulations, <span class="fu">simuler_intersection_pure</span>())</span>
+<span id="cb14-427"><a href="#cb14-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-428"><a href="#cb14-428" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la probabilité empirique</span></span>
+<span id="cb14-429"><a href="#cb14-429" aria-hidden="true" tabindex="-1"></a>probabilite_intersection <span class="ot">&lt;-</span> <span class="fu">mean</span>(vecteur_intersections)</span>
+<span id="cb14-430"><a href="#cb14-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-431"><a href="#cb14-431" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4. AFFICHAGE DES RÉSULTATS ---</span></span>
+<span id="cb14-432"><a href="#cb14-432" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"=== RÉSULTATS DE LA SIMULATION ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-433"><a href="#cb14-433" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Nombre de simulations exécutées :"</span>, nombre_simulations, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-434"><a href="#cb14-434" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Nombre d'intersections trouvées :"</span>, <span class="fu">sum</span>(vecteur_intersections), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-435"><a href="#cb14-435" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Probabilité estimée d'intersection :"</span>, <span class="fu">round</span>(probabilite_intersection, <span class="dv">4</span>)) </span>
+<span id="cb14-436"><a href="#cb14-436" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jusdethomaste/feux_thomas.git/edit/main/03-simulations.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/jusdethomaste/feux_thomas.git/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/edit/main/03-simulations.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div></div></footer></body></html>
