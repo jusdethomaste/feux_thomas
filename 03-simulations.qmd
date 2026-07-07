@@ -1,4 +1,4 @@
-# 3 Simulations
+# Simulations
 
 ```{r}
 #| label: setup-sim
@@ -7,7 +7,7 @@ library(spatstat)
 library(ggplot2)
 ```
 
-## 3.1 Simulation d'un modèle booléen avec disques
+## Simulation d'un modèle booléen avec disques
 
 
 On fait apparaître des points $x_i$ sur une région selon un processus de Poisson homogène sur la région $[0,1] \times [0,1]$ du plan, et on pose un disque $\Xi_i$ sur chaque point, de telle sorte que chaque point est le centre de chaque disque. Dans ce cas-ci, pour chaque rayon de cercle, on a $R(x_i) \sim \text{exp}(\lambda)$.Ici, le modèle booléen est $$ \Xi= \cup_{i  \in I}( \Xi_i \oplus x_i).$$
@@ -81,7 +81,7 @@ ggplot() +
   theme_minimal()
 ```
 
-## 3.2 Simulation de deux modèles booléens superposés
+## Simulation de deux modèles booléens superposés
 
 On crée d'abord un modèle booléen $\Xi_d$ avec des disques comme à la section précédente. On crée ensuite un second modéle booléen $\Xi_c$ où les points$x_{ci}$ sont à nouveau placés sur la partie du plan $[0,1] \times [0,1]$ selon un deuxiàme processus de Poisson, pour l'orientation de chaque corde$\Xi_{ci}$, on a $\theta_i \sim  \text{uniforme}(0, \pi)$ et pour la longueur, on a $\mathscr{l}_i \sim \text{exp}( \lambda_{ci})$. On peut calculer la longueur moyenne de chaque corde qui se trouve dans $\Xi_d$ et la probabilité $\mathbb{P}(x \in \Xi_d  \vert x \in \Xi_c)$.
 
