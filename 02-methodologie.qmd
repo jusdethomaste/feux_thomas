@@ -59,7 +59,7 @@ ggplot()+
 
 ### Processus de Poisson inhomogène spatial
 
-Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité dépend donc de la position sur A. Prenons, par exemple, le cas où $\lambda (x,y)=(6x)^2+(6y)^2$ (voir figure 2.2). L'espérance $\mathbb{E}(N(A))$ est donnée par $\mathbb{E}(N(A))= \int_0^1 \int_0^1 \lambda(x,y)dxdy=42 \int_0^1 \int_0^1 (x^2+y^2)dxdy=42 \int_0^1( \frac{x^3}{3}+xy^2) \vert_{x=0}^{x=1}dy=36( \frac{y}{3}+ \frac{y^3}{3}) \vert_{y=0}^{y=1}=24$,ce qui coïncide exactement avec le nombre de points obtenus par la simulation.
+Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité dépend donc de la position sur A. Prenons, par exemple, le cas où $\lambda (x,y)=(6x)^2+(6y)^2$ (voir figure 2.2). L'espérance $\mathbb{E}(N(A))$ est donnée par $\mathbb{E}(N(A))= \int_0^1 \int_0^1 \lambda(x,y)dxdy=36 \int_0^1 \int_0^1 (x^2+y^2)dxdy=36 \int_0^1( \frac{x^3}{3}+xy^2) \vert_{x=0}^{x=1}dy=36( \frac{y}{3}+ \frac{y^3}{3}) \vert_{y=0}^{y=1}=24$,ce qui coïncide exactement avec le nombre de points obtenus par la simulation.
 
 ```{r}
 
