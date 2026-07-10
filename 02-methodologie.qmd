@@ -390,7 +390,7 @@ ggplot()+
 ```
 
 
-Le résultat est $\Xi= \cup_{i=1}^4(x_i \oplus \Xi_i)=(x_1 \oplus \Xi_1) \cup (x_2 \oplus \Xi_2) \cup (x_3 \oplus \Xi_3) \cup (x_4 \oplus \Xi_4)=((0.1,0.5) \oplus(rcos \theta,rsin \theta)) \cup ((0.4,0.3) \oplus(rcos \theta,rsin \theta)) \cup ((0.7,0.2) \oplus(rcos \theta,rsin \theta)) \cup ((0.8,0.2) \oplus(rcos \theta,rsin \theta))$ (voir figure 2.10).
+Le résultat est $\Xi= \cup_{i=1}^4(x_i \oplus \Xi_i)$=$(x_1 \oplus \Xi_1) \cup (x_2 \oplus \Xi_2) \cup (x_3 \oplus \Xi_3) \cup (x_4 \oplus \Xi_4)$=$((0.1,0.5) \oplus(rcos \theta,rsin \theta)) \cup ((0.4,0.3)$ $\oplus(rcos \theta,rsin \theta)) \cup ((0.7,0.2)$ $\oplus(rcos \theta,rsin \theta)) \cup ((0.8,0.2)$ $\oplus(rcos \theta,rsin \theta))$ (voir figure 2.10).
 
 ```{r}
 library(ggplot2)
