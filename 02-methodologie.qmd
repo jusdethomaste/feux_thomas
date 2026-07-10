@@ -18,21 +18,415 @@ Un processus ponctuel spatial est un ensemble de données qui donne l'endroit de
 
 ### Processus de Poisson homogène spatial
 
-Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par$\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$
+Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par $\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$ Par exemple, pour un processus  de poisson spatial $N(A)$ d'intesité $\lambda =200$ (voir figure 2.1) sur $A=[0,1] \times[0,1]$, on a $\mathbb{E}(N(A))= \vert A \vert \lambda= 1  \times200=200$, ce qui a du sens, car le nombre de points de la simulation est 219.
+
+```{r}
+
+
+library(spatstat.geom)
+library(spatstat.random)
+
+
+library(ggplot2)
+
+set.seed(42)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-200
+
+ppoisson<-rpoispp(lambda, win = w)
+
+n<-ppoisson$n
+ggplot()+
+  
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=1)+
+  
+  coord_fixed()+
+  labs(title="Figure 2.1: Processus de Poisson homogène",
+       x="x",
+       y="y")+
+  annotate("text",x=0.5,y=1.05,label=paste("nombre de points:",n),
+           size=3,fontface="bold",vjust=0)+
+  
+  theme_minimal()
+
+
+
+```
+
 
 ### Processus de Poisson inhomogène spatial
 
-Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité dépend donc de la position sur A.
+Le principe est le même qu'avec le processus de Poisson homogène, toutefois, l'intensité $\lambda$ devient une fonction $\lambda (x,y)$. L'intensité dépend donc de la position sur A. Prenons, par exemple, le cas où $\lambda (x,y)=(6x)^2+(6y)^2$ (voir figure 2.2). L'espérance $\mathbb{E}(N(A))$ est donnée par $\mathbb{E}(N(A))= \int_0^1 \int_0^1 \lambda(x,y)dxdy=42 \int_0^1 \int_0^1 (x^2+y^2)dxdy=42 \int_0^1( \frac{x^3}{3}+xy^2) \vert_{x=0}^{x=1}dy=36( \frac{y}{3}+ \frac{y^3}{3}) \vert_{y=0}^{y=1}=24$,ce qui coïncide exactement avec le nombre de points obtenus par la simulation.
+
+```{r}
+
+
+library(spatstat.geom)
+library(spatstat.random)
+library(ggplot2)
+
+set.seed(41)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-function(x,y){(6*x)^2+(6*y)^2}
+
+ppoisson<-rpoispp(lambda, win = w)
+
+n<-ppoisson$n
+  
+ggplot()+
+  
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=2)+
+  
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.2: Processus de Poisson inhomogène",
+       x="x",
+       y="y")+
+  
+  annotate("text",x=0.65,y=0.95,
+           label=paste("nombre de points:",n),
+           size=3,fontface="bold", vjust=0)+
+  
+  theme_minimal()
+
+
+
+```
 
 ## Géométrie Stochastique
 
 ### Opérations de Minkowski
 
-Soient deux ensembles $A$ et $B$. La somme de Minkowski $\oplus$  est définie par $$A \oplus B= \left\{ a+b \vert a \in A \wedge b \in B  \right\}.$$ Autrement dit, on fait la somme de tous les éléments de $A$ avec ceux de $B$. La différence de Minkowski$\ominus$, quant à elle, est définie par $$A \ominus B=(A^c \oplus B)^c.$$[@chiu2013]
+Soient deux ensembles $A$ et $B$. La somme de Minkowski $\oplus$  est définie par $$A \oplus B= \left\{ a+b \vert a \in A \wedge b \in B  \right\}.$$ Autrement dit, on fait la somme de tous les éléments de $A$ avec ceux de $B$. La différence de Minkowski$\ominus$, quant à elle, est définie par $$A \ominus B=(A^c \oplus B)^c$$[@chiu2013]. Soit, par exemple, $A=(rcos \theta,rsin \theta)$ (le disque  de rayon r=1 et centré à l'origine) et $B=(x,y)$ (le carré de sommets $(-2,1),(-2,5),(2,1),(2,5)$), où $r \in[0,1]$, $\theta \in[0,2 \pi)$, $x \in[-2,2]$ et $y \in[1,5]$ (voir Figure 2.3 et Figure 2.4).
+
+```{r}
+
+library(ggplot2)
+library(ggforce)
+
+coord_car_x<-c(-2,
+              -2,
+              2,
+              2
+              )
+
+coord_car_y<-c(1,
+               5,
+               5,
+               1
+               )
+
+ggplot()+
+  
+  geom_circle(aes(x0=0,y0=0,r=1), fill="yellow",colour="black",linewidth=0.5
+              )+
+  
+  geom_point(data=data.frame(x=c(0),y=c(0)),aes(x=x,y=y),
+             colour="black",size=2)+
+  
+  coord_fixed(x=c(-1.5, 1.5),
+              y=c(-1.5, 1.5),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.3: ensemble A",x="x",y="y")+
+  
+    annotate("text",x=-0.9,y=0.9,
+           label="A",
+           size=5,fontface="bold", vjust=0)+
+
+  theme_minimal()
+  
+ggplot()+
+  geom_polygon(data=data.frame(x=coord_car_x, y=coord_car_y),
+               aes(x=x, y=y),
+               fill="magenta",colour="black", linewidth=0.5
+               )+
+  
+  geom_point(data=data.frame(x=c(0),y=c(3)),aes(x=x,y=y),
+             colour="black",size=2)+
+  
+  coord_fixed(x=c(-3, 3),
+              y=c(0, 6),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.4: Ensemble B",x="x",y="y")+
+  
+    annotate("text",x=-2.25,y=5.25,
+           label="B",
+           size=5,fontface="bold", vjust=0)+
+  
+  theme_minimal()
+
+
+
+```
+
+
+ALors, $A \oplus B=B \oplus A=(x+rcos \theta,y+rsin \theta)$(voir Figure 2.5),
+
+```{r}
+
+library(ggplot2)
+library(ggforce)
+
+coord_car_x<-c(-2,
+               -2,
+               2,
+               2
+               )
+
+coord_car_y<-c(1,
+               5,
+               5,
+               1
+               )
+
+ggplot()+
+  
+  geom_circle(aes(x0=coord_car_x,y0=coord_car_y,r=1), fill="yellow",colour="black",linewidth=0.5
+              )+
+  
+  geom_polygon(data=data.frame(x=coord_car_x, y=coord_car_y),
+               aes(x=x, y=y),
+               fill="magenta",colour="black", linewidth=0.5
+               )+
+  
+  geom_polygon(data=data.frame(x=c(-3,-2,-2,-3),y=c(1,1,5,5)),
+               aes(x=x,y=y),
+               fill="limegreen",colour="black",linewidth=00.5)+
+  
+  geom_polygon(data=data.frame(x=c(3,2,2,3),y=c(1,1,5,5)),
+               aes(x=x,y=y),
+               fill="limegreen",colour="black",linewidth=0.5)+
+  
+  geom_polygon(data=data.frame(x=c(-2,2,2,-2),y=c(0,0,1,1)),
+               aes(x=x,y=y),
+               fill="limegreen",colour="black",linewidth=0.5)+    
+  
+ geom_polygon(data=data.frame(x=c(-2,2,2,-2),y=c(5,5,6,6)),
+               aes(x=x,y=y),
+               fill="limegreen",colour="black",linewidth=0.5)+  
+  
+  geom_point(data=data.frame(x=c(0),y=c(3)),aes(x=x,y=y),
+             colour="black",size=2)+
+  
+  coord_fixed(x=c(-3.5, 3.5),
+              y=c(-0.5, 6.5),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.5: Ensemble $A + B$",x="x",y="y")+
+  
+  annotate("text",x=0,y=3.5,
+           label="$A + B$",
+           size=5,fontface="bold", vjust=0)+
+  
+  theme_minimal()
+  
+
+```
+
+
+$A \ominus B= \emptyset$ (voir Figure 2.6),
+
+```{r}
+library(ggplot2)
+library(ggforce)
+
+coord_car_x<-c(-2,
+               -2,
+               2,
+               2
+               )
+
+coord_car_y<-c(-2,
+               2,
+               2,
+               -2
+               )
+
+ggplot()+
+  
+   
+  geom_circle(aes(x0=0,y0=0,r=1), fill="yellow",colour="black",linewidth=0.5
+              )+
+  
+  geom_point(data=data.frame(x=c(0),y=c(0)),aes(x=x,y=y),
+             colour="black",size=2)+
+  
+  geom_polygon(data=data.frame(x=coord_car_x, y=coord_car_y),
+               aes(x=x, y=y),
+               fill="magenta",colour="black", linewidth=0.5,alpha=0.5
+               )+
+  
+    coord_fixed(x=c(-3, 3),
+              y=c(-3,3),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.6: Ensemble $A - B$",x="x",y="y")+
+  
+  theme_minimal()
+```
+
+
+on remarque en effet qu'il existe une manière de poser $B$ de telle sorte que $A$ peut être totalement recouvert, et donc $A^c \oplus B= \mathbb{R}^2$, ainsi, $A \ominus B=(A^c \oplus B)^c= \emptyset$. Finalement $B \ominus A=(u,v)$ (voir Figure 2.7), où $u \in [-1,1]$ et $v \in[2,4]$.
+
+```{r}
+library(ggplot2)
+
+coord_car_x<-c(-2,
+               -2,
+               2,
+               2
+               )
+
+coord_car_y<-c(1,
+               5,
+               5,
+               1
+               )
+
+ggplot()+
+  geom_polygon(data=data.frame(x=coord_car_x, y=coord_car_y),
+               aes(x=x, y=y),
+               fill="magenta",colour="black", linewidth=0.5, alpha=0.2
+               )+
+  
+  geom_polygon(data=data.frame(x=c(-1,-1,1,1), y=c(2,4,4,2)),
+               aes(x=x, y=y),
+               fill="darkred",colour="black", linewidth=0.5
+               )+
+  
+  geom_point(data=data.frame(x=c(0),y=c(3)),aes(x=x,y=y),
+             colour="black",size=2)+
+  
+  coord_fixed(x=c(-3, 3),
+              y=c(0, 6),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.7: Ensemble $B-A$",x="x",y="y")+
+  
+    annotate("text",x=0,y=4.25,
+           label="$B-A$",
+           size=5,fontface="bold", vjust=0)+
+  
+  theme_minimal()
+```
+
 
 ### Modèle booléen
 
-Le $\textit{modèle booléen }  \Xi$ est construit de germes $x_i$ (des points) et de grains$\Xi_i$ (des ensembles compacts (fermés et bornés) dans $\mathbb{R}^2$) comme suit $$ \Xi= \cup_{i=1}^\infty( \Xi_i \oplus x_i).$$ Pour un ensemble compact $K$, la probabilité de recouvrement $T_{ \Xi}(k)= \mathbb{P}( \check{ \Xi} \cap K \ne \emptyset)$ est donnée par $$T_{ \Xi}(k)=1- \text{exp}(- \lambda \mathbb{E}( \nu_2( \check{ \Xi}_0 \oplus K))).$$ Il s'agit de la probabilité qu'il existe une intersection entre $K$ et $\Xi$.[@chiu2013]
+Le $\textit{modèle booléen }  \Xi$ est construit de germes $x_i$ (des points) et de grains$\Xi_i$ (des ensembles compacts (fermés et bornés) dans $\mathbb{R}^2$) comme suit $$ \Xi= \cup_{i=1}^\infty( \Xi_i \oplus x_i).$$ Pour un ensemble compact $K$, la probabilité de recouvrement $T_{ \Xi}(k)= \mathbb{P}( \check{ \Xi} \cap K \ne \emptyset)$ est donnée par $$T_{ \Xi}(k)=1- \text{exp}(- \lambda \mathbb{E}( \nu_2( \check{ \Xi}_0 \oplus K))).$$ Il s'agit de la probabilité qu'il existe une intersection entre $K$ et $\Xi$[@chiu2013]. Par exemple, un modèle booléen $\Xi$ dur $[0,1] \times[0,1]$ composé de 4 germes $x_1=(0.1,0.5)$, $x_2=(0.4,0.3)$, $x_3=(0.7,0.2)$ et $x_4=(0.8,0.8)$(voir figure 2.8)
+
+
+```{r}
+library(ggplot2)
+library(ggforce)
+coordonnees_x <-c(0.1 ,
+                  0.4 ,
+                  0.7 ,
+                  0.8
+                  )
+
+coordonnees_y <-c(0.5 ,
+                  0.3 ,
+                  0.2 ,
+                  0.8
+                  )
+
+ggplot()+
+  geom_point(data=data.frame(x=coordonnees_x, y=coordonnees_y),
+             aes(x = x , y = y),
+             colour="darkred",
+             size=2)+
+  
+  coord_fixed(xlim = c(0, 1),
+              ylim = c(0, 1),
+              expand = FALSE) +
+
+  labs(title="Figure 2.8: Germes", x="x", y="y")+
+  
+  theme_minimal()
+```
+
+
+et des grains $ \Xi_i=(rcos \theta,rsin \theta)$, où $0 \leq r \leq 0.175$ et $0 \leq \theta \leq 2 \pi$ pour $i \in {1,2,3,4}$ (voir figure 2.9).
+
+
+```{r}
+library(ggplot2)
+library(ggforce)
+
+theta<-seq(0,2*pi,length.out=200)
+r<-0.175
+
+contour_cercle_x<- r*cos(theta)
+contour_cercle_y<- r*sin(theta)
+
+ggplot()+
+  geom_polygon(data=data.frame(x=contour_cercle_x,y=contour_cercle_y),
+               aes(x=x, y=y),
+               fill="magenta", colour="red", linewidth=1, alpha=0.5)+
+  
+  geom_point(data=data.frame(x=0,y=0),
+             aes(x=x,y=y),
+             colour="darkred",
+             size=2)+
+  
+  coord_fixed(x=c(-0.3, 0.3),
+              y=c(-0.3,0.3),
+              expand=FALSE) +
+  
+  
+  labs(title="Figure 2.9: Grains", x="x", y="y")+
+  theme_minimal()
+```
+
+
+Le résultat est $\Xi= \cup_{i=1}^4(x_i \oplus \Xi_i)=(x_1 \oplus \Xi_1) \cup (x_2 \oplus \Xi_2) \cup (x_3 \oplus \Xi_3) \cup (x_4 \oplus \Xi_4)=((0.1,0.5) \oplus(rcos \theta,rsin \theta)) \cup ((0.4,0.3) \oplus(rcos \theta,rsin \theta)) \cup ((0.7,0.2) \oplus(rcos \theta,rsin \theta)) \cup ((0.8,0.2) \oplus(rcos \theta,rsin \theta))$ (voir figure 2.10).
+
+```{r}
+library(ggplot2)
+library(ggforce)
+coordonnees_x <-c(0.1 ,
+                  0.4 ,
+                  0.7 ,
+                  0.8
+                  )
+
+coordonnees_y <-c(0.5 ,
+                  0.3 ,
+                  0.2 ,
+                  0.8
+                  )
+
+ggplot(data.frame(x=coordonnees_x, y=coordonnees_y))+
+  geom_circle(aes(x0=coordonnees_x,y0=coordonnees_y, r=r), fill="magenta", colour="red", alpha=0.5)+
+  
+  geom_point(data=data.frame(x=coordonnees_x,y=coordonnees_y),
+             aes(x=x,y=y),
+             colour="darkred",
+             size=2)+
+  
+  coord_fixed(x=c(0, 1),
+              y=c(0, 1),
+              expand=FALSE)+
+    
+  labs(title="Figure 2.10: Modèle booléen", x="x", y="y")+
+  
+  theme_minimal()
+```
+
+
+
+
 
 ## Estimations
 
@@ -54,6 +448,6 @@ Si un processus a une fonction d'intensité $\lambda (u)$, alors cette fonction 
 
 Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. [@chiu2013]
 
-### Estimation statistique
+## Estimation statistique
 
 chap 5.1: trouver max à partir d'un échantillon
