@@ -357,7 +357,7 @@ ggplot()+
 ```
 
 
-et des grains $ \Xi_i=(rcos \theta,rsin \theta)$, où $0 \leq r \leq 0.175$ et $0 \leq \theta \leq 2 \pi$ pour $i \in {1,2,3,4}$ (voir figure 2.9).
+et des grains $\Xi_i=(rcos \theta,rsin \theta)$, où $0 \leq r \leq 0.175$ et $0 \leq \theta \leq 2 \pi$ pour $i \in {1,2,3,4}$ (voir figure 2.9).
 
 
 ```{r}
