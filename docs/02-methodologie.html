@@ -1702,7 +1702,7 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Processus de Poisson homogène spatial</span></span>
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par $\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$ Par exemple, pour un processus  de poisson spatial $N(A)$ d'intesité $\lambda =200$ (voir figure 2.1) sur $A=<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, on a $\mathbb{E}(N(A))= \vert A \vert \lambda= 1  \times200=200$, ce qui a du sens, car le nombre de points de la simulation est 219.</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par $\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$ Par exemple, pour un processus  de poisson spatial $N(A)$ d'intesité $\lambda =200$ (voir figure 2.1) sur $A=<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, on a $\mathbb{E}(N(A))= \vert A \vert \lambda= 1  \times200=200$, ce qui a du sens, car le nombre de points de la simulation est 206.</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
@@ -1711,7 +1711,7 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
@@ -2114,11 +2114,11 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb13-450"><a href="#cb13-450" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-451"><a href="#cb13-451" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation de l'intensité homogène</span></span>
 <span id="cb13-452"><a href="#cb13-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-453"><a href="#cb13-453" aria-hidden="true" tabindex="-1"></a>Une manière assez intuitive d'estimer l'intensité d'un certain processus est de prendre la moyenne de points pour une certaine aire: $$\bar{ \lambda}= \frac{n(x)}{ \vert A \vert}.$$ de variance $var \bar{ \lambda}= \frac{ \bar{ \lambda}}{ \vert A \vert}$ et d'écart-type $\sigma= \sqrt{ \frac{ \bar{ \lambda}}{ \vert A \vert}}$ s'il s'agit d'un processus de Poisson homogène. Cette technique n'est toutefois pas adaptée dans le cas d'un processus de Poisson non homogène <span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span>. Par exemple, dans la Figure 2.1, un total de 219 points a été compté sur la région $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, l'intensité calculée $ \bar{ \lambda}$ de ce processus de Poisson serait $ \bar{ \lambda}= \frac{n(x)}{ \vert A \vert}= \frac{219}{1 \times 1}=219$, la variance serait $ var(\bar{ \lambda})=219$ et l'écart-type serait $\bar{ \sigma}= \sqrt{219} \approx 15$. On pourrait répéter la simulation plusieurs fois afin d'obtenir une meilleure estimation.</span>
+<span id="cb13-453"><a href="#cb13-453" aria-hidden="true" tabindex="-1"></a>Une manière assez intuitive d'estimer l'intensité d'un certain processus est de prendre la moyenne de points pour une certaine aire: $$\bar{ \lambda}= \frac{n(x)}{ \vert A \vert}.$$ de variance $var \bar{ \lambda}= \frac{ \bar{ \lambda}}{ \vert A \vert}$ et d'écart-type $\sigma= \sqrt{ \frac{ \bar{ \lambda}}{ \vert A \vert}}$ s'il s'agit d'un processus de Poisson homogène. Cette technique n'est toutefois pas adaptée dans le cas d'un processus de Poisson non homogène <span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span>. Par exemple, dans la Figure 2.1, un total de 219 points a été compté sur la région $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, l'intensité calculée $ \bar{ \lambda}$ de ce processus de Poisson serait $ \bar{ \lambda}= \frac{n(x)}{ \vert A \vert}= \frac{206}{1 \times 1}=206$, la variance serait $ var(\bar{ \lambda})=206$ et l'écart-type serait $\bar{ \sigma}= \sqrt{206} \approx 14,4$. On pourrait répéter la simulation plusieurs fois afin d'obtenir une meilleure estimation.</span>
 <span id="cb13-454"><a href="#cb13-454" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-455"><a href="#cb13-455" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation de l'intensité non homogène</span></span>
 <span id="cb13-456"><a href="#cb13-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-457"><a href="#cb13-457" aria-hidden="true" tabindex="-1"></a>Dans le cas où l'hypothèse d'un processus non homogène est la plus vraisemblable, la technique du comptage de quadrats est simple et efficace. Elle consiste à diviser la région étudiée en ntuiles $B_i$ de même dimension (par exemple: rectangles ou hexagones) et on compte le nombre de points dans chaque région. Puisque le nombre de points de chaque région est indépendant, l'espérance du nombre de points dans chaque région $\mathbb{E}(n(X \cap B_i))$ devrait être la même $\forall i \in \mathbb{N} \star \vert i \le n$, une quelconque tendance spatiale apparente suggère la non homogénéité du processus étudié<span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span>. Par exemple, si on voulait savoir si le résultat obtenu à la Figure 2.2, on pourrait commencer par diviser la portion $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$ du plan sur lequel l'ensemble des points aura été posé au préalable en 16 cellules, pour ensuite compter le nombre de point à l'intérieur de chaque cellule (voir Figure 2.11)</span>
+<span id="cb13-457"><a href="#cb13-457" aria-hidden="true" tabindex="-1"></a>Dans le cas où l'hypothèse d'un processus non homogène est la plus vraisemblable, la technique du comptage de quadrats est simple et efficace. Elle consiste à diviser la région étudiée en ntuiles $B_i$ de même dimension (par exemple: rectangles ou hexagones) et on compte le nombre de points dans chaque région. Puisque le nombre de points de chaque région est indépendant, l'espérance du nombre de points dans chaque région $\mathbb{E}(n(X \cap B_i))$ devrait être la même $\forall i \in \mathbb{N} \star \vert i \le n$, une quelconque tendance spatiale apparente suggère la non homogénéité du processus étudié<span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span>. Par exemple, si on voulait savoir si le résultat obtenu à la Figure 2.2, on pourrait commencer par diviser la portion $<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> \times<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$ du plan sur lequel l'ensemble des points aura été posé au préalable en 16 cellules, pour ensuite compter le nombre de point à l'intérieur de chaque cellule (voir Figure 2.11 et Figure 2.12)</span>
 <span id="cb13-458"><a href="#cb13-458" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-461"><a href="#cb13-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-462"><a href="#cb13-462" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
@@ -2151,7 +2151,7 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb13-489"><a href="#cb13-489" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
 <span id="cb13-490"><a href="#cb13-490" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
 <span id="cb13-491"><a href="#cb13-491" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-492"><a href="#cb13-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.11: Première étape"</span>,</span>
+<span id="cb13-492"><a href="#cb13-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.11: Cas inhomogène"</span>,</span>
 <span id="cb13-493"><a href="#cb13-493" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"x"</span>,</span>
 <span id="cb13-494"><a href="#cb13-494" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"y"</span>)<span class="sc">+</span></span>
 <span id="cb13-495"><a href="#cb13-495" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -2199,115 +2199,288 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb13-537"><a href="#cb13-537" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-538"><a href="#cb13-538" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-539"><a href="#cb13-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-540"><a href="#cb13-540" aria-hidden="true" tabindex="-1"></a>On peut ensuite colorier les cellules selon le nombre de points dans chaque cellule (voir Figure 2.12).</span>
-<span id="cb13-541"><a href="#cb13-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-544"><a href="#cb13-544" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-545"><a href="#cb13-545" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
-<span id="cb13-546"><a href="#cb13-546" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.random)</span>
-<span id="cb13-547"><a href="#cb13-547" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-542"><a href="#cb13-542" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-543"><a href="#cb13-543" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
+<span id="cb13-544"><a href="#cb13-544" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.random)</span>
+<span id="cb13-545"><a href="#cb13-545" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-546"><a href="#cb13-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-547"><a href="#cb13-547" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">41</span>)</span>
 <span id="cb13-548"><a href="#cb13-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-549"><a href="#cb13-549" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">41</span>)</span>
+<span id="cb13-549"><a href="#cb13-549" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
 <span id="cb13-550"><a href="#cb13-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-551"><a href="#cb13-551" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb13-551"><a href="#cb13-551" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="cf">function</span>(x,y){(<span class="dv">9</span><span class="sc">*</span>x)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>(<span class="dv">9</span><span class="sc">*</span>y)<span class="sc">^</span><span class="dv">2</span>}</span>
 <span id="cb13-552"><a href="#cb13-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-553"><a href="#cb13-553" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="cf">function</span>(x,y){(<span class="dv">9</span><span class="sc">*</span>x)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>(<span class="dv">9</span><span class="sc">*</span>y)<span class="sc">^</span><span class="dv">2</span>}</span>
+<span id="cb13-553"><a href="#cb13-553" aria-hidden="true" tabindex="-1"></a>ppoisson<span class="ot">&lt;-</span><span class="fu">rpoispp</span>(lambda, <span class="at">win =</span> w)</span>
 <span id="cb13-554"><a href="#cb13-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-555"><a href="#cb13-555" aria-hidden="true" tabindex="-1"></a>ppoisson<span class="ot">&lt;-</span><span class="fu">rpoispp</span>(lambda, <span class="at">win =</span> w)</span>
-<span id="cb13-556"><a href="#cb13-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-557"><a href="#cb13-557" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>n</span>
-<span id="cb13-558"><a href="#cb13-558" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-559"><a href="#cb13-559" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">16</span>)</span>
-<span id="cb13-560"><a href="#cb13-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-561"><a href="#cb13-561" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-562"><a href="#cb13-562" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb13-555"><a href="#cb13-555" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>n</span>
+<span id="cb13-556"><a href="#cb13-556" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-557"><a href="#cb13-557" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">16</span>)</span>
+<span id="cb13-558"><a href="#cb13-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-559"><a href="#cb13-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-560"><a href="#cb13-560" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb13-561"><a href="#cb13-561" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-562"><a href="#cb13-562" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
 <span id="cb13-563"><a href="#cb13-563" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-564"><a href="#cb13-564" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-564"><a href="#cb13-564" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
 <span id="cb13-565"><a href="#cb13-565" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-566"><a href="#cb13-566" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb13-567"><a href="#cb13-567" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-568"><a href="#cb13-568" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb13-569"><a href="#cb13-569" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb13-570"><a href="#cb13-570" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb13-571"><a href="#cb13-571" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-572"><a href="#cb13-572" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.12: Deuxième étape"</span>,</span>
-<span id="cb13-573"><a href="#cb13-573" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"x"</span>,</span>
-<span id="cb13-574"><a href="#cb13-574" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"y"</span>)<span class="sc">+</span></span>
-<span id="cb13-575"><a href="#cb13-575" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-576"><a href="#cb13-576" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb13-577"><a href="#cb13-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-578"><a href="#cb13-578" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb13-579"><a href="#cb13-579" aria-hidden="true" tabindex="-1"></a> xi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>x[i]</span>
-<span id="cb13-580"><a href="#cb13-580" aria-hidden="true" tabindex="-1"></a> yi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>y[i]</span>
-<span id="cb13-581"><a href="#cb13-581" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb13-582"><a href="#cb13-582" aria-hidden="true" tabindex="-1"></a> col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
-<span id="cb13-583"><a href="#cb13-583" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
-<span id="cb13-584"><a href="#cb13-584" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
-<span id="cb13-585"><a href="#cb13-585" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb13-586"><a href="#cb13-586" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-587"><a href="#cb13-587" aria-hidden="true" tabindex="-1"></a> rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
-<span id="cb13-588"><a href="#cb13-588" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
-<span id="cb13-589"><a href="#cb13-589" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-566"><a href="#cb13-566" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-567"><a href="#cb13-567" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-568"><a href="#cb13-568" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb13-569"><a href="#cb13-569" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-570"><a href="#cb13-570" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.12: Cas inhomogène"</span>,</span>
+<span id="cb13-571"><a href="#cb13-571" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"x"</span>,</span>
+<span id="cb13-572"><a href="#cb13-572" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb13-573"><a href="#cb13-573" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-574"><a href="#cb13-574" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-575"><a href="#cb13-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-576"><a href="#cb13-576" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb13-577"><a href="#cb13-577" aria-hidden="true" tabindex="-1"></a> xi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>x[i]</span>
+<span id="cb13-578"><a href="#cb13-578" aria-hidden="true" tabindex="-1"></a> yi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>y[i]</span>
+<span id="cb13-579"><a href="#cb13-579" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-580"><a href="#cb13-580" aria-hidden="true" tabindex="-1"></a> col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-581"><a href="#cb13-581" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-582"><a href="#cb13-582" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-583"><a href="#cb13-583" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-584"><a href="#cb13-584" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-585"><a href="#cb13-585" aria-hidden="true" tabindex="-1"></a> rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-586"><a href="#cb13-586" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-587"><a href="#cb13-587" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-588"><a href="#cb13-588" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-589"><a href="#cb13-589" aria-hidden="true" tabindex="-1"></a> num_cell<span class="ot">&lt;-</span>col<span class="sc">+</span>(rang<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">4</span></span>
 <span id="cb13-590"><a href="#cb13-590" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-591"><a href="#cb13-591" aria-hidden="true" tabindex="-1"></a> num_cell<span class="ot">&lt;-</span>col<span class="sc">+</span>(rang<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">4</span></span>
-<span id="cb13-592"><a href="#cb13-592" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-593"><a href="#cb13-593" aria-hidden="true" tabindex="-1"></a>  R[num_cell]<span class="ot">&lt;-</span>R[num_cell]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb13-594"><a href="#cb13-594" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb13-595"><a href="#cb13-595" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-596"><a href="#cb13-596" aria-hidden="true" tabindex="-1"></a> max<span class="ot">&lt;-</span><span class="fu">max</span>(R)</span>
-<span id="cb13-597"><a href="#cb13-597" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>){</span>
-<span id="cb13-598"><a href="#cb13-598" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-599"><a href="#cb13-599" aria-hidden="true" tabindex="-1"></a>  col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
-<span id="cb13-600"><a href="#cb13-600" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">9</span>,<span class="dv">2</span>,</span>
-<span id="cb13-601"><a href="#cb13-601" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">13</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
-<span id="cb13-602"><a href="#cb13-602" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-603"><a href="#cb13-603" aria-hidden="true" tabindex="-1"></a>  rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,</span>
-<span id="cb13-604"><a href="#cb13-604" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">2</span>,<span class="dv">2</span>,</span>
-<span id="cb13-605"><a href="#cb13-605" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
-<span id="cb13-606"><a href="#cb13-606" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-607"><a href="#cb13-607" aria-hidden="true" tabindex="-1"></a>  coord_x<span class="ot">&lt;-</span><span class="fu">c</span>(rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
-<span id="cb13-608"><a href="#cb13-608" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
-<span id="cb13-609"><a href="#cb13-609" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
-<span id="cb13-610"><a href="#cb13-610" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
-<span id="cb13-611"><a href="#cb13-611" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-612"><a href="#cb13-612" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-613"><a href="#cb13-613" aria-hidden="true" tabindex="-1"></a>  coord_y<span class="ot">&lt;-</span><span class="fu">c</span>(col<span class="sc">/</span><span class="dv">4</span>,</span>
-<span id="cb13-614"><a href="#cb13-614" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span>,</span>
-<span id="cb13-615"><a href="#cb13-615" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
-<span id="cb13-616"><a href="#cb13-616" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
+<span id="cb13-591"><a href="#cb13-591" aria-hidden="true" tabindex="-1"></a>  R[num_cell]<span class="ot">&lt;-</span>R[num_cell]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb13-592"><a href="#cb13-592" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-593"><a href="#cb13-593" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-594"><a href="#cb13-594" aria-hidden="true" tabindex="-1"></a> max<span class="ot">&lt;-</span><span class="fu">max</span>(R)</span>
+<span id="cb13-595"><a href="#cb13-595" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>){</span>
+<span id="cb13-596"><a href="#cb13-596" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-597"><a href="#cb13-597" aria-hidden="true" tabindex="-1"></a>  col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
+<span id="cb13-598"><a href="#cb13-598" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">9</span>,<span class="dv">2</span>,</span>
+<span id="cb13-599"><a href="#cb13-599" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">13</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-600"><a href="#cb13-600" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-601"><a href="#cb13-601" aria-hidden="true" tabindex="-1"></a>  rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,</span>
+<span id="cb13-602"><a href="#cb13-602" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">2</span>,<span class="dv">2</span>,</span>
+<span id="cb13-603"><a href="#cb13-603" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-604"><a href="#cb13-604" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-605"><a href="#cb13-605" aria-hidden="true" tabindex="-1"></a>  coord_x<span class="ot">&lt;-</span><span class="fu">c</span>(rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
+<span id="cb13-606"><a href="#cb13-606" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-607"><a href="#cb13-607" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-608"><a href="#cb13-608" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
+<span id="cb13-609"><a href="#cb13-609" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-610"><a href="#cb13-610" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-611"><a href="#cb13-611" aria-hidden="true" tabindex="-1"></a>  coord_y<span class="ot">&lt;-</span><span class="fu">c</span>(col<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-612"><a href="#cb13-612" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-613"><a href="#cb13-613" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
+<span id="cb13-614"><a href="#cb13-614" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
+<span id="cb13-615"><a href="#cb13-615" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-616"><a href="#cb13-616" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb13-617"><a href="#cb13-617" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-618"><a href="#cb13-618" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-619"><a href="#cb13-619" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-620"><a href="#cb13-620" aria-hidden="true" tabindex="-1"></a>  p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">geom_polygon</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">x=</span>coord_x, <span class="at">y=</span>coord_y, <span class="at">nb_points=</span>R[i]),</span>
-<span id="cb13-621"><a href="#cb13-621" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>nb_points),</span>
-<span id="cb13-622"><a href="#cb13-622" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.5</span>,<span class="at">colour=</span><span class="st">"black"</span></span>
-<span id="cb13-623"><a href="#cb13-623" aria-hidden="true" tabindex="-1"></a>               )<span class="sc">+</span></span>
-<span id="cb13-624"><a href="#cb13-624" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>rang<span class="fl">-0.25</span>,<span class="at">y=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>col<span class="fl">-0.25</span>,</span>
-<span id="cb13-625"><a href="#cb13-625" aria-hidden="true" tabindex="-1"></a>          <span class="at">label=</span>R[i],</span>
-<span id="cb13-626"><a href="#cb13-626" aria-hidden="true" tabindex="-1"></a>          <span class="at">size=</span><span class="dv">3</span>,<span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">vjust=</span><span class="dv">0</span>)</span>
-<span id="cb13-627"><a href="#cb13-627" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-628"><a href="#cb13-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-629"><a href="#cb13-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-630"><a href="#cb13-630" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">scale_fill_gradient</span>(<span class="at">low=</span><span class="st">"white"</span>,<span class="at">high=</span><span class="st">"magenta"</span>,</span>
-<span id="cb13-631"><a href="#cb13-631" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name =</span><span class="st">"nombre de points par cellule"</span>,</span>
-<span id="cb13-632"><a href="#cb13-632" aria-hidden="true" tabindex="-1"></a>                         <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(R)))</span>
+<span id="cb13-618"><a href="#cb13-618" aria-hidden="true" tabindex="-1"></a>  p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">geom_polygon</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">x=</span>coord_x, <span class="at">y=</span>coord_y, <span class="at">nb_points=</span>R[i]),</span>
+<span id="cb13-619"><a href="#cb13-619" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>nb_points),</span>
+<span id="cb13-620"><a href="#cb13-620" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.5</span></span>
+<span id="cb13-621"><a href="#cb13-621" aria-hidden="true" tabindex="-1"></a>               )<span class="sc">+</span></span>
+<span id="cb13-622"><a href="#cb13-622" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>rang<span class="fl">-0.25</span>,<span class="at">y=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>col<span class="fl">-0.25</span>,</span>
+<span id="cb13-623"><a href="#cb13-623" aria-hidden="true" tabindex="-1"></a>          <span class="at">label=</span>R[i],</span>
+<span id="cb13-624"><a href="#cb13-624" aria-hidden="true" tabindex="-1"></a>          <span class="at">size=</span><span class="dv">3</span>,<span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">vjust=</span><span class="dv">0</span>)</span>
+<span id="cb13-625"><a href="#cb13-625" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-626"><a href="#cb13-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-627"><a href="#cb13-627" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-628"><a href="#cb13-628" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">scale_fill_gradient</span>(<span class="at">low=</span><span class="st">"white"</span>,<span class="at">high=</span><span class="st">"magenta"</span>,</span>
+<span id="cb13-629"><a href="#cb13-629" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name =</span><span class="st">"nombre de points par cellule"</span>,</span>
+<span id="cb13-630"><a href="#cb13-630" aria-hidden="true" tabindex="-1"></a>                         <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(R)))</span>
+<span id="cb13-631"><a href="#cb13-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-632"><a href="#cb13-632" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span>
 <span id="cb13-633"><a href="#cb13-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-634"><a href="#cb13-634" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span>
+<span id="cb13-634"><a href="#cb13-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-635"><a href="#cb13-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-636"><a href="#cb13-636" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-636"><a href="#cb13-636" aria-hidden="true" tabindex="-1"></a>On soupçonne une plus forte intensité lorsqu'on s'éloigne de l'origine, ce qui suggère un processus de Poisson non homogène. On peut faire ces manipulations dans le cas homogène (voir figure 2.13 et 2.14)</span>
 <span id="cb13-637"><a href="#cb13-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-638"><a href="#cb13-638" aria-hidden="true" tabindex="-1"></a>On soupçonne une plus forte intensité lorsqu'on s'éloigne de l'origine, ce qui suggère un processus de Poisson non homogène.</span>
-<span id="cb13-639"><a href="#cb13-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-640"><a href="#cb13-640" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation de la fonction d'intensité</span></span>
-<span id="cb13-641"><a href="#cb13-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-642"><a href="#cb13-642" aria-hidden="true" tabindex="-1"></a>Si un processus a une fonction d'intensité $\lambda (u)$, alors cette fonction peut être estimée avec l'estimation de noyau. Il existe plusieurs estimateurs de noyau, en voici un: $$\tilde{ \lambda}^{(0)} (u)= \sum_{i=1}^n  \kappa (u-x_i)$$ où $\kappa(u)$ est la fonction de noyau (la forme autour du point).<span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span></span>
-<span id="cb13-643"><a href="#cb13-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-644"><a href="#cb13-644" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation des paramètres de la fonction de densité de rayon</span></span>
-<span id="cb13-645"><a href="#cb13-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-646"><a href="#cb13-646" aria-hidden="true" tabindex="-1"></a>Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. <span class="co">[</span><span class="ot">@chiu2013</span><span class="co">]</span></span>
-<span id="cb13-647"><a href="#cb13-647" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-648"><a href="#cb13-648" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation statistique</span></span>
-<span id="cb13-649"><a href="#cb13-649" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-650"><a href="#cb13-650" aria-hidden="true" tabindex="-1"></a>chap 5.1: trouver max à partir d'un échantillon</span>
+<span id="cb13-640"><a href="#cb13-640" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-641"><a href="#cb13-641" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
+<span id="cb13-642"><a href="#cb13-642" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.random)</span>
+<span id="cb13-643"><a href="#cb13-643" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-644"><a href="#cb13-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-645"><a href="#cb13-645" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-646"><a href="#cb13-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-647"><a href="#cb13-647" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
+<span id="cb13-648"><a href="#cb13-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-649"><a href="#cb13-649" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb13-650"><a href="#cb13-650" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-651"><a href="#cb13-651" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="dv">200</span></span>
+<span id="cb13-652"><a href="#cb13-652" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-653"><a href="#cb13-653" aria-hidden="true" tabindex="-1"></a>ppoisson<span class="ot">&lt;-</span><span class="fu">rpoispp</span>(lambda, <span class="at">win =</span> w)</span>
+<span id="cb13-654"><a href="#cb13-654" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-655"><a href="#cb13-655" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>n</span>
+<span id="cb13-656"><a href="#cb13-656" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-657"><a href="#cb13-657" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">16</span>)</span>
+<span id="cb13-658"><a href="#cb13-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-659"><a href="#cb13-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-660"><a href="#cb13-660" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb13-661"><a href="#cb13-661" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-662"><a href="#cb13-662" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-663"><a href="#cb13-663" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-664"><a href="#cb13-664" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-665"><a href="#cb13-665" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-666"><a href="#cb13-666" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span><span class="fu">as.data.frame</span>(ppoisson),<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y),</span>
+<span id="cb13-667"><a href="#cb13-667" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour=</span><span class="st">"darkred"</span>,<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-668"><a href="#cb13-668" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-669"><a href="#cb13-669" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-670"><a href="#cb13-670" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-671"><a href="#cb13-671" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb13-672"><a href="#cb13-672" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-673"><a href="#cb13-673" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.13: Cas homogène"</span>,</span>
+<span id="cb13-674"><a href="#cb13-674" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"x"</span>,</span>
+<span id="cb13-675"><a href="#cb13-675" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb13-676"><a href="#cb13-676" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-677"><a href="#cb13-677" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-678"><a href="#cb13-678" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-679"><a href="#cb13-679" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb13-680"><a href="#cb13-680" aria-hidden="true" tabindex="-1"></a> xi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>x[i]</span>
+<span id="cb13-681"><a href="#cb13-681" aria-hidden="true" tabindex="-1"></a> yi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>y[i]</span>
+<span id="cb13-682"><a href="#cb13-682" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-683"><a href="#cb13-683" aria-hidden="true" tabindex="-1"></a> col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-684"><a href="#cb13-684" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-685"><a href="#cb13-685" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-686"><a href="#cb13-686" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-687"><a href="#cb13-687" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-688"><a href="#cb13-688" aria-hidden="true" tabindex="-1"></a> rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-689"><a href="#cb13-689" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-690"><a href="#cb13-690" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-691"><a href="#cb13-691" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-692"><a href="#cb13-692" aria-hidden="true" tabindex="-1"></a> num_cell<span class="ot">&lt;-</span>col<span class="sc">+</span>(rang<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">4</span></span>
+<span id="cb13-693"><a href="#cb13-693" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-694"><a href="#cb13-694" aria-hidden="true" tabindex="-1"></a>  R[num_cell]<span class="ot">&lt;-</span>R[num_cell]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb13-695"><a href="#cb13-695" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-696"><a href="#cb13-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-697"><a href="#cb13-697" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>){</span>
+<span id="cb13-698"><a href="#cb13-698" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-699"><a href="#cb13-699" aria-hidden="true" tabindex="-1"></a>  col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
+<span id="cb13-700"><a href="#cb13-700" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">9</span>,<span class="dv">2</span>,</span>
+<span id="cb13-701"><a href="#cb13-701" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">13</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-702"><a href="#cb13-702" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-703"><a href="#cb13-703" aria-hidden="true" tabindex="-1"></a>  rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,</span>
+<span id="cb13-704"><a href="#cb13-704" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">2</span>,<span class="dv">2</span>,</span>
+<span id="cb13-705"><a href="#cb13-705" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-706"><a href="#cb13-706" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-707"><a href="#cb13-707" aria-hidden="true" tabindex="-1"></a>  p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>rang<span class="fl">-0.25</span>,<span class="at">y=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>col<span class="fl">-0.25</span>,</span>
+<span id="cb13-708"><a href="#cb13-708" aria-hidden="true" tabindex="-1"></a>          <span class="at">label=</span>R[i],</span>
+<span id="cb13-709"><a href="#cb13-709" aria-hidden="true" tabindex="-1"></a>          <span class="at">size=</span><span class="dv">3</span>,<span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">vjust=</span><span class="dv">0</span>)</span>
+<span id="cb13-710"><a href="#cb13-710" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-711"><a href="#cb13-711" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-712"><a href="#cb13-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-713"><a href="#cb13-713" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-714"><a href="#cb13-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-715"><a href="#cb13-715" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span>
+<span id="cb13-716"><a href="#cb13-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-717"><a href="#cb13-717" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-718"><a href="#cb13-718" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-719"><a href="#cb13-719" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-722"><a href="#cb13-722" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-723"><a href="#cb13-723" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.geom)</span>
+<span id="cb13-724"><a href="#cb13-724" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat.random)</span>
+<span id="cb13-725"><a href="#cb13-725" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-726"><a href="#cb13-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-727"><a href="#cb13-727" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">40</span>)</span>
+<span id="cb13-728"><a href="#cb13-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-729"><a href="#cb13-729" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">owin</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb13-730"><a href="#cb13-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-731"><a href="#cb13-731" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">&lt;-</span><span class="dv">200</span></span>
+<span id="cb13-732"><a href="#cb13-732" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-733"><a href="#cb13-733" aria-hidden="true" tabindex="-1"></a>ppoisson<span class="ot">&lt;-</span><span class="fu">rpoispp</span>(lambda, <span class="at">win =</span> w)</span>
+<span id="cb13-734"><a href="#cb13-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-735"><a href="#cb13-735" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>n</span>
+<span id="cb13-736"><a href="#cb13-736" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-737"><a href="#cb13-737" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">16</span>)</span>
+<span id="cb13-738"><a href="#cb13-738" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-739"><a href="#cb13-739" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-740"><a href="#cb13-740" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb13-741"><a href="#cb13-741" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-742"><a href="#cb13-742" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-743"><a href="#cb13-743" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-744"><a href="#cb13-744" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>), <span class="at">color=</span><span class="st">"purple"</span>,<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb13-745"><a href="#cb13-745" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-746"><a href="#cb13-746" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-747"><a href="#cb13-747" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb13-748"><a href="#cb13-748" aria-hidden="true" tabindex="-1"></a>              <span class="at">expand=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb13-749"><a href="#cb13-749" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-750"><a href="#cb13-750" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2.14: Cas homogène"</span>,</span>
+<span id="cb13-751"><a href="#cb13-751" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"x"</span>,</span>
+<span id="cb13-752"><a href="#cb13-752" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"y"</span>)<span class="sc">+</span></span>
+<span id="cb13-753"><a href="#cb13-753" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-754"><a href="#cb13-754" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-755"><a href="#cb13-755" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-756"><a href="#cb13-756" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb13-757"><a href="#cb13-757" aria-hidden="true" tabindex="-1"></a> xi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>x[i]</span>
+<span id="cb13-758"><a href="#cb13-758" aria-hidden="true" tabindex="-1"></a> yi<span class="ot">&lt;-</span>ppoisson<span class="sc">$</span>y[i]</span>
+<span id="cb13-759"><a href="#cb13-759" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-760"><a href="#cb13-760" aria-hidden="true" tabindex="-1"></a> col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-761"><a href="#cb13-761" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-762"><a href="#cb13-762" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(xi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-763"><a href="#cb13-763" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-764"><a href="#cb13-764" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-765"><a href="#cb13-765" aria-hidden="true" tabindex="-1"></a> rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.25</span>,<span class="dv">1</span>,</span>
+<span id="cb13-766"><a href="#cb13-766" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="dv">2</span>,</span>
+<span id="cb13-767"><a href="#cb13-767" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(yi<span class="sc">&lt;</span><span class="fl">0.75</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-768"><a href="#cb13-768" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-769"><a href="#cb13-769" aria-hidden="true" tabindex="-1"></a> num_cell<span class="ot">&lt;-</span>col<span class="sc">+</span>(rang<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">4</span></span>
+<span id="cb13-770"><a href="#cb13-770" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-771"><a href="#cb13-771" aria-hidden="true" tabindex="-1"></a>  R[num_cell]<span class="ot">&lt;-</span>R[num_cell]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb13-772"><a href="#cb13-772" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-773"><a href="#cb13-773" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-774"><a href="#cb13-774" aria-hidden="true" tabindex="-1"></a> max<span class="ot">&lt;-</span><span class="fu">max</span>(R)</span>
+<span id="cb13-775"><a href="#cb13-775" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>){</span>
+<span id="cb13-776"><a href="#cb13-776" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-777"><a href="#cb13-777" aria-hidden="true" tabindex="-1"></a>  col<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">5</span>,<span class="dv">1</span>,</span>
+<span id="cb13-778"><a href="#cb13-778" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">9</span>,<span class="dv">2</span>,</span>
+<span id="cb13-779"><a href="#cb13-779" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(i<span class="sc">&lt;</span><span class="dv">13</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-780"><a href="#cb13-780" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-781"><a href="#cb13-781" aria-hidden="true" tabindex="-1"></a>  rang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,</span>
+<span id="cb13-782"><a href="#cb13-782" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">2</span>,<span class="dv">2</span>,</span>
+<span id="cb13-783"><a href="#cb13-783" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(i<span class="sc">%%</span><span class="dv">4</span><span class="sc">==</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)))</span>
+<span id="cb13-784"><a href="#cb13-784" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-785"><a href="#cb13-785" aria-hidden="true" tabindex="-1"></a>  coord_x<span class="ot">&lt;-</span><span class="fu">c</span>(rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
+<span id="cb13-786"><a href="#cb13-786" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-787"><a href="#cb13-787" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-788"><a href="#cb13-788" aria-hidden="true" tabindex="-1"></a>                 rang<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
+<span id="cb13-789"><a href="#cb13-789" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-790"><a href="#cb13-790" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-791"><a href="#cb13-791" aria-hidden="true" tabindex="-1"></a>  coord_y<span class="ot">&lt;-</span><span class="fu">c</span>(col<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-792"><a href="#cb13-792" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span>,</span>
+<span id="cb13-793"><a href="#cb13-793" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>,</span>
+<span id="cb13-794"><a href="#cb13-794" aria-hidden="true" tabindex="-1"></a>                 col<span class="sc">/</span><span class="dv">4</span><span class="fl">-0.25</span>)</span>
+<span id="cb13-795"><a href="#cb13-795" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-796"><a href="#cb13-796" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-797"><a href="#cb13-797" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-798"><a href="#cb13-798" aria-hidden="true" tabindex="-1"></a>  p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">geom_polygon</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">x=</span>coord_x, <span class="at">y=</span>coord_y, <span class="at">nb_points=</span>R[i]),</span>
+<span id="cb13-799"><a href="#cb13-799" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">fill=</span>nb_points),</span>
+<span id="cb13-800"><a href="#cb13-800" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.5</span></span>
+<span id="cb13-801"><a href="#cb13-801" aria-hidden="true" tabindex="-1"></a>               )<span class="sc">+</span></span>
+<span id="cb13-802"><a href="#cb13-802" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>rang<span class="fl">-0.25</span>,<span class="at">y=</span><span class="fl">0.125+0.25</span><span class="sc">*</span>col<span class="fl">-0.25</span>,</span>
+<span id="cb13-803"><a href="#cb13-803" aria-hidden="true" tabindex="-1"></a>          <span class="at">label=</span>R[i],</span>
+<span id="cb13-804"><a href="#cb13-804" aria-hidden="true" tabindex="-1"></a>          <span class="at">size=</span><span class="dv">3</span>,<span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">vjust=</span><span class="dv">0</span>)</span>
+<span id="cb13-805"><a href="#cb13-805" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-806"><a href="#cb13-806" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-807"><a href="#cb13-807" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-808"><a href="#cb13-808" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">scale_fill_gradient</span>(<span class="at">low=</span><span class="st">"white"</span>,<span class="at">high=</span><span class="st">"magenta"</span>,</span>
+<span id="cb13-809"><a href="#cb13-809" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name =</span><span class="st">"nombre de points par cellule"</span>,</span>
+<span id="cb13-810"><a href="#cb13-810" aria-hidden="true" tabindex="-1"></a>                         <span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(R)))</span>
+<span id="cb13-811"><a href="#cb13-811" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-812"><a href="#cb13-812" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span>
+<span id="cb13-813"><a href="#cb13-813" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-814"><a href="#cb13-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-815"><a href="#cb13-815" aria-hidden="true" tabindex="-1"></a>Il est bien plus difficile d'apercevoir un motif quelconque dans ces figures que dans les figures 2.11 et 2.12, l'hypothèse retenue est donc celle du processus de Poisson homogène.</span>
+<span id="cb13-816"><a href="#cb13-816" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-817"><a href="#cb13-817" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation de la fonction d'intensité</span></span>
+<span id="cb13-818"><a href="#cb13-818" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-819"><a href="#cb13-819" aria-hidden="true" tabindex="-1"></a>Si un processus a une fonction d'intensité $\lambda (u)$, alors cette fonction peut être estimée avec l'estimation de noyau. Il existe plusieurs estimateurs de noyau, en voici un: $$\tilde{ \lambda}^{(0)} (u)= \sum_{i=1}^n  \kappa (u-x_i)$$ où $\kappa(u)$ est la fonction de noyau (la forme autour du point).<span class="co">[</span><span class="ot">@baddeley2015</span><span class="co">]</span></span>
+<span id="cb13-820"><a href="#cb13-820" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-821"><a href="#cb13-821" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation des paramètres de la fonction de densité de rayon</span></span>
+<span id="cb13-822"><a href="#cb13-822" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-823"><a href="#cb13-823" aria-hidden="true" tabindex="-1"></a>Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. <span class="co">[</span><span class="ot">@chiu2013</span><span class="co">]</span></span>
+<span id="cb13-824"><a href="#cb13-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-825"><a href="#cb13-825" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation statistique</span></span>
+<span id="cb13-826"><a href="#cb13-826" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-827"><a href="#cb13-827" aria-hidden="true" tabindex="-1"></a>chap 5.1: trouver max à partir d'un échantillon</span>
 </code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
