@@ -2,37 +2,9 @@
 
 ## Contexte et motivation
 
-<!-- 
-Décris ici le contexte général :
-- Pourquoi modéliser les feux de forêt ?
-- Quelle est l'importance du problème (climatique, économique, humain) ?
-- Qu'est-ce qui rend le problème intéressant d'un point de vue probabiliste ?
--->
+Avec le nombre de feux de forêts élevé des dernières, il devient intéressant d'essayer de modéliser les feux de forêts afin de mieux les prédire. L'utilisation de modèles probabilistes semble intuitive pour illustrer la progression des feux dans le plan, en particulier le processus de Poisson spatial et la géométrie stochastique, objets dont il sera question dans le chapitre 2.
 
-Les feux de forêt constituent un phénomène naturel dont la fréquence et l'intensité sont en augmentation dans le contexte des changements climatiques [@jones2022]. La modélisation probabiliste de leur occurrence permet d'évaluer, par exemple, les risques qu'a un chalet placé à un certain endroit d'étre consumé partiellement ou totalement par les flammes. Le problème est intéressant, d'abord d'un point de vue climatique, car en sachant où les feux ont plus tendance à se propager et comment ils se propagent, il est plus facile de s'y préparer. Ensuite, d'un point de vue humain, il est utile de savoir quels endroits sont plus ou moins susceptibles d'être dans une zone de risque et, par conséquent, d'éviter que de nouvelles personnes s'installent à ces endroits et mettent leur vie en danger.Également, d'un point de vue économique, il est intéressant de connaître la probabilité, par exemple, qu'une propriété brûle au cours d'un feu de forêt et d'ajuster leurs tarifs en conséquence. Finalement, d'un point de vue probabiliste, le problème est intéressant, car les feux se propagent à partir de foyers et se développent de différentes manières. Le modèle booléen semble parfait pour ce problème. En ce qui concerne l'apparition des foyers, le processus de Poisson spatial inhomogène a du sens. En effet, on ne peut pas prédire exactement le nombre de feux qui se propagera dans une certaine surface, mais on peut essayer de l'estimer avec une intensité qui varie selon les régions. Par exemple, il sera plus probable pour un feu de prendre forme près d'endroits fréquentés par les humains que d'endroits qui ne le sont pas.
 
-## Problématique
+## Objectifs
 
-<!-- 
-Formule clairement la question de recherche.
-Par exemple : "Comment modéliser la distribution spatiale des ignitions de feux de forêt à l'aide de processus ponctuels ?"
--->
-
-Est-il possible de simuler des feux de forêts où les foyers sont générés selon des processus de Poisson de telle sorte que ces simulations peuvent assez bien prédire la probabilité qu'un point soit recouvert par l'enveloppe d'un feu?
-
-## Revue de littérature
-
-<!-- 
-Présente brièvement les approches existantes.
-Tu peux citer des articles avec la syntaxe [@cle_reference].
--->
-
-Plusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. @morisette2001 ont montré que ... Les processus de Poisson spatiaux ont été utilisés dans ce contexte par ...
-
-## Objectifs spécifiques
-
-Les objectifs de ce travail sont les suivants :
-
-1. Observer comment les feux se sont propagés par le passé et trouver des manières de reconnaître les différentes intensités pour ensuite en faire des simulations et des comparaisons.
-2. Mieux comprendre les propriétés de certaines familles de modèles de 
-géométrie stochastique
+Les objectifs de ce projet sont de déterminer une manière de modéliser les feux de forêts.

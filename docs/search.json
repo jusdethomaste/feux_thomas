@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Modélisation spatiale des feux de forêt",
     "section": "",
-    "text": "Préface\nCe livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de [Nom du superviseur], [Département/Institution].",
+    "text": "Préface\nCe livre a pour but de présenter le résultat des recherches effectuées par Thomas Serré à propos de la modélisation probabiliste des feux de forêts et supervisées par Jérôme Soucy et Thierry Duchesne, le premier est chargé de cours, le second est professeur titulaire, tous deux au Département de mathématiques et de statistque de l’Université Laval.",
     "crumbs": [
       "Préface"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#organisation-du-document",
     "title": "Modélisation spatiale des feux de forêt",
     "section": "Organisation du document",
-    "text": "Organisation du document\nLe rapport est structuré comme suit :\n\nChapitre 1 – Introduction : contexte, problématique et revue de littérature sommaire\nChapitre 2 – Méthodologie : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)\nChapitre 3 – Simulations : description et résultats des simulations réalisées en R\nChapitre 4 – Résultats : analyse et interprétation des résultats\nChapitre 5 – Discussion : limites, extensions possibles et conclusion",
+    "text": "Organisation du document\nLe rapport est divisé en cinq chapitres:\n\nChapitre 1 – Introduction : contexte, motivation et objectifs\nChapitre 2 – Méthodologie : présentation des éléments utiles aux recherches\nChapitre 3 – Simulations : description et résultats des simulations réalisées en R\nChapitre 4 – Résultats : analyse et interprétation des résultats\nChapitre 5 – Discussion : limites, extensions possibles et conclusion",
     "crumbs": [
       "Préface"
     ]
@@ -263,6 +263,26 @@
     "text": "Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point\nPatterns: Methodology and Applications with R. CRC\nPress.\n\n\nBélisle, Claude. 2021. STT-4700 Processus Aléatoires.\n\n\nChiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, and Joseph Mecke.\n2013. Stochastic Geometry and Its Applications, 3rd Edition.\nWiley.\n\n\nJones, Matthew W., John T. Abatzoglou, Sander\nVeraverbeke, et al. 2022. “Global and Regional Trends and\nDrivers of Fire Under Climate Change.” Reviews of\nGeophysics 60 (3). https://doi.org/10.1029/2020RG000726.\n\n\nMorisette, Jeffrey T., Louis Giglio, Ivan Csiszar, and Christopher O.\nJustice. 2001. “Validation of the MODIS Active Fire\nProduct over Southern Africa with ASTER\nData.” International Journal of Remote Sensing 26 (19):\n4239–64.",
     "crumbs": [
       "Références"
+    ]
+  },
+  {
+    "objectID": "index.html#environnement",
+    "href": "index.html#environnement",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Environnement",
+    "text": "Environnement\nTous les graphiques et simulations ont été faits dans l’environnement R, les packages utilisés sont spatstat et ggplot2.",
+    "crumbs": [
+      "Préface"
+    ]
+  },
+  {
+    "objectID": "index.html#remerciements",
+    "href": "index.html#remerciements",
+    "title": "Modélisation spatiale des feux de forêt",
+    "section": "Remerciements",
+    "text": "Remerciements\nNous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).\nCette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), [numéro de référence 616966].\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].\n\n\n\nCRSNG_RGB",
+    "crumbs": [
+      "Préface"
     ]
   }
 ]
