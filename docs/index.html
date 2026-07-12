@@ -408,10 +408,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#préface" id="toc-préface" class="nav-link active" data-scroll-target="#préface">Préface</a>
   <ul class="collapse">
-  <li><a href="#objectifs-du-projet" id="toc-objectifs-du-projet" class="nav-link" data-scroll-target="#objectifs-du-projet">Objectifs du projet</a></li>
   <li><a href="#organisation-du-document" id="toc-organisation-du-document" class="nav-link" data-scroll-target="#organisation-du-document">Organisation du document</a></li>
-  <li><a href="#reproductibilité" id="toc-reproductibilité" class="nav-link" data-scroll-target="#reproductibilité">Reproductibilité</a></li>
-  <li><a href="#environnement-de-travail" id="toc-environnement-de-travail" class="nav-link" data-scroll-target="#environnement-de-travail">Environnement de travail</a></li>
+  <li><a href="#environnement" id="toc-environnement" class="nav-link" data-scroll-target="#environnement">Environnement</a></li>
+  <li><a href="#remerciements" id="toc-remerciements" class="nav-link" data-scroll-target="#remerciements">Remerciements</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
@@ -422,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Modélisation spatiale des feux de forêt</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Montrer tout le code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Cacher tout le code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Voir les sources</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Modélisation spatiale des feux de forêt</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -453,63 +452,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="préface" class="level1 unnumbered">
 <h1 class="unnumbered">Préface</h1>
-<p>Ce livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de [Nom du superviseur], [Département/Institution].</p>
-<section id="objectifs-du-projet" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs-du-projet">Objectifs du projet</h2>
-<!-- Décris brièvement ce que tu cherches à modéliser et pourquoi -->
-<p>Ce projet vise à …</p>
-</section>
+<p>Ce livre a pour but de présenter le résultat des recherches effectuées par Thomas Serré à propos de la modélisation probabiliste des feux de forêts et supervisées par Jérôme Soucy et Thierry Duchesne, le premier est chargé de cours, le second est professeur titulaire, tous deux au Département de mathématiques et de statistque de l’Université Laval.</p>
 <section id="organisation-du-document" class="level2">
 <h2 class="anchored" data-anchor-id="organisation-du-document">Organisation du document</h2>
-<p>Le rapport est structuré comme suit :</p>
+<p>Le rapport est divisé en cinq chapitres:</p>
 <ul>
-<li><strong>Chapitre 1 – Introduction</strong> : contexte, problématique et revue de littérature sommaire</li>
-<li><strong>Chapitre 2 – Méthodologie</strong> : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)</li>
+<li><strong>Chapitre 1 – Introduction</strong> : contexte, motivation et objectifs</li>
+<li><strong>Chapitre 2 – Méthodologie</strong> : présentation des éléments utiles aux recherches</li>
 <li><strong>Chapitre 3 – Simulations</strong> : description et résultats des simulations réalisées en R</li>
 <li><strong>Chapitre 4 – Résultats</strong> : analyse et interprétation des résultats</li>
 <li><strong>Chapitre 5 – Discussion</strong> : limites, extensions possibles et conclusion</li>
 </ul>
 </section>
-<section id="reproductibilité" class="level2">
-<h2 class="anchored" data-anchor-id="reproductibilité">Reproductibilité</h2>
-<p>Tout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/TON-USERNAME/feux-foret-book.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> feux-foret-book</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Les packages R nécessaires sont listés dans le fichier <code>packages.R</code> à la racine du projet.</p>
+<section id="environnement" class="level2">
+<h2 class="anchored" data-anchor-id="environnement">Environnement</h2>
+<p>Tous les graphiques et simulations ont été faits dans l’environnement R, les packages utilisés sont spatstat et ggplot2.</p>
 </section>
-<section id="environnement-de-travail" class="level2">
-<h2 class="anchored" data-anchor-id="environnement-de-travail">Environnement de travail</h2>
-<div class="cell">
-<details class="code-fold">
-<summary>Informations sur l’environnement R</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.6.0 (2026-04-24 ucrt)
-Platform: x86_64-w64-mingw32/x64
-Running under: Windows 11 x64 (build 26200)
-
-Matrix products: default
-  LAPACK version 3.12.1
-
-locale:
-[1] LC_COLLATE=French_Canada.utf8  LC_CTYPE=French_Canada.utf8   
-[3] LC_MONETARY=French_Canada.utf8 LC_NUMERIC=C                  
-[5] LC_TIME=French_Canada.utf8    
-
-time zone: America/Toronto
-tzcode source: internal
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] compiler_4.6.0  fastmap_1.2.0   cli_3.6.6       tools_4.6.0    
- [5] htmltools_0.5.9 yaml_2.3.12     rmarkdown_2.31  knitr_1.51     
- [9] jsonlite_2.0.0  xfun_0.57       digest_0.6.39   rlang_1.2.0    
-[13] evaluate_1.0.5 </code></pre>
-</div>
+<section id="remerciements" class="level2">
+<h2 class="anchored" data-anchor-id="remerciements">Remerciements</h2>
+<p>Nous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.</p>
+<p>We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).</p>
+<p>Cette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), [numéro de référence 616966].</p>
+<p>We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="C:/École/E26/STT-4700/CRSNG_NUME╠üRIQUE/png/CRSNG_RGB.png" class="img-fluid figure-img"></p>
+<figcaption>CRSNG_RGB</figcaption>
+</figure>
 </div>
 
 
@@ -992,48 +961,37 @@ loaded via a namespace (and not attached):
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Préface {.unnumbered}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Ce livre présente les travaux réalisés dans le cadre du projet de modélisation probabiliste des feux de forêt, sous la supervision de <span class="co">[</span><span class="ot">Nom du superviseur</span><span class="co">]</span>, <span class="co">[</span><span class="ot">Département/Institution</span><span class="co">]</span>.</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectifs du projet</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Décris brièvement ce que tu cherches à modéliser et pourquoi --&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Ce projet vise à ...</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organisation du document</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>Le rapport est structuré comme suit :</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 1 – Introduction** : contexte, problématique et revue de littérature sommaire</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 2 – Méthodologie** : présentation des outils probabilistes utilisés (processus de Poisson spatial, etc.)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 3 – Simulations** : description et résultats des simulations réalisées en R</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 4 – Résultats** : analyse et interprétation des résultats</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 5 – Discussion** : limites, extensions possibles et conclusion</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproductibilité</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>Tout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/TON-USERNAME/feux-foret-book.git</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> feux-foret-book</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>Les packages R nécessaires sont listés dans le fichier <span class="in">`packages.R`</span> à la racine du projet.</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Environnement de travail</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: session-info</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Informations sur l'environnement R"</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Préface {.unnumbered}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Ce livre a pour but de présenter le résultat des recherches effectuées par Thomas Serré à propos de la modélisation probabiliste des feux de forêts et supervisées par Jérôme Soucy et Thierry Duchesne, le premier est chargé de cours, le second est professeur titulaire, tous deux au Département de mathématiques et de statistque de l'Université Laval.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organisation du document</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Le rapport est divisé en cinq chapitres:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 1 – Introduction** : contexte, motivation et objectifs</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 2 – Méthodologie** : présentation des éléments utiles aux recherches</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 3 – Simulations** : description et résultats des simulations réalisées en R</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 4 – Résultats** : analyse et interprétation des résultats</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chapitre 5 – Discussion** : limites, extensions possibles et conclusion</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Environnement</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Tous les graphiques et simulations ont été faits dans l'environnement R, les packages utilisés sont spatstat et ggplot2.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Remerciements</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Nous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Cette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), <span class="co">[</span><span class="ot">numéro de référence 616966</span><span class="co">]</span>.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), <span class="co">[</span><span class="ot">funding reference number 616966</span><span class="co">]</span>.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="al">![CRSNG_RGB](C:/École/E26/STT-4700/CRSNG_NUME╠üRIQUE/png/CRSNG_RGB.png)</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
