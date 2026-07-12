@@ -10,16 +10,6 @@
     ]
   },
   {
-    "objectID": "index.html#objectifs-du-projet",
-    "href": "index.html#objectifs-du-projet",
-    "title": "Modélisation spatiale des feux de forêt",
-    "section": "Objectifs du projet",
-    "text": "Objectifs du projet\n\nCe projet vise à …",
-    "crumbs": [
-      "Préface"
-    ]
-  },
-  {
     "objectID": "index.html#organisation-du-document",
     "href": "index.html#organisation-du-document",
     "title": "Modélisation spatiale des feux de forêt",
@@ -30,21 +20,21 @@
     ]
   },
   {
-    "objectID": "index.html#reproductibilité",
-    "href": "index.html#reproductibilité",
+    "objectID": "index.html#environnement",
+    "href": "index.html#environnement",
     "title": "Modélisation spatiale des feux de forêt",
-    "section": "Reproductibilité",
-    "text": "Reproductibilité\nTout le code utilisé dans ce document est disponible dans le dépôt GitHub associé. Pour reproduire les analyses, clone le dépôt et compile le livre avec :\ngit clone https://github.com/TON-USERNAME/feux-foret-book.git\ncd feux-foret-book\nquarto render\nLes packages R nécessaires sont listés dans le fichier packages.R à la racine du projet.",
+    "section": "Environnement",
+    "text": "Environnement\nTous les graphiques et simulations ont été faits dans l’environnement R, les packages utilisés sont spatstat et ggplot2.",
     "crumbs": [
       "Préface"
     ]
   },
   {
-    "objectID": "index.html#environnement-de-travail",
-    "href": "index.html#environnement-de-travail",
+    "objectID": "index.html#remerciements",
+    "href": "index.html#remerciements",
     "title": "Modélisation spatiale des feux de forêt",
-    "section": "Environnement de travail",
-    "text": "Environnement de travail\n\n\nInformations sur l’environnement R\nsessionInfo()\n\n\nR version 4.6.0 (2026-04-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26200)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=French_Canada.utf8  LC_CTYPE=French_Canada.utf8   \n[3] LC_MONETARY=French_Canada.utf8 LC_NUMERIC=C                  \n[5] LC_TIME=French_Canada.utf8    \n\ntime zone: America/Toronto\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.6.0  fastmap_1.2.0   cli_3.6.6       tools_4.6.0    \n [5] htmltools_0.5.9 yaml_2.3.12     rmarkdown_2.31  knitr_1.51     \n [9] jsonlite_2.0.0  xfun_0.57       digest_0.6.39   rlang_1.2.0    \n[13] evaluate_1.0.5",
+    "section": "Remerciements",
+    "text": "Remerciements\nNous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).\nCette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), [numéro de référence 616966].\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].\n\n\n\nCRSNG_RGB",
     "crumbs": [
       "Préface"
     ]
@@ -54,40 +44,18 @@
     "href": "01-introduction.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "1.1 Contexte et motivation\nLes feux de forêt constituent un phénomène naturel dont la fréquence et l’intensité sont en augmentation dans le contexte des changements climatiques (Jones et al. 2022). La modélisation probabiliste de leur occurrence permet d’évaluer, par exemple, les risques qu’a un chalet placé à un certain endroit d’étre consumé partiellement ou totalement par les flammes. Le problème est intéressant, d’abord d’un point de vue climatique, car en sachant où les feux ont plus tendance à se propager et comment ils se propagent, il est plus facile de s’y préparer. Ensuite, d’un point de vue humain, il est utile de savoir quels endroits sont plus ou moins susceptibles d’être dans une zone de risque et, par conséquent, d’éviter que de nouvelles personnes s’installent à ces endroits et mettent leur vie en danger.Également, d’un point de vue économique, il est intéressant de connaître la probabilité, par exemple, qu’une propriété brûle au cours d’un feu de forêt et d’ajuster leurs tarifs en conséquence. Finalement, d’un point de vue probabiliste, le problème est intéressant, car les feux se propagent à partir de foyers et se développent de différentes manières. Le modèle booléen semble parfait pour ce problème. En ce qui concerne l’apparition des foyers, le processus de Poisson spatial inhomogène a du sens. En effet, on ne peut pas prédire exactement le nombre de feux qui se propagera dans une certaine surface, mais on peut essayer de l’estimer avec une intensité qui varie selon les régions. Par exemple, il sera plus probable pour un feu de prendre forme près d’endroits fréquentés par les humains que d’endroits qui ne le sont pas.",
+    "text": "1.1 Contexte et motivation\nAvec le nombre de feux de forêts élevé des dernières, il devient intéressant d’essayer de modéliser les feux de forêts afin de mieux les prédire. L’utilisation de modèles probabilistes semble intuitive pour illustrer la progression des feux dans le plan, en particulier le processus de Poisson spatial et la géométrie stochastique, objets dont il sera question dans le chapitre 2.",
     "crumbs": [
       "Cadre théorique",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
-    "objectID": "01-introduction.html#problématique",
-    "href": "01-introduction.html#problématique",
+    "objectID": "01-introduction.html#objectifs",
+    "href": "01-introduction.html#objectifs",
     "title": "1  Introduction",
-    "section": "1.2 Problématique",
-    "text": "1.2 Problématique\n\nEst-il possible de simuler des feux de forêts où les foyers sont générés selon des processus de Poisson de telle sorte que ces simulations peuvent assez bien prédire la probabilité qu’un point soit recouvert par l’enveloppe d’un feu?",
-    "crumbs": [
-      "Cadre théorique",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "01-introduction.html#revue-de-littérature",
-    "href": "01-introduction.html#revue-de-littérature",
-    "title": "1  Introduction",
-    "section": "1.3 Revue de littérature",
-    "text": "1.3 Revue de littérature\n\nPlusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. Morisette et al. (2001) ont montré que … Les processus de Poisson spatiaux ont été utilisés dans ce contexte par …",
-    "crumbs": [
-      "Cadre théorique",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "01-introduction.html#objectifs-spécifiques",
-    "href": "01-introduction.html#objectifs-spécifiques",
-    "title": "1  Introduction",
-    "section": "1.4 Objectifs spécifiques",
-    "text": "1.4 Objectifs spécifiques\nLes objectifs de ce travail sont les suivants :\n\nObserver comment les feux se sont propagés par le passé et trouver des manières de reconnaître les différentes intensités pour ensuite en faire des simulations et des comparaisons.\nMieux comprendre les propriétés de certaines familles de modèles de géométrie stochastique\n\n\n\n\n\n\n\nJones, Matthew W., John T. Abatzoglou, Sander Veraverbeke, et al. 2022. « Global and Regional Trends and Drivers of Fire Under Climate Change ». Reviews of Geophysics 60 (3). https://doi.org/10.1029/2020RG000726.\n\n\nMorisette, Jeffrey T., Louis Giglio, Ivan Csiszar, et Christopher O. Justice. 2001. « Validation of the MODIS Active Fire Product over Southern Africa with ASTER Data ». International Journal of Remote Sensing 26 (19): 4239‑64.",
+    "section": "1.2 Objectifs",
+    "text": "1.2 Objectifs\nLes objectifs de ce projet sont de déterminer une manière de modéliser les feux de forêts.",
     "crumbs": [
       "Cadre théorique",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
@@ -260,29 +228,9 @@
     "href": "references.html",
     "title": "Références",
     "section": "",
-    "text": "Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point\nPatterns: Methodology and Applications with R. CRC\nPress.\n\n\nBélisle, Claude. 2021. STT-4700 Processus Aléatoires.\n\n\nChiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, and Joseph Mecke.\n2013. Stochastic Geometry and Its Applications, 3rd Edition.\nWiley.\n\n\nJones, Matthew W., John T. Abatzoglou, Sander\nVeraverbeke, et al. 2022. “Global and Regional Trends and\nDrivers of Fire Under Climate Change.” Reviews of\nGeophysics 60 (3). https://doi.org/10.1029/2020RG000726.\n\n\nMorisette, Jeffrey T., Louis Giglio, Ivan Csiszar, and Christopher O.\nJustice. 2001. “Validation of the MODIS Active Fire\nProduct over Southern Africa with ASTER\nData.” International Journal of Remote Sensing 26 (19):\n4239–64.",
+    "text": "Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point\nPatterns: Methodology and Applications with R. CRC\nPress.\n\n\nBélisle, Claude. 2021. STT-4700 Processus Aléatoires.\n\n\nChiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, and Joseph Mecke.\n2013. Stochastic Geometry and Its Applications, 3rd Edition.\nWiley.",
     "crumbs": [
       "Références"
-    ]
-  },
-  {
-    "objectID": "index.html#environnement",
-    "href": "index.html#environnement",
-    "title": "Modélisation spatiale des feux de forêt",
-    "section": "Environnement",
-    "text": "Environnement\nTous les graphiques et simulations ont été faits dans l’environnement R, les packages utilisés sont spatstat et ggplot2.",
-    "crumbs": [
-      "Préface"
-    ]
-  },
-  {
-    "objectID": "index.html#remerciements",
-    "href": "index.html#remerciements",
-    "title": "Modélisation spatiale des feux de forêt",
-    "section": "Remerciements",
-    "text": "Remerciements\nNous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).\nCette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), [numéro de référence 616966].\nWe acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].\n\n\n\nCRSNG_RGB",
-    "crumbs": [
-      "Préface"
     ]
   }
 ]

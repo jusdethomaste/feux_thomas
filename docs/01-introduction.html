@@ -58,26 +58,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -426,9 +407,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#contexte-et-motivation" id="toc-contexte-et-motivation" class="nav-link active" data-scroll-target="#contexte-et-motivation"><span class="header-section-number">1.1</span> Contexte et motivation</a></li>
-  <li><a href="#problématique" id="toc-problématique" class="nav-link" data-scroll-target="#problématique"><span class="header-section-number">1.2</span> Problématique</a></li>
-  <li><a href="#revue-de-littérature" id="toc-revue-de-littérature" class="nav-link" data-scroll-target="#revue-de-littérature"><span class="header-section-number">1.3</span> Revue de littérature</a></li>
-  <li><a href="#objectifs-spécifiques" id="toc-objectifs-spécifiques" class="nav-link" data-scroll-target="#objectifs-spécifiques"><span class="header-section-number">1.4</span> Objectifs spécifiques</a></li>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs"><span class="header-section-number">1.2</span> Objectifs</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/edit/main/01-introduction.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
@@ -457,49 +436,15 @@ div.csl-indent {
 
 <section id="contexte-et-motivation" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="contexte-et-motivation"><span class="header-section-number">1.1</span> Contexte et motivation</h2>
-<!-- 
-Décris ici le contexte général :
-- Pourquoi modéliser les feux de forêt ?
-- Quelle est l'importance du problème (climatique, économique, humain) ?
-- Qu'est-ce qui rend le problème intéressant d'un point de vue probabiliste ?
--->
-<p>Les feux de forêt constituent un phénomène naturel dont la fréquence et l’intensité sont en augmentation dans le contexte des changements climatiques <span class="citation" data-cites="jones2022">(<a href="references.html#ref-jones2022" role="doc-biblioref"><span class="nocase">Jones et al.</span> 2022</a>)</span>. La modélisation probabiliste de leur occurrence permet d’évaluer, par exemple, les risques qu’a un chalet placé à un certain endroit d’étre consumé partiellement ou totalement par les flammes. Le problème est intéressant, d’abord d’un point de vue climatique, car en sachant où les feux ont plus tendance à se propager et comment ils se propagent, il est plus facile de s’y préparer. Ensuite, d’un point de vue humain, il est utile de savoir quels endroits sont plus ou moins susceptibles d’être dans une zone de risque et, par conséquent, d’éviter que de nouvelles personnes s’installent à ces endroits et mettent leur vie en danger.Également, d’un point de vue économique, il est intéressant de connaître la probabilité, par exemple, qu’une propriété brûle au cours d’un feu de forêt et d’ajuster leurs tarifs en conséquence. Finalement, d’un point de vue probabiliste, le problème est intéressant, car les feux se propagent à partir de foyers et se développent de différentes manières. Le modèle booléen semble parfait pour ce problème. En ce qui concerne l’apparition des foyers, le processus de Poisson spatial inhomogène a du sens. En effet, on ne peut pas prédire exactement le nombre de feux qui se propagera dans une certaine surface, mais on peut essayer de l’estimer avec une intensité qui varie selon les régions. Par exemple, il sera plus probable pour un feu de prendre forme près d’endroits fréquentés par les humains que d’endroits qui ne le sont pas.</p>
+<p>Avec le nombre de feux de forêts élevé des dernières, il devient intéressant d’essayer de modéliser les feux de forêts afin de mieux les prédire. L’utilisation de modèles probabilistes semble intuitive pour illustrer la progression des feux dans le plan, en particulier le processus de Poisson spatial et la géométrie stochastique, objets dont il sera question dans le chapitre 2.</p>
 </section>
-<section id="problématique" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="problématique"><span class="header-section-number">1.2</span> Problématique</h2>
-<!-- 
-Formule clairement la question de recherche.
-Par exemple : "Comment modéliser la distribution spatiale des ignitions de feux de forêt à l'aide de processus ponctuels ?"
--->
-<p>Est-il possible de simuler des feux de forêts où les foyers sont générés selon des processus de Poisson de telle sorte que ces simulations peuvent assez bien prédire la probabilité qu’un point soit recouvert par l’enveloppe d’un feu?</p>
-</section>
-<section id="revue-de-littérature" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="revue-de-littérature"><span class="header-section-number">1.3</span> Revue de littérature</h2>
-<!-- 
-Présente brièvement les approches existantes.
-Tu peux citer des articles avec la syntaxe [@cle_reference].
--->
-<p>Plusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. <span class="citation" data-cites="morisette2001">Morisette et al. (<a href="references.html#ref-morisette2001" role="doc-biblioref">2001</a>)</span> ont montré que … Les processus de Poisson spatiaux ont été utilisés dans ce contexte par …</p>
-</section>
-<section id="objectifs-spécifiques" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="objectifs-spécifiques"><span class="header-section-number">1.4</span> Objectifs spécifiques</h2>
-<p>Les objectifs de ce travail sont les suivants :</p>
-<ol type="1">
-<li>Observer comment les feux se sont propagés par le passé et trouver des manières de reconnaître les différentes intensités pour ensuite en faire des simulations et des comparaisons.</li>
-<li>Mieux comprendre les propriétés de certaines familles de modèles de géométrie stochastique</li>
-</ol>
+<section id="objectifs" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="objectifs"><span class="header-section-number">1.2</span> Objectifs</h2>
+<p>Les objectifs de ce projet sont de déterminer une manière de modéliser les feux de forêts.</p>
 
 
 <!-- -->
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-jones2022" class="csl-entry" role="listitem">
-<span class="nocase">Jones, Matthew W., John T. Abatzoglou, Sander Veraverbeke, et al.</span> 2022. <span>«&nbsp;Global and Regional Trends and Drivers of Fire Under Climate Change&nbsp;»</span>. <em>Reviews of Geophysics</em> 60 (3). <a href="https://doi.org/10.1029/2020RG000726">https://doi.org/10.1029/2020RG000726</a>.
-</div>
-<div id="ref-morisette2001" class="csl-entry" role="listitem">
-Morisette, Jeffrey T., Louis Giglio, Ivan Csiszar, et Christopher O. Justice. 2001. <span>«&nbsp;Validation of the <span>MODIS</span> Active Fire Product over Southern <span>Africa</span> with <span>ASTER</span> Data&nbsp;»</span>. <em>International Journal of Remote Sensing</em> 26 (19): 4239‑64.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -983,40 +928,12 @@ Morisette, Jeffrey T., Louis Giglio, Ivan Csiszar, et Christopher O. Justice. 20
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contexte et motivation</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">Décris ici le contexte général :</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">- Pourquoi modéliser les feux de forêt ?</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">- Quelle est l'importance du problème (climatique, économique, humain) ?</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">- Qu'est-ce qui rend le problème intéressant d'un point de vue probabiliste ?</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Les feux de forêt constituent un phénomène naturel dont la fréquence et l'intensité sont en augmentation dans le contexte des changements climatiques <span class="co">[</span><span class="ot">@jones2022</span><span class="co">]</span>. La modélisation probabiliste de leur occurrence permet d'évaluer, par exemple, les risques qu'a un chalet placé à un certain endroit d'étre consumé partiellement ou totalement par les flammes. Le problème est intéressant, d'abord d'un point de vue climatique, car en sachant où les feux ont plus tendance à se propager et comment ils se propagent, il est plus facile de s'y préparer. Ensuite, d'un point de vue humain, il est utile de savoir quels endroits sont plus ou moins susceptibles d'être dans une zone de risque et, par conséquent, d'éviter que de nouvelles personnes s'installent à ces endroits et mettent leur vie en danger.Également, d'un point de vue économique, il est intéressant de connaître la probabilité, par exemple, qu'une propriété brûle au cours d'un feu de forêt et d'ajuster leurs tarifs en conséquence. Finalement, d'un point de vue probabiliste, le problème est intéressant, car les feux se propagent à partir de foyers et se développent de différentes manières. Le modèle booléen semble parfait pour ce problème. En ce qui concerne l'apparition des foyers, le processus de Poisson spatial inhomogène a du sens. En effet, on ne peut pas prédire exactement le nombre de feux qui se propagera dans une certaine surface, mais on peut essayer de l'estimer avec une intensité qui varie selon les régions. Par exemple, il sera plus probable pour un feu de prendre forme près d'endroits fréquentés par les humains que d'endroits qui ne le sont pas.</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problématique</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">Formule clairement la question de recherche.</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">Par exemple : "Comment modéliser la distribution spatiale des ignitions de feux de forêt à l'aide de processus ponctuels ?"</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Est-il possible de simuler des feux de forêts où les foyers sont générés selon des processus de Poisson de telle sorte que ces simulations peuvent assez bien prédire la probabilité qu'un point soit recouvert par l'enveloppe d'un feu?</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Revue de littérature</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">Présente brièvement les approches existantes.</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">Tu peux citer des articles avec la syntaxe [@cle_reference].</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Plusieurs approches ont été proposées pour modéliser la distribution spatiale des feux de forêt. @morisette2001 ont montré que ... Les processus de Poisson spatiaux ont été utilisés dans ce contexte par ...</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectifs spécifiques</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Les objectifs de ce travail sont les suivants :</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Observer comment les feux se sont propagés par le passé et trouver des manières de reconnaître les différentes intensités pour ensuite en faire des simulations et des comparaisons.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Mieux comprendre les propriétés de certaines familles de modèles de </span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>géométrie stochastique</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Avec le nombre de feux de forêts élevé des dernières, il devient intéressant d'essayer de modéliser les feux de forêts afin de mieux les prédire. L'utilisation de modèles probabilistes semble intuitive pour illustrer la progression des feux dans le plan, en particulier le processus de Poisson spatial et la géométrie stochastique, objets dont il sera question dans le chapitre 2.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectifs</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Les objectifs de ce projet sont de déterminer une manière de modéliser les feux de forêts.</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -1,6 +1,6 @@
 # Préface {.unnumbered}
 
-Ce livre a pour but de présenter le résultat des recherches effectuées par Thomas Serré à propos de la modélisation probabiliste des feux de forêts et supervisées par Jérôme Soucy et Thierry Duchesne, le premier est chargé de cours, le second est professeur titulaire, tous deux au Département de mathématiques et de statistque de l'Université Laval.
+Ce livre a pour but de présenter le résultat des recherches effectuées par Thomas Serré, étudiant du baccalauréat en mathématiques de l'Université Laval, à propos de la modélisation probabiliste des feux de forêts et supervisées par Jérôme Soucy et Thierry Duchesne, le premier est chargé de cours, le second est professeur titulaire, tous deux au Département de mathématiques et de statistque de l'Université Laval.
 
 
 ## Organisation du document
@@ -28,4 +28,4 @@ Cette recherche a été financée par le Conseil de recherches en sciences natur
 
 We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].
 
-![CRSNG_RGB](C:/École/E26/STT-4700/CRSNG_NUME╠üRIQUE/png/CRSNG_RGB.png)
+![CRSNG_RGB](feux-foret-book/index_files/figure-html/CRSNG_RGB.png)
