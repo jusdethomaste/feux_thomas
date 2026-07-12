@@ -18,7 +18,7 @@ Un processus ponctuel spatial est un ensemble de données qui donne l'endroit de
 
 ### Processus de Poisson homogène spatial
 
-Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par $\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$ Par exemple, pour un processus  de poisson spatial $N(A)$ d'intesité $\lambda =200$ (voir figure 2.1) sur $A=[0,1] \times[0,1]$, on a $\mathbb{E}(N(A))= \vert A \vert \lambda= 1  \times200=200$, ce qui a du sens, car le nombre de points de la simulation est 219.
+Pour passer du processus de Poisson dans le temps au processus de Poisson spatial, il suffit de remplacer le temps t par une surface $A$ (car on s'intéresse, dans ce cas-ci, à la dimension $d=2$). La mesure du temps est remplacée par $\vert A \vert$ et $$N( A ) \sim Poisson(\lambda \vert A \vert ).$$ Par exemple, pour un processus  de poisson spatial $N(A)$ d'intesité $\lambda =200$ (voir figure 2.1) sur $A=[0,1] \times[0,1]$, on a $\mathbb{E}(N(A))= \vert A \vert \lambda= 1  \times200=200$, ce qui a du sens, car le nombre de points de la simulation est 206.
 
 ```{r}
 
@@ -29,7 +29,7 @@ library(spatstat.random)
 
 library(ggplot2)
 
-set.seed(42)
+set.seed(40)
 
 w <- owin(c(0,1),c(0,1))
 
@@ -436,11 +436,11 @@ Ce projet est ancré sur des phénomènes réels, il est alors important de pouv
 
 ### Estimation de l'intensité homogène
 
-Une manière assez intuitive d'estimer l'intensité d'un certain processus est de prendre la moyenne de points pour une certaine aire: $$\bar{ \lambda}= \frac{n(x)}{ \vert A \vert}.$$ de variance $var \bar{ \lambda}= \frac{ \bar{ \lambda}}{ \vert A \vert}$ et d'écart-type $\sigma= \sqrt{ \frac{ \bar{ \lambda}}{ \vert A \vert}}$ s'il s'agit d'un processus de Poisson homogène. Cette technique n'est toutefois pas adaptée dans le cas d'un processus de Poisson non homogène [@baddeley2015]. Par exemple, dans la Figure 2.1, un total de 219 points a été compté sur la région $[0,1] \times[0,1]$, l'intensité calculée $ \bar{ \lambda}$ de ce processus de Poisson serait $ \bar{ \lambda}= \frac{n(x)}{ \vert A \vert}= \frac{219}{1 \times 1}=219$, la variance serait $ var(\bar{ \lambda})=219$ et l'écart-type serait $\bar{ \sigma}= \sqrt{219} \approx 15$. On pourrait répéter la simulation plusieurs fois afin d'obtenir une meilleure estimation.
+Une manière assez intuitive d'estimer l'intensité d'un certain processus est de prendre la moyenne de points pour une certaine aire: $$\bar{ \lambda}= \frac{n(x)}{ \vert A \vert}.$$ de variance $var \bar{ \lambda}= \frac{ \bar{ \lambda}}{ \vert A \vert}$ et d'écart-type $\sigma= \sqrt{ \frac{ \bar{ \lambda}}{ \vert A \vert}}$ s'il s'agit d'un processus de Poisson homogène. Cette technique n'est toutefois pas adaptée dans le cas d'un processus de Poisson non homogène [@baddeley2015]. Par exemple, dans la Figure 2.1, un total de 219 points a été compté sur la région $[0,1] \times[0,1]$, l'intensité calculée $ \bar{ \lambda}$ de ce processus de Poisson serait $ \bar{ \lambda}= \frac{n(x)}{ \vert A \vert}= \frac{206}{1 \times 1}=206$, la variance serait $ var(\bar{ \lambda})=206$ et l'écart-type serait $\bar{ \sigma}= \sqrt{206} \approx 14,4$. On pourrait répéter la simulation plusieurs fois afin d'obtenir une meilleure estimation.
 
 ### Estimation de l'intensité non homogène
 
-Dans le cas où l'hypothèse d'un processus non homogène est la plus vraisemblable, la technique du comptage de quadrats est simple et efficace. Elle consiste à diviser la région étudiée en ntuiles $B_i$ de même dimension (par exemple: rectangles ou hexagones) et on compte le nombre de points dans chaque région. Puisque le nombre de points de chaque région est indépendant, l'espérance du nombre de points dans chaque région $\mathbb{E}(n(X \cap B_i))$ devrait être la même $\forall i \in \mathbb{N} \star \vert i \le n$, une quelconque tendance spatiale apparente suggère la non homogénéité du processus étudié[@baddeley2015]. Par exemple, si on voulait savoir si le résultat obtenu à la Figure 2.2, on pourrait commencer par diviser la portion $[0,1] \times[0,1]$ du plan sur lequel l'ensemble des points aura été posé au préalable en 16 cellules, pour ensuite compter le nombre de point à l'intérieur de chaque cellule (voir Figure 2.11)
+Dans le cas où l'hypothèse d'un processus non homogène est la plus vraisemblable, la technique du comptage de quadrats est simple et efficace. Elle consiste à diviser la région étudiée en ntuiles $B_i$ de même dimension (par exemple: rectangles ou hexagones) et on compte le nombre de points dans chaque région. Puisque le nombre de points de chaque région est indépendant, l'espérance du nombre de points dans chaque région $\mathbb{E}(n(X \cap B_i))$ devrait être la même $\forall i \in \mathbb{N} \star \vert i \le n$, une quelconque tendance spatiale apparente suggère la non homogénéité du processus étudié[@baddeley2015]. Par exemple, si on voulait savoir si le résultat obtenu à la Figure 2.2, on pourrait commencer par diviser la portion $[0,1] \times[0,1]$ du plan sur lequel l'ensemble des points aura été posé au préalable en 16 cellules, pour ensuite compter le nombre de point à l'intérieur de chaque cellule (voir Figure 2.11 et Figure 2.12)
 
 ```{r}
 
@@ -474,7 +474,7 @@ p<-ggplot()+
               ylim=c(0,1),
               expand=FALSE)+
   
-  labs(title="Figure 2.11: Première étape",
+  labs(title="Figure 2.11: Cas inhomogène",
        x="x",
        y="y")+
   
@@ -522,8 +522,6 @@ print(p)
 
 ```
 
-On peut ensuite colorier les cellules selon le nombre de points dans chaque cellule (voir Figure 2.12).
-
 ```{r}
 library(spatstat.geom)
 library(spatstat.random)
@@ -552,7 +550,7 @@ p<-ggplot()+
               ylim=c(0,1),
               expand=FALSE)+
   
-  labs(title="Figure 2.12: Deuxième étape",
+  labs(title="Figure 2.12: Cas inhomogène",
        x="x",
        y="y")+
   
@@ -602,7 +600,7 @@ for (i in 1:16){
   
   p<-p+geom_polygon(data=data.frame(x=coord_x, y=coord_y, nb_points=R[i]),
                aes(x=x, y=y, fill=nb_points),
-               linewidth=0.5,colour="black"
+               linewidth=0.5
                )+
   annotate("text",x=0.125+0.25*rang-0.25,y=0.125+0.25*col-0.25,
           label=R[i],
@@ -618,7 +616,182 @@ print(p)
 
 ```
 
-On soupçonne une plus forte intensité lorsqu'on s'éloigne de l'origine, ce qui suggère un processus de Poisson non homogène.
+On soupçonne une plus forte intensité lorsqu'on s'éloigne de l'origine, ce qui suggère un processus de Poisson non homogène. On peut faire ces manipulations dans le cas homogène (voir figure 2.13 et 2.14)
+
+```{r}
+library(spatstat.geom)
+library(spatstat.random)
+library(ggplot2)
+
+library(ggplot2)
+
+set.seed(40)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-200
+
+ppoisson<-rpoispp(lambda, win = w)
+
+n<-ppoisson$n
+  
+R <- rep(0, 16)
+
+
+p<-ggplot()+
+  
+  geom_hline(yintercept=c(0.25,0.5,0.75), color="purple",linewidth=1)+
+  
+  geom_vline(xintercept=c(0.25,0.5,0.75), color="purple",linewidth=1)+
+  
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=1)+
+  
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.13: Cas homogène",
+       x="x",
+       y="y")+
+  
+  theme_minimal()
+
+for (i in 1:n){
+ xi<-ppoisson$x[i]
+ yi<-ppoisson$y[i]
+ 
+ col<-ifelse(xi<0.25,1,
+              ifelse(xi<0.5,2,
+                    ifelse(xi<0.75,3,4)))
+ 
+  
+ rang<-ifelse(yi<0.25,1,
+              ifelse(yi<0.5,2,
+                    ifelse(yi<0.75,3,4)))
+  
+ num_cell<-col+(rang-1)*4
+  
+  R[num_cell]<-R[num_cell]+1
+}
+
+for (i in 1:16){
+  
+  col<-ifelse(i<5,1,
+               ifelse(i<9,2,
+                      ifelse(i<13,3,4)))
+  
+  rang<-ifelse(i%%4==1,1,
+              ifelse(i%%4==2,2,
+                    ifelse(i%%4==3,3,4)))
+  
+  p<-p+annotate("text",x=0.125+0.25*rang-0.25,y=0.125+0.25*col-0.25,
+          label=R[i],
+          size=3,fontface="bold", vjust=0)
+  
+  }
+
+
+
+print(p)
+
+
+```
+
+```{r}
+library(spatstat.geom)
+library(spatstat.random)
+library(ggplot2)
+
+set.seed(40)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-200
+
+ppoisson<-rpoispp(lambda, win = w)
+
+n<-ppoisson$n
+  
+R <- rep(0, 16)
+
+
+p<-ggplot()+
+  
+  geom_hline(yintercept=c(0.25,0.5,0.75), color="purple",linewidth=1)+
+  
+  geom_vline(xintercept=c(0.25,0.5,0.75), color="purple",linewidth=1)+
+  
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.14: Cas homogène",
+       x="x",
+       y="y")+
+  
+  theme_minimal()
+
+for (i in 1:n){
+ xi<-ppoisson$x[i]
+ yi<-ppoisson$y[i]
+ 
+ col<-ifelse(xi<0.25,1,
+              ifelse(xi<0.5,2,
+                    ifelse(xi<0.75,3,4)))
+ 
+  
+ rang<-ifelse(yi<0.25,1,
+              ifelse(yi<0.5,2,
+                    ifelse(yi<0.75,3,4)))
+  
+ num_cell<-col+(rang-1)*4
+  
+  R[num_cell]<-R[num_cell]+1
+ 
+}
+ max<-max(R)
+for (i in 1:16){
+  
+  col<-ifelse(i<5,1,
+               ifelse(i<9,2,
+                      ifelse(i<13,3,4)))
+  
+  rang<-ifelse(i%%4==1,1,
+              ifelse(i%%4==2,2,
+                    ifelse(i%%4==3,3,4)))
+  
+  coord_x<-c(rang/4-0.25,
+                 rang/4,
+                 rang/4,
+                 rang/4-0.25)
+  
+  
+  coord_y<-c(col/4,
+                 col/4,
+                 col/4-0.25,
+                 col/4-0.25)
+  
+  
+  
+  p<-p+geom_polygon(data=data.frame(x=coord_x, y=coord_y, nb_points=R[i]),
+               aes(x=x, y=y, fill=nb_points),
+               linewidth=0.5
+               )+
+  annotate("text",x=0.125+0.25*rang-0.25,y=0.125+0.25*col-0.25,
+          label=R[i],
+          size=3,fontface="bold", vjust=0)
+  }
+
+
+p<-p+scale_fill_gradient(low="white",high="magenta",
+                         name ="nombre de points par cellule",
+                         limits=c(0,max(R)))
+
+print(p)
+```
+
+Il est bien plus difficile d'apercevoir un motif quelconque dans ces figures que dans les figures 2.11 et 2.12, l'hypothèse retenue est donc celle du processus de Poisson homogène.
 
 ### Estimation de la fonction d'intensité
 
