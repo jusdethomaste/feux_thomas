@@ -325,7 +325,7 @@ ggplot()+
 
 ### Modèle booléen
 
-Le $\textit{modèle booléen }  \Xi$ est construit de germes $x_i$ (des points) et de grains$\Xi_i$ (des ensembles compacts (fermés et bornés) dans $\mathbb{R}^2$) comme suit $$ \Xi= \cup_{i=1}^\infty( \Xi_i \oplus x_i).$$ Pour un ensemble compact $K$, la probabilité de recouvrement $T_{ \Xi}(k)= \mathbb{P}( \check{ \Xi} \cap K \ne \emptyset)$ est donnée par $$T_{ \Xi}(k)=1- \text{exp}(- \lambda \mathbb{E}( \nu_2( \check{ \Xi}_0 \oplus K))).$$ Il s'agit de la probabilité qu'il existe une intersection entre $K$ et $\Xi$[@chiu2013]. Par exemple, un modèle booléen $\Xi$ dur $[0,1] \times[0,1]$ composé de 4 germes $x_1=(0.1,0.5)$, $x_2=(0.4,0.3)$, $x_3=(0.7,0.2)$ et $x_4=(0.8,0.8)$(voir figure 2.8)
+Le $\textit{modèle booléen }  \Xi$ est construit de germes $x_i$ (des points) et de grains$\Xi_i$ (des ensembles compacts (fermés et bornés) dans $\mathbb{R}^2$) comme suit $$ \Xi= \cup_{i=1}^\infty( \Xi_i \oplus x_i).$$ Pour un ensemble compact $K$, la probabilité de recouvrement $T_{ \Xi}(k)= \mathbb{P}( \check{ \Xi} \cap K \ne \emptyset)$ est donnée par $$T_{ \Xi}(k)=1- \text{exp}(- \lambda \mathbb{E}( \nu_2( \check{ \Xi}_0 \oplus K))).$$ Il s'agit de la probabilité qu'il existe une intersection entre $K$ et $\Xi$[@chiu2013]. Par exemple, un modèle booléen $\Xi$ sur $[0,1] \times[0,1]$ composé de 4 germes $x_1=(0.1,0.5)$, $x_2=(0.4,0.3)$, $x_3=(0.7,0.2)$ et $x_4=(0.8,0.8)$ générés à paritr d'un processus de Poisson spatial dont l'homogénéité (ou non homogénéité) n'est pas spécifiée (voir figure 2.8)
 
 
 ```{r}
@@ -623,7 +623,7 @@ library(spatstat.geom)
 library(spatstat.random)
 library(ggplot2)
 
-library(ggplot2)
+
 
 set.seed(40)
 
@@ -795,7 +795,71 @@ Il est bien plus difficile d'apercevoir un motif quelconque dans ces figures que
 
 ### Estimation de la fonction d'intensité
 
-Si un processus a une fonction d'intensité $\lambda (u)$, alors cette fonction peut être estimée avec l'estimation de noyau. Il existe plusieurs estimateurs de noyau, en voici un: $$\tilde{ \lambda}^{(0)} (u)= \sum_{i=1}^n  \kappa (u-x_i)$$ où $\kappa(u)$ est la fonction de noyau (la forme autour du point).[@baddeley2015]
+Si un processus a une fonction d'intensité $\lambda (u)$, alors cette fonction peut être estimée avec l'estimation de noyau. Il existe plusieurs estimateurs de noyau, en voici un: $$\tilde{ \lambda}^{(0)} (u)= \sum_{i=1}^n  \kappa (u-x_i)$$ où $\kappa(u)$ est la fonction de noyau (la forme autour du point). Pour comprendre l'effet de cette fonction, on imagine que l'on pose un morceau de chocolat sur chaque point généré, on le fait ensuite fondre légèrement pour que la surface soit continue, le résultat est une surface de chocolat ondulée. La hauteur de la surface est la fonction d'intensité estimée[@baddeley2015]. Prenons le processus de Poisson inhomogène généré à la figure 2.2 et essayons d'en estimer la fonction d'intensité (voir Figure 2.15-2.18):
+
+
+
+```{r}
+
+library(spatstat.geom)
+library(spatstat.random)
+library(ggplot2)
+
+set.seed(41)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-function(x,y){(9*x)^2+(9*y)^2}
+
+ppoisson<-rpoispp(lambda, win = w)
+
+den<-density(ppoisson,sigma=0.2)
+
+den_f<-as.data.frame(den)
+
+ggplot(den_f,aes(x,y,fill=value)) +
+  geom_raster() +
+  scale_fill_gradientn(colours=c("white","magenta")) +
+  coord_fixed() +
+  labs(title = "Figure 2.15: Fonction d'intensité estimée",
+       fill = "Densité") +
+  theme_minimal()
+
+grid <- expand.grid(
+  x = seq(0, 1, length.out = 100),
+  y = seq(0, 1, length.out = 100)
+)
+
+grid$value <- with(grid, lambda(x, y))
+
+x<-seq(0,1,length.out=100)
+y<-seq(0,1,length.out=100)
+z<-outer(x,y,lambda)
+
+persp(den$xcol,den$yrow,den$v,theta=30,phi=15,col="magenta",shade=0.5,
+      border=NA,xlab="x",ylab="y",zlab="z"
+      )
+
+title(main = "Figure 2.16 : Fonction d'intensité estimée")
+
+ggplot(grid, aes(x, y, fill = value)) +
+  geom_raster() +
+  scale_fill_gradientn(colours = c("white", "magenta")) +
+  coord_fixed() +
+  labs(
+    title = "Figure 2.17: Intensité théorique",
+    fill = "Densité"
+  ) +
+  theme_minimal()
+
+persp(x,y,z,
+      theta=30,phi=15,col="magenta",shade=0.5,
+      border=NA,xlab="x",ylab="y",zlab="z"
+      )
+title(main = "Figure 2.18: Fonction d'intensité théorique")
+```
+
+On remarque que la fonction d'intensité estimée est assez semblable à la fonction d'intensité théoriqe, donnant ainsi de la crédibilité à cette technique.
 
 ### Estimation des paramètres de la fonction de densité de rayon
 
