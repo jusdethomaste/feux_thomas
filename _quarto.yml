@@ -52,3 +52,4 @@ execute:
   message: false
   cache: false
   freeze: true
+  fig-path: "files/images/"
