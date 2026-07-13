@@ -28,4 +28,3 @@ Cette recherche a été financée par le Conseil de recherches en sciences natur
 
 We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].
 
-![CRSNG_RGB](feux-foret-book/index_files/figure-html/CRSNG_RGB.png)
