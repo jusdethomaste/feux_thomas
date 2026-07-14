@@ -929,8 +929,8 @@ cat("Fraction d'aire   :", aire_moyenne, "\n")
 
 ```
 
-La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés.
+La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés; pas très concluant...
 
-## Estimation statistique
+### Estmation du maximum de vraisemblance
 
-chap 5.1: trouver max à partir d'un échantillon
+Soit $f(X; \theta)$ la fonction de densité pour la variable aléatoire $X$, où  $\theta$ est le paramètre à estimer. Supposons que n observations sont faites de la variable $X$. Soient $X_1, \dots,X_n$ les variables aléatoires correspondant à ces n observations. Alors la fonction $$L(x_1,x_2, \dots,x_n)= \Pi_{i=1}^nf(x_i; \theta)$$ définit la fonction de vraisemblance de l'échantillon. Exemple: soient $X_1, \dots, X_n$ des variables aléatoires telles que pour tout $i \in {1,2, \dots,n}$, $X_i \sim Bernoulli(p)$, la fonction de vraisemblance est donnée par$\Pi_{i=1 }^n p^{x_i}(1-p)^{1-x_i}$ et $x_i=1$ où $x_i=0$, dépendant de si la i-ième observation est respectivement un succès ou un échec. L'estimateur de maximum de vraisemblance est donc $\hat{p}= \frac{ \Sigma_{i=1}^n x_i}{n}$, c'est la valeur qui maximise la fonction([@hoel1983].

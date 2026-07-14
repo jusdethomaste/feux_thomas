@@ -21,10 +21,9 @@ Tous les graphiques et simulations ont été faits dans l'environnement R, les p
 
 Nous remercions le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG) de son soutien.
 
-We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).
-
-
 Cette recherche a été financée par le Conseil de recherches en sciences naturelles et en génie du Canada (CRSNG), [numéro de référence 616966].
+
+We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC).
 
 We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].
 

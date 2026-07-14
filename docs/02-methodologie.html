@@ -471,8 +471,8 @@ window.Quarto = {
   <li><a href="#estimation-de-lintensité-non-homogène" id="toc-estimation-de-lintensité-non-homogène" class="nav-link" data-scroll-target="#estimation-de-lintensité-non-homogène"><span class="header-section-number">2.4.2</span> Estimation de l’intensité non homogène</a></li>
   <li><a href="#estimation-de-la-fonction-dintensité" id="toc-estimation-de-la-fonction-dintensité" class="nav-link" data-scroll-target="#estimation-de-la-fonction-dintensité"><span class="header-section-number">2.4.3</span> Estimation de la fonction d’intensité</a></li>
   <li><a href="#estimation-des-paramètres-de-la-fonction-de-densité-de-rayon" id="toc-estimation-des-paramètres-de-la-fonction-de-densité-de-rayon" class="nav-link" data-scroll-target="#estimation-des-paramètres-de-la-fonction-de-densité-de-rayon"><span class="header-section-number">2.4.4</span> Estimation des paramètres de la fonction de densité de rayon</a></li>
+  <li><a href="#estmation-du-maximum-de-vraisemblance" id="toc-estmation-du-maximum-de-vraisemblance" class="nav-link" data-scroll-target="#estmation-du-maximum-de-vraisemblance"><span class="header-section-number">2.4.5</span> Estmation du maximum de vraisemblance</a></li>
   </ul></li>
-  <li><a href="#estimation-statistique" id="toc-estimation-statistique" class="nav-link" data-scroll-target="#estimation-statistique"><span class="header-section-number">2.5</span> Estimation statistique</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/edit/main/02-methodologie.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li><li><a href="https://github.com/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
@@ -1551,12 +1551,11 @@ window.Quarto = {
 <pre><code>Fraction d'aire   : 0.125 </code></pre>
 </div>
 </div>
-<p>La fraction d’aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc <span class="math display">\[0,125=1-exp(- \lambda  \pi  R^2)\]</span> et <span class="math display">\[0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R\]</span>. On obtient <span class="math inline">\(\lambda \approx 0,195\)</span> et <span class="math inline">\(R \approx0,467\)</span>, ce qui est assez loin des paramètres utilisés.</p>
+<p>La fraction d’aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc <span class="math display">\[0,125=1-exp(- \lambda  \pi  R^2)\]</span> et <span class="math display">\[0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R\]</span>. On obtient <span class="math inline">\(\lambda \approx 0,195\)</span> et <span class="math inline">\(R \approx0,467\)</span>, ce qui est assez loin des paramètres utilisés; pas très concluant…</p>
 </section>
-</section>
-<section id="estimation-statistique" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="estimation-statistique"><span class="header-section-number">2.5</span> Estimation statistique</h2>
-<p>chap 5.1: trouver max à partir d’un échantillon</p>
+<section id="estmation-du-maximum-de-vraisemblance" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="estmation-du-maximum-de-vraisemblance"><span class="header-section-number">2.4.5</span> Estmation du maximum de vraisemblance</h3>
+<p>Soit <span class="math inline">\(f(X; \theta)\)</span> la fonction de densité pour la variable aléatoire <span class="math inline">\(X\)</span>, où <span class="math inline">\(\theta\)</span> est le paramètre à estimer. Supposons que n observations sont faites de la variable <span class="math inline">\(X\)</span>. Soient <span class="math inline">\(X_1, \dots,X_n\)</span> les variables aléatoires correspondant à ces n observations. Alors la fonction <span class="math display">\[L(x_1,x_2, \dots,x_n)= \Pi_{i=1}^nf(x_i; \theta)\]</span> définit la fonction de vraisemblance de l’échantillon. Exemple: soient <span class="math inline">\(X_1, \dots, X_n\)</span> des variables aléatoires telles que pour tout <span class="math inline">\(i \in {1,2, \dots,n}\)</span>, <span class="math inline">\(X_i \sim Bernoulli(p)\)</span>, la fonction de vraisemblance est donnée par<span class="math inline">\(\Pi_{i=1 }^n p^{x_i}(1-p)^{1-x_i}\)</span> et <span class="math inline">\(x_i=1\)</span> où <span class="math inline">\(x_i=0\)</span>, dépendant de si la i-ième observation est respectivement un succès ou un échec. L’estimateur de maximum de vraisemblance est donc <span class="math inline">\(\hat{p}= \frac{ \Sigma_{i=1}^n x_i}{n}\)</span>, c’est la valeur qui maximise la fonction(<span class="citation" data-cites="hoel1983">(<a href="references.html#ref-hoel1983" role="doc-biblioref"><strong>hoel1983?</strong></a>)</span>.</p>
 
 
 <!-- -->
@@ -1572,6 +1571,7 @@ Bélisle, Claude. 2021. <em>STT-4700 Processus aléatoires</em>.
 Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Stochastic Geometry and Its Applications, 3rd Edition</em>. Wiley.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2974,11 +2974,11 @@ Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Sto
 <span id="cb24-953"><a href="#cb24-953" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-954"><a href="#cb24-954" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-955"><a href="#cb24-955" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-956"><a href="#cb24-956" aria-hidden="true" tabindex="-1"></a>La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés.</span>
+<span id="cb24-956"><a href="#cb24-956" aria-hidden="true" tabindex="-1"></a>La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés; pas très concluant...</span>
 <span id="cb24-957"><a href="#cb24-957" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-958"><a href="#cb24-958" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation statistique</span></span>
+<span id="cb24-958"><a href="#cb24-958" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estmation du maximum de vraisemblance</span></span>
 <span id="cb24-959"><a href="#cb24-959" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-960"><a href="#cb24-960" aria-hidden="true" tabindex="-1"></a>chap 5.1: trouver max à partir d'un échantillon</span>
+<span id="cb24-960"><a href="#cb24-960" aria-hidden="true" tabindex="-1"></a>Soit $f(X; \theta)$ la fonction de densité pour la variable aléatoire $X$, où  $\theta$ est le paramètre à estimer. Supposons que n observations sont faites de la variable $X$. Soient $X_1, \dots,X_n$ les variables aléatoires correspondant à ces n observations. Alors la fonction $$L(x_1,x_2, \dots,x_n)= \Pi_{i=1}^nf(x_i; \theta)$$ définit la fonction de vraisemblance de l'échantillon. Exemple: soient $X_1, \dots, X_n$ des variables aléatoires telles que pour tout $i \in {1,2, \dots,n}$, $X_i \sim Bernoulli(p)$, la fonction de vraisemblance est donnée par$\Pi_{i=1 }^n p^{x_i}(1-p)^{1-x_i}$ et $x_i=1$ où $x_i=0$, dépendant de si la i-ième observation est respectivement un succès ou un échec. L'estimateur de maximum de vraisemblance est donc $\hat{p}= \frac{ \Sigma_{i=1}^n x_i}{n}$, c'est la valeur qui maximise la fonction(<span class="co">[</span><span class="ot">@hoel1983</span><span class="co">]</span>.</span>
 </code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
