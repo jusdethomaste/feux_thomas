@@ -819,7 +819,7 @@ den_f<-as.data.frame(den)
 
 ggplot(den_f,aes(x,y,fill=value)) +
   geom_raster() +
-  scale_fill_gradientn(colours=c("white","magenta")) +
+  scale_fill_gradientn(colours=c("white","darkred")) +
   coord_fixed() +
   labs(title = "Figure 2.15: Fonction d'intensité estimée",
        fill = "Densité") +
@@ -836,34 +836,100 @@ x<-seq(0,1,length.out=100)
 y<-seq(0,1,length.out=100)
 z<-outer(x,y,lambda)
 
-persp(den$xcol,den$yrow,den$v,theta=30,phi=15,col="magenta",shade=0.5,
-      border=NA,xlab="x",ylab="y",zlab="z"
-      )
-
-title(main = "Figure 2.16 : Fonction d'intensité estimée")
-
 ggplot(grid, aes(x, y, fill = value)) +
   geom_raster() +
   scale_fill_gradientn(colours = c("white", "magenta")) +
   coord_fixed() +
   labs(
-    title = "Figure 2.17: Intensité théorique",
+    title = "Figure 2.16: IFonction d'ntensité théorique",
     fill = "Densité"
   ) +
   theme_minimal()
 
+persp(den$xcol,den$yrow,den$v,theta=25,phi=15,col="darkred",shade=0.5,
+      border=NA,xlab="x",ylab="y",zlab="z"
+      )
+
+title(main = "Figure 2.17 : Fonction d'intensité estimée")
+
 persp(x,y,z,
-      theta=30,phi=15,col="magenta",shade=0.5,
+      theta=25,phi=15,col="magenta",shade=0.5,
       border=NA,xlab="x",ylab="y",zlab="z"
       )
 title(main = "Figure 2.18: Fonction d'intensité théorique")
 ```
 
-On remarque que la fonction d'intensité estimée est assez semblable à la fonction d'intensité théoriqe, donnant ainsi de la crédibilité à cette technique.
+On remarque que la fonction d'intensité estimée est assez semblable à la fonction d'intensité théoriqe, crédibilisant ainsi cette technique.
 
 ### Estimation des paramètres de la fonction de densité de rayon
 
-Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. [@chiu2013]
+Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. Dans le cas où les germes sont des cercles, on a $$A_A=1-exp(- \lambda \bar{A})$$ et $$L_A= \lambda(1-A_A) \bar{L}$$, où $A_A$ est la fraction d'aire couverte, $\lamda$ est l'intensité, $\bar{A}$ est l'aire moyenne couverte calculée, celle-ci peut elle_même être réécrite comme $\bar{A}= \pi  R^2$, $L_A$ est la longueur de frontière moyenne et $\bar{L}$ est la longueur moyenne de forntière calculée, qui peut être réécrite à son tour comme $\bar{L}=2 \pi R$. on obtient donc $$A_A=1-exp(- \lambda  \pi  R^2)$$ et $$L_A= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. Ces équations ont toutes deux les mêmes deux inconnus, soit $\lambda$ et $R$[@chiu2013]. Exemple: (voir Figure 2.19)
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(42)
+
+w <- owin(c(0,1),c(0,1))
+
+lambda<-5
+
+ppoisson<-rpoispp(lambda, win = w)
+
+n<-ppoisson$n
+
+r<-rexp(n,20)
+
+ggplot(data.frame(x=ppoisson$x, y=ppoisson$y))+
+  
+  geom_circle(aes(x0=ppoisson$x,y0=ppoisson$y, r=r),
+              fill="magenta",
+              alpha=0.5,colour="red",
+              linewidth=0.3)+
+  
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=1)+
+  
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  
+  labs(title="Figure 2.19: Modèle booléen de disques",
+       x="x",
+       y="y")+
+  
+  theme_minimal()
+
+# Configuration de la grille de pixels (résolution)
+resolution <- 1000 
+
+# Création et fusion géométrique des disques superposés
+liste_disques <- list()
+for(i in 1:n) {
+  liste_disques[[i]] <- disc(r = r[i], centre = c(ppoisson$x[i], ppoisson$y[i]))
+}
+union_restreinte <- intersect.owin(union.owin(as.anylist(liste_disques)), w)
+
+# Conversion en masque de pixels
+masque_union <- as.mask(union_restreinte, dimyx = c(resolution, resolution))
+
+# Calcul des mesures globales de l'union
+aire_totale <- sum(masque_union$m) * ((1 / resolution)^2)
+frontiere_totale <- perimeter(masque_union)
+
+# Calcul des moyennes par disque simulé (divisé par n)
+aire_moyenne <- aire_totale / n
+frontiere_moyenne <- frontiere_totale / n
+
+# Affichage strict des deux valeurs demandées
+cat("Frontière moyenne :", frontiere_moyenne, "\n")
+cat("Fraction d'aire   :", aire_moyenne, "\n")
+
+```
+
+La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés.
 
 ## Estimation statistique
 
