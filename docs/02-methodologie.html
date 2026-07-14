@@ -1555,7 +1555,7 @@ window.Quarto = {
 </section>
 <section id="estmation-du-maximum-de-vraisemblance" class="level3" data-number="2.4.5">
 <h3 data-number="2.4.5" class="anchored" data-anchor-id="estmation-du-maximum-de-vraisemblance"><span class="header-section-number">2.4.5</span> Estmation du maximum de vraisemblance</h3>
-<p>Soit <span class="math inline">\(f(X; \theta)\)</span> la fonction de densité pour la variable aléatoire <span class="math inline">\(X\)</span>, où <span class="math inline">\(\theta\)</span> est le paramètre à estimer. Supposons que n observations sont faites de la variable <span class="math inline">\(X\)</span>. Soient <span class="math inline">\(X_1, \dots,X_n\)</span> les variables aléatoires correspondant à ces n observations. Alors la fonction <span class="math display">\[L(x_1,x_2, \dots,x_n)= \Pi_{i=1}^nf(x_i; \theta)\]</span> définit la fonction de vraisemblance de l’échantillon. Exemple: soient <span class="math inline">\(X_1, \dots, X_n\)</span> des variables aléatoires telles que pour tout <span class="math inline">\(i \in {1,2, \dots,n}\)</span>, <span class="math inline">\(X_i \sim Bernoulli(p)\)</span>, la fonction de vraisemblance est donnée par<span class="math inline">\(\Pi_{i=1 }^n p^{x_i}(1-p)^{1-x_i}\)</span> et <span class="math inline">\(x_i=1\)</span> où <span class="math inline">\(x_i=0\)</span>, dépendant de si la i-ième observation est respectivement un succès ou un échec. L’estimateur de maximum de vraisemblance est donc <span class="math inline">\(\hat{p}= \frac{ \Sigma_{i=1}^n x_i}{n}\)</span>, c’est la valeur qui maximise la fonction(<span class="citation" data-cites="hoel1983">(<a href="references.html#ref-hoel1983" role="doc-biblioref"><strong>hoel1983?</strong></a>)</span>.</p>
+<p>Soit <span class="math inline">\(f(X; \theta)\)</span> la fonction de densité pour la variable aléatoire <span class="math inline">\(X\)</span>, où <span class="math inline">\(\theta\)</span> est le paramètre à estimer. Supposons que n observations sont faites de la variable <span class="math inline">\(X\)</span>. Soient <span class="math inline">\(X_1, \dots,X_n\)</span> les variables aléatoires correspondant à ces n observations. Alors la fonction <span class="math display">\[L(x_1,x_2, \dots,x_n)= \Pi_{i=1}^nf(x_i; \theta)\]</span> définit la fonction de vraisemblance de l’échantillon. Exemple: soient <span class="math inline">\(X_1, \dots, X_n\)</span> des variables aléatoires telles que pour tout <span class="math inline">\(i \in {1,2, \dots,n}\)</span>, <span class="math inline">\(X_i \sim Bernoulli(p)\)</span>, la fonction de vraisemblance est donnée par<span class="math inline">\(\Pi_{i=1 }^n p^{x_i}(1-p)^{1-x_i}\)</span> et <span class="math inline">\(x_i=1\)</span> où <span class="math inline">\(x_i=0\)</span>, dépendant de si la i-ième observation est respectivement un succès ou un échec. L’estimateur de maximum de vraisemblance est donc <span class="math inline">\(\hat{p}= \frac{ \Sigma_{i=1}^n x_i}{n}\)</span>, c’est la valeur qui maximise la fonction(<span class="citation" data-cites="hoel1983">(<a href="references.html#ref-hoel1983" role="doc-biblioref">G. Hoel 1983</a>)</span>.</p>
 
 
 <!-- -->
@@ -1569,6 +1569,9 @@ Bélisle, Claude. 2021. <em>STT-4700 Processus aléatoires</em>.
 </div>
 <div id="ref-chiu2013" class="csl-entry" role="listitem">
 Chiu, Sung Nok, Dietrich Stoyan, Wilfrid Kendall, et Joseph Mecke. 2013. <em>Stochastic Geometry and Its Applications, 3rd Edition</em>. Wiley.
+</div>
+<div id="ref-hoel1983" class="csl-entry" role="listitem">
+G. Hoel, Paul. 1983. <em>Introduction to Mathematical Statistics</em>. Wiley.
 </div>
 </div>
 </section>
