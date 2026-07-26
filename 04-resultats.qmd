@@ -1,321 +1,457 @@
 # Résultats
 
-##
+## La méthode de Serra
+
+La méthode de Serra fait une synthèse assez complète des concepts vus au chapitre 2. D'abord, on regarde les points chauds d'une région au temps $t=0$ (voir Figure 4.1),
 
 ```{r}
-library(spatstat)
 library(ggplot2)
-library(ggforce)
+library(spatstat)
 
-set.seed(42)
+set.seed(4)
 
-# ---- 1. INITIALISATION ----
-w <- owin(c(0,1), c(0,1))
-resolution <- 1000
+lambda<-4
+w<-owin(c(0,1),c(0,1))
 
-# Points initiaux (Feux Jour 1)
-hotspot <- function(x, y) { 6 * x + 4 * y }
-pts_actuels <- rpoispp(hotspot, win = w)
+ppoisson<-rpoispp(lambda, win=w)
 
-# Fonction d'intensité pour les combustibles régénérés
-combustibles_func <- function(x, y) { 100 + 100 * x + 100 * y^3 + 100 * y }
-
-# Structures pour mémoriser l'historique global
-historique_cercles_total <- data.frame()
-union_totale <- emptywindow(w)
-historique_unions <- list()
-
-jour <- 1
-continuer <- TRUE
-
-# ---- 2. BOUCLE DE PROPAGATION ITÉRATIVE ----
-while(continuer) {
+ggplot()+
   
-  if (pts_actuels$n == 0) {
-    cat("Arrêt : Plus aucun feu actif pour propager l'incendie.\n")
-    break
-  }
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=3)+
   
-  # REGÉNÉRATION : On génère de nouveaux combustibles au début de chaque jour
-  pts_comb_du_jour <- rpoispp(combustibles_func, win = w)
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  labs(title="Figure 4.1: Points chauds jour 1",
+       x="x",
+       y="y")+
   
-  # Génération des rayons pour les feux actifs (divisé par 70)
-  r <- floor(runif(pts_actuels$n, 1.000001, 6)) / 70
-  
-  # Données des cercles du jour actuel
-  cercles_du_jour <- data.frame(
-    x0 = pts_actuels$x,
-    y0 = pts_actuels$y,
-    r = r,
-    jour = jour
-  )
-  
-  # Accumulation dans l'historique pour le rendu final et pour le traçage
-  historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
-  
-  # Création géométrique des disques (Spatstat)
-  liste_disques <- list()
-  for(i in 1:pts_actuels$n) {
-    liste_disques[[i]] <- disc(r = r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
-  }
-  
-  union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
-  union_totale <- union.owin(union_totale, union_du_jour)
-  
-  # Sauvegarde de la zone totale brûlée à la fin de ce jour (pour les calculs)
-  historique_unions[[jour]] <- union_totale
-  
-  # ---- FILTRAGE GÉOMÉTRIQUE ET SÉLECTION DES CERCLES NOIRS ----
-  target_jour_ancien <- jour - 2
-  cercles_noirs <- NULL
-  
-  if (target_jour_ancien >= 1) {
-    zone_sterile <- historique_unions[[target_jour_ancien]]
-    
-    # 1. Filtrage mathématique des points combustibles (inchangé)
-    dans_zone_sterile <- inside.owin(pts_comb_du_jour$x, pts_comb_du_jour$y, zone_sterile)
-    pts_comb_du_jour <- ppp(pts_comb_du_jour$x[!dans_zone_sterile], 
-                            pts_comb_du_jour$y[!dans_zone_sterile], 
-                            window = w)
-    
-    # 2. SELECTION POUR LE PLOT : On récupère les vieux cercles dans notre tableau de suivi
-    cercles_noirs <- historique_cercles_total[historique_cercles_total$jour <= target_jour_ancien, ]
-  }
-  
-  # --- PLOT DU JOUR (Expansion de la journée uniquement) ---
-  df_combustibles <- as.data.frame(pts_comb_du_jour)
-  df_feux_actifs <- as.data.frame(pts_actuels)
-  
-  p_jour <- ggplot()
-  
-  # 1. AJOUT GRAPHISME : Si des cercles noirs existent, on les trace d'abord (arrière-plan)
-  if (!is.null(cercles_noirs) && nrow(cercles_noirs) > 0) {
-    p_jour <- p_jour + 
-      geom_circle(data = cercles_noirs, aes(x0 = x0, y0 = y0, r = r),
-                  fill = "black", colour = NA, alpha = 0.2)
-  }
-  
-  # 2. Ajout du front de feu magenta actif (cercles du jour) et des points
-  p_jour <- p_jour +
-    geom_circle(data = cercles_du_jour, aes(x0 = x0, y0 = y0, r = r),
-                fill = "magenta", alpha = 0.3, colour = "red", linewidth = 0.3) +
-    geom_point(data = df_combustibles, aes(x = x, y = y), colour = "purple", size = 0.4) +
-    geom_point(data = df_feux_actifs, aes(x = x, y = y), colour = "darkred", size = 1) +
-    labs(title = paste("Expansion des feux - Jour", jour),
-         subtitle = "Zones calcinées (>2j) affichées en cercles noirs sans bordure",
-         x = "x", y = "y") +
-    coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
-    theme_minimal()
-  
-  print(p_jour)
-  Sys.sleep(0.6)
-  
-  # Condition d'arrêt : carré entièrement couvert (avec correction area.owin)
-  if (area.owin(union_totale) >= 0.999) {
-    cat("Arrêt : Le carré est complètement couvert !\n")
-    break
-  }
-  
-  # Détection des combustibles valides touchés aujourd'hui
-  points_dedans <- inside.owin(pts_comb_du_jour$x, pts_comb_du_jour$y, union_du_jour)
-  
-  if (sum(points_dedans) == 0) {
-    cat("Arrêt : Aucun nouveau combustible n'a été touché ce jour-ci.\n")
-    continuer <- FALSE
-  } else {
-    # Les combustibles touchés deviennent les feux du lendemain
-    pts_actuels <- ppp(pts_comb_du_jour$x[points_dedans], 
-                       pts_comb_du_jour$y[points_dedans], 
-                       window = w)
-    jour <- jour + 1
-  }
-}
-
-# ---- 3. PLOT FINAL (Expansion totale des feux) ----
-cat("Génération du graphique récapitulatif final...\n")
-
-p_final <- ggplot() +
-  geom_circle(data = historique_cercles_total, aes(x0 = x0, y0 = y0, r = r), 
-              fill = "magenta", colour = NA, alpha = 1) +
-  labs(title = "Expansion totale de l'incendie (Synthèse)",
-       subtitle = paste("Simulation terminée en", jour, "jours"),
-       x = "x", y = "y") +
-  coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
   theme_minimal()
-
-print(p_final)
-
 
 ```
 
+ c'est-à-dire, les points d'une région qui sont susceptibles de se propager lors de la journée qui suit. On génère un  disque de rayon selon la fonction $\delta (x,y)$ parmi cinq rayons discrets autour de chaque point chaud à la fin du jour suivant (voit figure 4.2).
+ 
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(4)
+
+lambda<-4
+w<-owin(c(0,1),c(0,1))
+
+ppoisson<-rpoispp(lambda, win=w)
+
+r<-floor(runif(ppoisson$n,1,5.99999999))/70
+
+ggplot(data.frame(x=ppoisson$x, y=ppoisson$y))+
+  
+  geom_circle(aes(x0=ppoisson$x,y0=ppoisson$y,r=r),
+              fill="magenta",colour="red",
+              linewidth=0.5,alpha=0.5
+              )+
+  
+  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
+             colour="darkred",size=1)+
+  
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  labs(title="Figure 4.2: Propagation jour 1",
+       x="x",
+       y="y")+
+  
+  theme_minimal()
+```
+ 
+Ensuite, on génère un processus de Poisson spatial selon la fonction $\theta (x,y)=k\times f_w(x,y)$, où $k$ est le coefficient saisonnier (par exemple, lors d'une sécheresse ou d'une canicule, $k$ est plus grand, là où lors d'un grand froid, $k$ est petit) et $f_w(x,y)$ est la fonction d'intensité du total de combustible(voir Figure 4.3).Il est naturel de faire en sorte que $k$ dépende du temps, étant donné qu'il s'agit d'un coefficient saisonnier, de telle sorte que $\theta (x,y)=k\times f_w(x,y)$ est remplacée par $\theta (x,y,t)=k(t)\times f_w(x,y)$. 
+
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(4)
+
+# Window and main process (Day 1 Fire centers)
+lambda <- 4
+w <- owin(c(0,1), c(0,1))
+ppoisson <- rpoispp(lambda, win = w)
+
+# Radius generation
+r <- floor(runif(ppoisson$n, 1, 5.99999999)) / 70
+
+# --- NEW STEP: GEOMETRIC CREATION OF CIRCLES ---
+liste_disques <- list()
+for(i in 1:ppoisson$n) {
+  liste_disques[[i]] <- disc(r = r[i], centre = c(ppoisson$x[i], ppoisson$y[i]))
+}
+# Union of all circles, clipped to the window w
+union_cercles <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# --- NEW STEP: POISSON PROCESS FOR COMBUSTIBLES (INTENSITY 200) ---
+lambda_combustibles <- 200
+pts_combustibles <- rpoispp(lambda_combustibles, win = w)
+
+# Check which points fall inside the geometric union of the circles
+est_dedans <- inside.owin(pts_combustibles$x, pts_combustibles$y, union_cercles)
+
+# Create a data frame for plotting the new points
+df_combustibles <- data.frame(
+  x = pts_combustibles$x,
+  y = pts_combustibles$y,
+  Statut = ifelse(est_dedans, "Dans un cercle", "Hors des cercles")
+)
+
+# --- UPDATED PLOT ---
+ggplot() +
+  # 1. Background circles (Day 1 propagation zones)
+  geom_circle(data = data.frame(x0=ppoisson$x, y0=ppoisson$y, r=r),
+              aes(x0=x0, y0=y0, r=r),
+              fill="magenta", colour="red",
+              linewidth=0.5, alpha=0.3) +
+  
+  # 3. Superimposed intensity 200 process differentiated by status
+  geom_point(data = df_combustibles, aes(x=x, y=y, colour=Statut), 
+             size=1.2) +
+  
+  # Aesthetic parameters
+  scale_colour_manual(values = c("Dans un cercle" = "blue", "Hors des cercles" = "darkgreen")) +
+  coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+  labs(title="Figure 4.3: Combustibles et foyers jour 2",
+       subtitle="Intensité combustibles = 200",
+       x="x", y="y",
+       colour="Statut des points") +
+  theme_minimal()
+
+```
+
+
+Si ces points sont générés à l'intérieur des feux de la veille (voir Figure 4.4),
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(4)
+
+# Window and main process (Day 1 Fire centers)
+lambda <- 4
+w <- owin(c(0,1), c(0,1))
+ppoisson <- rpoispp(lambda, win = w)
+
+# Radius generation
+r <- floor(runif(ppoisson$n, 1, 5.999999999)) / 70
+
+# --- NEW STEP: GEOMETRIC CREATION OF CIRCLES ---
+liste_disques <- list()
+for(i in 1:ppoisson$n) {
+  liste_disques[[i]] <- disc(r = r[i], centre = c(ppoisson$x[i], ppoisson$y[i]))
+}
+# Union of all circles, clipped to the window w
+union_cercles <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# --- NEW STEP: POISSON PROCESS FOR COMBUSTIBLES (INTENSITY 200) ---
+lambda_combustibles <- 200
+pts_combustibles <- rpoispp(lambda_combustibles, win = w)
+
+# Check which points fall inside the geometric union of the circles
+est_dedans <- inside.owin(pts_combustibles$x, pts_combustibles$y, union_cercles)
+
+# Create a data frame for plotting the new points
+df_combustibles <- data.frame(
+  x = pts_combustibles$x,
+  y = pts_combustibles$y,
+  Statut = ifelse(est_dedans, "Dans un cercle", "Hors des cercles")
+)
+
+# --- UPDATED PLOT ---
+# --- PLOT : UNIQUEMENT LES POINTS BLEUS ---
+ggplot() +
+  # 2. Uniquement les points qui sont DANS un cercle (Points bleus)
+  geom_point(data = subset(df_combustibles, Statut == "Dans un cercle"), 
+             aes(x=x, y=y), 
+             colour="blue", size=1.2) +
+  
+  # Paramètres esthétiques
+  coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+  labs(title="Figure 4.4: Foyers jour 2",
+       x="x", y="y") +
+  theme_minimal()
+
+```
+
+
+on les considère comme nos nouveaux points chauds et on répète alors l'étape de propagation (voir Figure 4.5) 
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(4)
+
+# Fenêtre et processus principal (Foyers du Jour 1)
+lambda <- 4
+w <- owin(c(0,1), c(0,1))
+ppoisson <- rpoispp(lambda, win = w)
+
+# Génération des rayons du Jour 1
+r_jour1 <- floor(runif(ppoisson$n, 1, 5.999999999)) / 70
+
+# --- CRÉATION GÉOMÉTRIQUE DES CERCLES DU JOUR 1 ---
+liste_disques <- list()
+for(i in 1:ppoisson$n) {
+  liste_disques[[i]] <- disc(r = r_jour1[i], centre = c(ppoisson$x[i], ppoisson$y[i]))
+}
+union_cercles <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# --- PROCESSUS DE POISSON POUR LES COMBUSTIBLES (INTENSITÉ 200) ---
+lambda_combustibles <- 200
+pts_combustibles <- rpoispp(lambda_combustibles, win = w)
+
+# Vérification des points à l'intérieur des cercles du Jour 1
+est_dedans <- inside.owin(pts_combustibles$x, pts_combustibles$y, union_cercles)
+
+# Extraction stricte des points bleus (foyers du Jour 2)
+points_bleus <- data.frame(
+  x = pts_combustibles$x[est_dedans],
+  y = pts_combustibles$y[est_dedans]
+)
+
+# --- NOUVEAU : GÉNÉRATION DES RAYONS POUR LES CERCLES DU JOUR 2 ---
+n_bleus <- nrow(points_bleus)
+# Même loi de distribution que le Jour 1 pour la cohérence de la propagation
+r_jour2 <- floor(runif(n_bleus, 1, 6)) / 70 
+
+# Ajout des rayons dans le data frame des points bleus
+points_bleus$r <- r_jour2
+
+# --- GRAPHIQUE METTANT EN ÉVIDENCE LA NOUVELLE EXPANSION ---
+ggplot() +
+  
+  # 2. NOUVEAUX cercles autour de chaque point bleu (Expansion Jour 2)
+  geom_circle(data = points_bleus,
+              aes(x0=x, y0=y, r=r),
+              fill="magenta", colour="red",
+              linewidth=0.5, alpha=0.3) +
+  
+  # 3. Centres des nouveaux cercles (Les points bleus d'origine)
+  geom_point(data = points_bleus, aes(x=x, y=y), 
+             colour="blue", size=1.2) +
+  
+  # Configuration esthétique
+  coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+  labs(title="Figure 4.5 : Propagation jour 2",
+       x="x", y="y") +
+  theme_minimal()
+
+```
+
+
+jusqu'à ce qu'on arrive à un de deux scénarios. Le premier: la réunion de tous les feux recouvre entièrement la région étudiée. On arrête, car il n'y a plus de progression. Le deuxième: aucun combustible n'est généré dans les feux de la veille. On arrête, car la propagation est terminée. 
+
+
+## Exemple
+
+Dans les images ci-dessous, un exemple a été réalisé avec la fonction d'intensité $\theta(x,y)=100+100x+100y+100y^3$ (à noter que k est constante dans ce cas-ci) et $\delta(x,y)=\frac{\lfloor 4+3x+2y\rfloor}{100}$. 
+
+
 ```{r}
 library(spatstat)
 library(ggplot2)
 library(ggforce)
+library(grid)
 
-set.seed(1)
+set.seed(40)
 
-# ---- 1. INITIALISATION ----
+#--------------------------
+# INITIALISATION
+#--------------------------
+
 w <- owin(c(0,1), c(0,1))
-resolution <- 1000
+aire_fenetre <- spatstat.geom::area(w)
 
-# Points initiaux (Feux Jour 1)
-hotspot <- function(x, y) { 6 * x + 4 * y }
-pts_actuels <- rpoispp(hotspot, win = w)
-
-# Fonction d'intensité pour les combustibles régénérés (multipliée par 100 selon votre code)
-combustibles_func <- function(x, y) { 5 * (100 + 100 * x + 100 * y^3 + 100 * y) }
-
-# CORRECTION : Définition propre et isolée de la fonction des rayons
-generer_rayons_func <- function(x, y) {
-  return(floor(1 + 5 * (cos(x * pi - 0.5) * sin(y * pi - 0.5) + 1) / 2))
+hotspot <- function(x,y){
+   6*x + 4*y
 }
 
-# ---- VISUALISATION DE LA FONCTION DES RAYONS (Exécutée immédiatement) ----
-grille <- expand.grid(
-  x = seq(0, 1, length.out = 200),
-  y = seq(0, 1, length.out = 200)
-)
-grille$rayon_brut <- generer_rayons_func(grille$x, grille$y)
-  
-p_fonction <- ggplot(grille, aes(x = x, y = y, fill = rayon_brut)) +
-  geom_raster(interpolate = TRUE) +
-  scale_fill_viridis_c(option = "plasma", name = "Rayon brut\n(1 à 6)") +
-  labs(
-    title = "Intensité spatiale de la fonction des rayons",
-    subtitle = "Visualisation des variations du rayon brut f(x,y) sur le carré [0,1]",
-    x = "x", y = "y"
-  ) +
-  coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
-  theme_minimal()
+# --- THETA : Intensité des combustibles ---
+theta <- function(x,y){
+   100 + 100*x + 100*y^3 + 100*y
+}
 
-print(p_fonction) # Affiche la carte d'intensité des rayons
+# --- DELTA : Dilatation géométrique déterministe ---
+delta <- function(x, y) {
+   floor(4 + 3 * x + 2 * y) / 100
+}
 
-# Structures pour mémoriser l'historique global de la simulation
+# Feux initiaux (Jour 1)
+pts_actuels <- rpoispp(hotspot, win=w)
+
+# Structures pour l'historique et les graphiques
 historique_cercles_total <- data.frame()
 union_totale <- emptywindow(w)
-historique_unions <- list()
+
+suivi_mesures <- data.frame(
+   jour = integer(),
+   fraction_aire = numeric(),
+   frontiere_interne = numeric()
+)
 
 jour <- 1
-continuer <- TRUE
 
-# ---- 2. BOUCLE DE PROPAGATION ITÉRATIVE ----
-while(continuer) {
-  
-  if (pts_actuels$n == 0) {
-    cat("Arrêt : Plus aucun feu actif pour propager l'incendie.\n")
-    break
-  }
-  
-  # REGÉNÉRATION : On génère de nouveaux combustibles au début de chaque jour
-  pts_comb_du_jour <- rpoispp(combustibles_func, win = w)
-  
-  # Les rayons dépendent maintenant de la fonction spatiale (divisé par 100 selon votre code)
-  r_brut <- generer_rayons_func(pts_actuels$x, pts_actuels$y)
-  r <- r_brut / 100
-  
-  # Données des cercles du jour actuel
-  cercles_du_jour <- data.frame(
-    x0 = pts_actuels$x,
-    y0 = pts_actuels$y,
-    r = r,
-    jour = jour
-  )
-  
-  # Accumulation dans l'historique
-  historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
-  
-  # Création géométrique des disques (Spatstat)
-  liste_disques <- list()
-  for(i in 1:pts_actuels$n) {
-    liste_disques[[i]] <- disc(r = r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
-  }
-  
-  union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
-  union_totale <- union.owin(union_totale, union_du_jour)
-  
-  # Sauvegarde de la zone totale brûlée
-  historique_unions[[jour]] <- union_totale
-  
-  # ---- FILTRAGE GÉOMÉTRIQUE ET SÉLECTION DES CERCLES NOIRS ----
-  target_jour_ancien <- jour - 2
-  cercles_noirs <- NULL
-  
-  if (target_jour_ancien >= 1) {
-    zone_sterile <- historique_unions[[target_jour_ancien]]
-    
-    # Filtrage mathématique des points combustibles
-    dans_zone_sterile <- inside.owin(pts_comb_du_jour$x, pts_comb_du_jour$y, zone_sterile)
-    pts_comb_du_jour <- ppp(pts_comb_du_jour$x[!dans_zone_sterile], 
-                            pts_comb_du_jour$y[!dans_zone_sterile], 
-                            window = w)
-    
-    # Sélection des vieux cercles pour l'affichage noir
-    cercles_noirs <- historique_cercles_total[historique_cercles_total$jour <= target_jour_ancien, ]
-  }
-  
-  # --- PLOT DU JOUR (Expansion de la journée uniquement) ---
-  df_combustibles <- as.data.frame(pts_comb_du_jour)
-  df_feux_actifs <- as.data.frame(pts_actuels)
-  
-  p_jour <- ggplot()
-  
-  # 1. Cercles noirs (arrière-plan)
-  if (!is.null(cercles_noirs) && nrow(cercles_noirs) > 0) {
-    p_jour <- p_jour + 
-      geom_circle(data = cercles_noirs, aes(x0 = x0, y0 = y0, r = r),
-                  fill = "black", colour = NA, alpha = 0.2)
-  }
-  
-  # 2. Front de feu magenta actif
-  p_jour <- p_jour +
-    geom_circle(data = cercles_du_jour, aes(x0 = x0, y0 = y0, r = r),
-                fill = "magenta", alpha = 0.3, colour = "red", linewidth = 0.3) +
-    geom_point(data = df_combustibles, aes(x = x, y = y), colour = "purple", size = 0.4) +
-    geom_point(data = df_feux_actifs, aes(x = x, y = y), colour = "darkred", size = 1) +
-    labs(title = paste("Expansion des feux - Jour", jour),
-         subtitle = "Rayons dynamiques continus f(x,y) de 1 à 6",
-         x = "x", y = "y") +
-    coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
-    theme_minimal()
-  
-  print(p_jour)
-  Sys.sleep(0.6)
-  
-  # Condition d'arrêt : carré entièrement couvert (area.owin)
-  if (area.owin(union_totale) >= 0.999) {
-    cat("Arrêt : Le carré est complètement couvert !\n")
-    break
-  }
-  
-  # Détection des combustibles valides touchés aujourd'hui
-  points_dedans <- inside.owin(pts_comb_du_jour$x, pts_comb_du_jour$y, union_du_jour)
-  
-  if (sum(points_dedans) == 0) {
-    cat("Arrêt : Aucun nouveau combustible n'a été touché ce jour-ci.\n")
-    continuer <- FALSE
-  } else {
-    # Les combustibles touchés deviennent les feux du lendemain
-    pts_actuels <- ppp(pts_comb_du_jour$x[points_dedans], 
-                       pts_comb_du_jour$y[points_dedans], 
-                       window = w)
-    jour <- jour + 1
-  }
+#--------------------------
+# BOUCLE PRINCIPALE
+#--------------------------
+
+while(TRUE){
+   
+   if(pts_actuels$n==0){
+      cat("Plus aucun feu actif.\n")
+      break
+   }
+   
+   # Calcul déterministe des rayons selon la position
+   r <- delta(pts_actuels$x, pts_actuels$y)
+   
+   cercles_du_jour <- data.frame(
+      x0 = pts_actuels$x,
+      y0 = pts_actuels$y,
+      r  = r,
+      jour = jour
+   )
+   
+   historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
+   
+   # Union des disques du jour
+   liste_disques <- vector("list", pts_actuels$n)
+   for(i in seq_len(pts_actuels$n)){
+      liste_disques[[i]] <- disc(r[i], centre=c(pts_actuels$x[i], pts_actuels$y[i]))
+   }
+   
+   union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+   
+   #------------------------------------------------------
+   # CORRECTION : Le feu ne se propage que sur le combustible restant
+   #------------------------------------------------------
+   # Zone encore intacte au début de la journée
+   zone_combustible_restant <- setminus.owin(w, union_totale)
+   
+   # Processus de Poisson généré UNIQUEMENT dans la zone non brûlée
+   pts_comb_tous <- rpoispp(theta, win = zone_combustible_restant)
+   
+   # Parmi les combustibles restants, lesquels sont touchés aujourd'hui ?
+   retenus <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_du_jour)
+   
+   pts_comb_du_jour <- ppp(pts_comb_tous$x[retenus], pts_comb_tous$y[retenus], window=w)
+   pts_comb_hors_zone <- ppp(pts_comb_tous$x[!retenus], pts_comb_tous$y[!retenus], window=w)
+   
+   # Mise à jour de la zone brûlée globale
+   union_totale <- union.owin(union_totale, union_du_jour)
+   
+   # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
+   fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
+   
+   # Front de flamme interne (sans les bordures du carré w)
+   tous_les_contours <- edges(union_totale)
+   w_interne <- erosion(w, r = 1e-6)
+   contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+   frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
+   
+   # Sauvegarde des statistiques
+   suivi_mesures <- rbind(suivi_mesures, data.frame(
+      jour = jour,
+      fraction_aire = fraction_aire_cumulee,
+      frontiere_interne = frontiere_interne_totale
+   ))
+   
+   #------------------------------------------------------
+   # Préparation des données pour le plot du jour
+   #------------------------------------------------------
+   df_combustibles <- as.data.frame(pts_comb_du_jour)
+   df_hors_zone <- as.data.frame(pts_comb_hors_zone)
+   
+   cercles_noirs <- historique_cercles_total[historique_cercles_total$jour < jour, ]
+   
+   p <- ggplot()
+   
+   if(nrow(cercles_noirs) > 0){
+      p <- p + geom_circle(data=cercles_noirs, aes(x0=x0,y0=y0,r=r), fill="black", alpha=0.15, colour=NA)
+   }
+   
+   p <- p +
+      geom_circle(data=cercles_du_jour, aes(x0=x0,y0=y0,r=r), fill="magenta", alpha=0.3, colour="red", linewidth=0.3) +
+      geom_point(data=df_combustibles, aes(x,y), colour="purple", size=0.5) +
+      geom_point(data=df_hors_zone, aes(x,y), colour="lightblue", alpha=0.3, size=0.35) +
+      coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+      theme_minimal() +
+      labs(
+         title=paste("Jour", jour),
+         subtitle=paste0("Aire brûlée : ", round(fraction_aire_cumulee * 100, 1), "% | Front de flamme : ", round(frontiere_interne_totale, 2))
+      )
+   
+   print(p)
+   Sys.sleep(0.4)
+   
+   # Arrêt si le carré est couvert
+   if(fraction_aire_cumulee >= 0.999){
+      cat("Le carré est entièrement brûlé.\n")
+      break
+   }
+   
+   # Passage au lendemain
+   if(pts_comb_du_jour$n == 0){
+      cat("Plus aucun nouveau combustible atteint.\n")
+      break
+   } else {
+      pts_actuels <- pts_comb_du_jour
+      jour <- jour + 1
+   }
 }
 
-# ---- 3. PLOT FINAL (Expansion totale des feux) ----
-cat("Génération du graphique récapitulatif final...\n")
+#------------------------------------------------------
+# 4. GRAPHIQUES RÉCAPITULATIFS FINAUX (SANS PATCHWORK)
+#------------------------------------------------------
+cat("\nGénération de la synthèse finale...\n")
 
-p_final <- ggplot() +
-  geom_circle(data = historique_cercles_total, aes(x0 = x0, y0 = y0, r = r), 
-              fill = "magenta", colour = NA, alpha = 1) +
-  labs(title = "Expansion totale de l'incendie (Synthèse)",
-       subtitle = paste("Simulation terminée en", jour, "jours"),
-       x = "x", y = "y") +
-  coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
-  theme_minimal()
+# Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
+df_union_finale <- as.data.frame(union_totale)
 
-print(p_final)
+# Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
+p_map <- ggplot() +
+   geom_polygon(data = df_union_finale, 
+                aes(x = x, y = y, group = id), 
+                fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
+   coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+   labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
+   theme_minimal()
+
+# Graphe B : Courbe d'évolution des indicateurs géométriques
+p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
+   geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
+   geom_line(aes(y = frontiere_interne / max(frontiere_interne, 1), colour = "Front de flamme (LA, normalisé)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne / max(frontiere_interne, 1), colour = "Front de flamme (LA, normalisé)"), size = 2) +
+   scale_colour_manual(values = c("Fraction d'aire (AA)" = "darkred", "Front de flamme (LA, normalisé)" = "darkblue")) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeur", colour = "Indicateur") +
+   theme_minimal() +
+   theme(legend.position = "bottom")
+
+# Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+
+print(p_map, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_stats, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+
+print(suivi_mesures)
+
 
 ```
 

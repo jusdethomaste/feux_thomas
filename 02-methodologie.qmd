@@ -43,10 +43,14 @@ ggplot()+
   geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
              colour="darkred",size=1)+
   
-  coord_fixed()+
+  coord_fixed(xlim=c(0,1),
+              ylim=c(0,1),
+              expand=FALSE)+
+  
   labs(title="Figure 2.1: Processus de Poisson homogène",
        x="x",
        y="y")+
+  
   annotate("text",x=0.5,y=1.05,label=paste("nombre de points:",n),
            size=3,fontface="bold",vjust=0)+
   
@@ -863,73 +867,77 @@ On remarque que la fonction d'intensité estimée est assez semblable à la fonc
 
 ### Estimation des paramètres de la fonction de densité de rayon
 
-Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. Dans le cas où les germes sont des cercles, on a $$A_A=1-exp(- \lambda \bar{A})$$ et $$L_A= \lambda(1-A_A) \bar{L}$$, où $A_A$ est la fraction d'aire couverte, $\lamda$ est l'intensité, $\bar{A}$ est l'aire moyenne couverte calculée, celle-ci peut elle_même être réécrite comme $\bar{A}= \pi  R^2$, $L_A$ est la longueur de frontière moyenne et $\bar{L}$ est la longueur moyenne de forntière calculée, qui peut être réécrite à son tour comme $\bar{L}=2 \pi R$. on obtient donc $$A_A=1-exp(- \lambda  \pi  R^2)$$ et $$L_A= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. Ces équations ont toutes deux les mêmes deux inconnus, soit $\lambda$ et $R$[@chiu2013]. Exemple: (voir Figure 2.19)
+Dans le cas où on a affaire à un modèle booléen composé de disques, il peut être intéressant de connaître comment le rayon de chaque cercle se comporte. Pour arriver à nos fins, on assume que la fonction de densité de rayon suit une certaine loi de probabilité (ex: exp, gamma, uniforme, etc.), on calcule la moyenne et l'écart-type sur l'échantillon observé et on fait les calculs nécessaires pour obtenir les paramètres de notre fonction de densité. Dans le cas où les germes sont des cercles, on a $$A_A=1-exp(- \lambda \bar{A})$$ et $$L_A= \lambda(1-A_A) \bar{L}$$, où $A_A$ est la fraction d'aire couverte, $\lambda$ est l'intensité, $\bar{A}$ est l'aire moyenne couverte calculée, celle-ci peut elle_même être réécrite comme $\bar{A}= \pi  R^2$, $L_A$ est la longueur de frontière moyenne et $\bar{L}$ est la longueur moyenne de forntière calculée, qui peut être réécrite à son tour comme $\bar{L}=2 \pi R$. on obtient donc $$A_A=1-exp(- \lambda  \pi  R^2)$$ et $$L_A= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. Ces équations ont toutes deux les mêmes deux inconnus, soit $\lambda$ et $R$[@chiu2013]. Exemple: (voir Figure 2.19)
 
 ```{r}
 library(ggplot2)
 library(ggforce)
 library(spatstat)
 
-set.seed(42)
+set.seed(40)
 
-w <- owin(c(0,1),c(0,1))
+# Définition de la fenêtre et calcul de son aire
+w <- owin(c(0,1), c(0,1))
+aire_fenetre <- spatstat.geom::area(w)
 
-lambda<-5
+# Simulation du processus de Poisson et des rayons
+lambda <- 5
+ppoisson <- rpoispp(lambda, win = w)
+n <- ppoisson$n
+r <- rexp(n, 20)
 
-ppoisson<-rpoispp(lambda, win = w)
+# --- GÉNÉRATION DU GRAPHIQUE ---
+print(
+  ggplot(data.frame(x=ppoisson$x, y=ppoisson$y)) +
+    geom_circle(aes(x0=ppoisson$x, y0=ppoisson$y, r=r),
+                fill="magenta",
+                alpha=0.5, colour="red",
+                linewidth=0.3) +
+    geom_point(data=as.data.frame(ppoisson), aes(x=x, y=y),
+               colour="darkred", size=1) +
+    coord_fixed(xlim=c(0,1),
+                ylim=c(0,1),
+                expand=FALSE) +
+    labs(title="Figure 2.19: Modèle booléen de disques",
+         x="x",
+         y="y") +
+    theme_minimal()
+)
 
-n<-ppoisson$n
+# --- CALCULS GÉOMÉTRIQUES PRÉCIS ---
 
-r<-rexp(n,20)
-
-ggplot(data.frame(x=ppoisson$x, y=ppoisson$y))+
-  
-  geom_circle(aes(x0=ppoisson$x,y0=ppoisson$y, r=r),
-              fill="magenta",
-              alpha=0.5,colour="red",
-              linewidth=0.3)+
-  
-  geom_point(data=as.data.frame(ppoisson),aes(x=x,y=y),
-             colour="darkred",size=1)+
-  
-  coord_fixed(xlim=c(0,1),
-              ylim=c(0,1),
-              expand=FALSE)+
-  
-  labs(title="Figure 2.19: Modèle booléen de disques",
-       x="x",
-       y="y")+
-  
-  theme_minimal()
-
-# Configuration de la grille de pixels (résolution)
-resolution <- 1000 
-
-# Création et fusion géométrique des disques superposés
+# Création des disques
 liste_disques <- list()
 for(i in 1:n) {
   liste_disques[[i]] <- disc(r = r[i], centre = c(ppoisson$x[i], ppoisson$y[i]))
 }
-union_restreinte <- intersect.owin(union.owin(as.anylist(liste_disques)), w)
 
-# Conversion en masque de pixels
-masque_union <- as.mask(union_restreinte, dimyx = c(resolution, resolution))
+# CORRECTION ICI : Utilisation de as.solist() au lieu de as.anylist()
+union_geom <- union.owin(as.solist(liste_disques))
+union_restreinte <- intersect.owin(union_geom, w)
 
-# Calcul des mesures globales de l'union
-aire_totale <- sum(masque_union$m) * ((1 / resolution)^2)
-frontiere_totale <- perimeter(masque_union)
+# 1. Aire totale et fraction d'aire occupée (AA)
+aire_totale <- spatstat.geom::area(union_restreinte) 
+fraction_aire <- aire_totale / aire_fenetre
 
-# Calcul des moyennes par disque simulé (divisé par n)
-aire_moyenne <- aire_totale / n
-frontiere_moyenne <- frontiere_totale / n
+# 2. Extraction de TOUS les contours de l'union restreinte
+tous_les_contours <- edges(union_restreinte)
 
-# Affichage strict des deux valeurs demandées
-cat("Frontière moyenne :", frontiere_moyenne, "\n")
-cat("Fraction d'aire   :", aire_moyenne, "\n")
+# 3. Suppression stricte des segments collés sur les bords de la fenêtre w
+w_interne <- erosion(w, r = 1e-6)
+contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+
+# 4. Calcul de la longueur totale du front interne et sa densité
+frontiere_interne_totale <- sum(lengths_psp(contours_internes))
+frontiere_moyenne <- frontiere_interne_totale / aire_fenetre
+
+# --- AFFICHAGE DES RÉSULTATS ---
+cat("Frontière moyenne (par unité d'aire) :", frontiere_moyenne, "\n")
+cat("Fraction d'aire (par unité d'aire)   :", fraction_aire, "\n")
 
 ```
 
-La fraction d'aire calculée est de 0,125 et la frontière moyenne est de 0,5. On a donc $$0,125=1-exp(- \lambda  \pi  R^2)$$ et $$0,5= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\lambda \approx 0,195$ et $R \approx0,467$, ce qui est assez loin des paramètres utilisés; pas très concluant...
+La fraction d'aire calculée est d'environ $0,096$ et la frontière moyenne est d'environ $2,08$. On a donc $$0,096=1-exp(- \lambda  \pi  R^2)$$ et $$2,08= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\bar\lambda \approx 4,17$ et $ \bar R \approx 0,087$. On avit choisi au préalable $R \sim  exp(20)$ et $N(A) \sim  Poisson(5 \vert A \vert)$ (où $A=[0,1] \times [0,1]$ et $\vert A \vert=1$). De telle sorte que $\mathbb{E}(R)= \frac{1}{20}=0,05$ et $\mathbb{E}(N(A))=5 \times 1=5$. Ce qui est ssez proche des résultats obtenus (respectivement $0,087$ et $4,17$).
 
 ### Estmation du maximum de vraisemblance
 
