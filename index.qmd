@@ -27,3 +27,4 @@ We acknowledge the support of the Natural Sciences and Engineering Research Coun
 
 We acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [funding reference number 616966].
 
+![](images/CRSNG_RGB.png){#fig-crsng fig-align="left" width=20%}

@@ -2,3 +2,6 @@
 
 ## Discussion
 
+Quand on regarde comment les choses se passent au Québec, on aperçoit qu'on fait affaire à un cas où les feux sont concentrés à une période particulière de l'année (se référer à la figure ci-dessous)
+
+![](images/comparaison_qc_malaisie_2023.png){#fig-crsng fig-align="left" width=50%}

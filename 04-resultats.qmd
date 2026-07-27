@@ -257,9 +257,9 @@ ggplot() +
 jusqu'à ce qu'on arrive à un de deux scénarios. Le premier: la réunion de tous les feux recouvre entièrement la région étudiée. On arrête, car il n'y a plus de progression. Le deuxième: aucun combustible n'est généré dans les feux de la veille. On arrête, car la propagation est terminée. 
 
 
-## Exemple
+## Exemple 1 ($\theta$ et $\delta$ moyens)
 
-Dans les images ci-dessous, un exemple a été réalisé avec la fonction d'intensité $\theta(x,y)=100+100x+100y+100y^3$ (à noter que k est constante dans ce cas-ci) et $\delta(x,y)=\frac{\lfloor 4+3x+2y\rfloor}{100}$. 
+Dans les images ci-dessous, un exemple a été réalisé avec la fonction d'intensité $\theta_1(x,y)=100+100x+100y+100y^3$ (à noter que k est constante dans ce cas-ci) et $\delta_1(x,y)=\frac{\lfloor 4+3x+2y\rfloor}{100}$. Une modification a été ajoutée à l'idée de base; les feux ne peuvent pas se propager à un endroit qui a été brûlé depuis un certain temps (2 jours dans ce cas-ci).
 
 
 ```{r}
@@ -283,7 +283,7 @@ hotspot <- function(x,y){
 
 # --- THETA : Intensité des combustibles ---
 theta <- function(x,y){
-   100 + 100*x + 100*y^3 + 100*y
+  ( 100 + 100*x + 100*y^3 + 100*y)
 }
 
 # --- DELTA : Dilatation géométrique déterministe ---
@@ -301,7 +301,8 @@ union_totale <- emptywindow(w)
 suivi_mesures <- data.frame(
    jour = integer(),
    fraction_aire = numeric(),
-   frontiere_interne = numeric()
+   frontiere_interne = numeric(),
+   frontiere_externe = numeric() # <-- NOUVEAU
 )
 
 jour <- 1
@@ -358,17 +359,21 @@ while(TRUE){
    # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
    fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
    
-   # Front de flamme interne (sans les bordures du carré w)
+   # 1. Front de flamme interne (sans les bordures du carré w)
    tous_les_contours <- edges(union_totale)
    w_interne <- erosion(w, r = 1e-6)
    contours_internes <- clip.psp(tous_les_contours, window = w_interne)
    frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
    
+   # 2. Frontière externe globale (incluant les bordures du carré w) - NOUVEAU
+   frontiere_externe_totale <- spatstat.geom::perimeter(union_totale) / aire_fenetre
+   
    # Sauvegarde des statistiques
    suivi_mesures <- rbind(suivi_mesures, data.frame(
       jour = jour,
       fraction_aire = fraction_aire_cumulee,
-      frontiere_interne = frontiere_interne_totale
+      frontiere_interne = frontiere_interne_totale,
+      frontiere_externe = frontiere_externe_totale # <-- NOUVEAU
    ))
    
    #------------------------------------------------------
@@ -393,7 +398,9 @@ while(TRUE){
       theme_minimal() +
       labs(
          title=paste("Jour", jour),
-         subtitle=paste0("Aire brûlée : ", round(fraction_aire_cumulee * 100, 1), "% | Front de flamme : ", round(frontiere_interne_totale, 2))
+         subtitle=paste0("Aire : ", round(fraction_aire_cumulee * 100, 1), 
+                          "% | Front Int : ", round(frontiere_interne_totale, 2),
+                          " | Front Ext : ", round(frontiere_externe_totale, 2))
       )
    
    print(p)
@@ -423,25 +430,937 @@ cat("\nGénération de la synthèse finale...\n")
 # Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
 df_union_finale <- as.data.frame(union_totale)
 
+# Sécurisation de l'identifiant de groupe pour geom_polygon
+nom_id <- grep("id", names(df_union_finale), value = TRUE)
+df_union_finale$group_id <- if(length(nom_id) > 0) df_union_finale[[nom_id]] else 1
+
 # Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
 p_map <- ggplot() +
    geom_polygon(data = df_union_finale, 
-                aes(x = x, y = y, group = id), 
+                aes(x = x, y = y, group = group_id), 
                 fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
    coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
    labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
    theme_minimal()
 
-# Graphe B : Courbe d'évolution des indicateurs géométriques
+# Graphe B : Courbe d'évolution des trois indicateurs géométriques
 p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   # 1. Courbe de la fraction d'aire
    geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
    geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
-   geom_line(aes(y = frontiere_interne / max(frontiere_interne, 1), colour = "Front de flamme (LA, normalisé)"), linewidth = 1, linetype = "dashed") +
-   geom_point(aes(y = frontiere_interne / max(frontiere_interne, 1), colour = "Front de flamme (LA, normalisé)"), size = 2) +
-   scale_colour_manual(values = c("Fraction d'aire (AA)" = "darkred", "Front de flamme (LA, normalisé)" = "darkblue")) +
-   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeur", colour = "Indicateur") +
+   
+   # 2. Courbe de la frontière interne (Front de flamme)
+   geom_line(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), size = 2) +
+   
+   # 3. Courbe de la frontière externe globale
+   geom_line(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), linewidth = 1, linetype = "dotted") +
+   geom_point(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), size = 2) +
+   
+   scale_colour_manual(values = c(
+      "Fraction d'aire (AA)" = "darkred", 
+      "Front de flamme interne (LA)" = "darkblue",
+      "Frontière externe globale" = "darkgreen"
+   )) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeurs absolues", colour = "Indicateur") +
    theme_minimal() +
-   theme(legend.position = "bottom")
+   theme(legend.position = "bottom", legend.box = "vertical")
+
+# Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+
+print(p_map, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_stats, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+
+print(suivi_mesures)
+
+
+
+
+
+```
+
+
+
+## Exemple 2 ($\theta$ grand et $\delta$ moyen)
+
+On refait la simulation, toutefois, on utilise $\theta_2=5\theta_1$ et $\delta_1$.
+
+```{r}
+library(spatstat)
+library(ggplot2)
+library(ggforce)
+library(grid)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+
+w <- owin(c(0,1), c(0,1))
+aire_fenetre <- spatstat.geom::area(w)
+
+hotspot <- function(x,y){
+   6*x + 4*y
+}
+
+# --- THETA : Intensité des combustibles ---
+theta <- function(x,y){
+  5*( 100 + 100*x + 100*y^3 + 100*y)
+}
+
+# --- DELTA : Dilatation géométrique déterministe ---
+delta <- function(x, y) {
+   floor(4 + 3 * x + 2 * y) / 100
+}
+
+# Feux initiaux (Jour 1)
+pts_actuels <- rpoispp(hotspot, win=w)
+
+# Structures pour l'historique et les graphiques
+historique_cercles_total <- data.frame()
+union_totale <- emptywindow(w)
+
+suivi_mesures <- data.frame(
+   jour = integer(),
+   fraction_aire = numeric(),
+   frontiere_interne = numeric(),
+   frontiere_externe = numeric() # <-- NOUVEAU
+)
+
+jour <- 1
+
+#--------------------------
+# BOUCLE PRINCIPALE
+#--------------------------
+
+while(TRUE){
+   
+   if(pts_actuels$n==0){
+      cat("Plus aucun feu actif.\n")
+      break
+   }
+   
+   # Calcul déterministe des rayons selon la position
+   r <- delta(pts_actuels$x, pts_actuels$y)
+   
+   cercles_du_jour <- data.frame(
+      x0 = pts_actuels$x,
+      y0 = pts_actuels$y,
+      r  = r,
+      jour = jour
+   )
+   
+   historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
+   
+   # Union des disques du jour
+   liste_disques <- vector("list", pts_actuels$n)
+   for(i in seq_len(pts_actuels$n)){
+      liste_disques[[i]] <- disc(r[i], centre=c(pts_actuels$x[i], pts_actuels$y[i]))
+   }
+   
+   union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+   
+   #------------------------------------------------------
+   # CORRECTION : Le feu ne se propage que sur le combustible restant
+   #------------------------------------------------------
+   # Zone encore intacte au début de la journée
+   zone_combustible_restant <- setminus.owin(w, union_totale)
+   
+   # Processus de Poisson généré UNIQUEMENT dans la zone non brûlée
+   pts_comb_tous <- rpoispp(theta, win = zone_combustible_restant)
+   
+   # Parmi les combustibles restants, lesquels sont touchés aujourd'hui ?
+   retenus <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_du_jour)
+   
+   pts_comb_du_jour <- ppp(pts_comb_tous$x[retenus], pts_comb_tous$y[retenus], window=w)
+   pts_comb_hors_zone <- ppp(pts_comb_tous$x[!retenus], pts_comb_tous$y[!retenus], window=w)
+   
+   # Mise à jour de la zone brûlée globale
+   union_totale <- union.owin(union_totale, union_du_jour)
+   
+   # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
+   fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
+   
+   # 1. Front de flamme interne (sans les bordures du carré w)
+   tous_les_contours <- edges(union_totale)
+   w_interne <- erosion(w, r = 1e-6)
+   contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+   frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
+   
+   # 2. Frontière externe globale (incluant les bordures du carré w) - NOUVEAU
+   frontiere_externe_totale <- spatstat.geom::perimeter(union_totale) / aire_fenetre
+   
+   # Sauvegarde des statistiques
+   suivi_mesures <- rbind(suivi_mesures, data.frame(
+      jour = jour,
+      fraction_aire = fraction_aire_cumulee,
+      frontiere_interne = frontiere_interne_totale,
+      frontiere_externe = frontiere_externe_totale # <-- NOUVEAU
+   ))
+   
+   #------------------------------------------------------
+   # Préparation des données pour le plot du jour
+   #------------------------------------------------------
+   df_combustibles <- as.data.frame(pts_comb_du_jour)
+   df_hors_zone <- as.data.frame(pts_comb_hors_zone)
+   
+   cercles_noirs <- historique_cercles_total[historique_cercles_total$jour < jour, ]
+   
+   p <- ggplot()
+   
+   if(nrow(cercles_noirs) > 0){
+      p <- p + geom_circle(data=cercles_noirs, aes(x0=x0,y0=y0,r=r), fill="black", alpha=0.15, colour=NA)
+   }
+   
+   p <- p +
+      geom_circle(data=cercles_du_jour, aes(x0=x0,y0=y0,r=r), fill="magenta", alpha=0.3, colour="red", linewidth=0.3) +
+      geom_point(data=df_combustibles, aes(x,y), colour="purple", size=0.5) +
+      geom_point(data=df_hors_zone, aes(x,y), colour="lightblue", alpha=0.3, size=0.35) +
+      coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+      theme_minimal() +
+      labs(
+         title=paste("Jour", jour),
+         subtitle=paste0("Aire : ", round(fraction_aire_cumulee * 100, 1), 
+                          "% | Front Int : ", round(frontiere_interne_totale, 2),
+                          " | Front Ext : ", round(frontiere_externe_totale, 2))
+      )
+   
+   print(p)
+   Sys.sleep(0.4)
+   
+   # Arrêt si le carré est couvert
+   if(fraction_aire_cumulee >= 0.999){
+      cat("Le carré est entièrement brûlé.\n")
+      break
+   }
+   
+   # Passage au lendemain
+   if(pts_comb_du_jour$n == 0){
+      cat("Plus aucun nouveau combustible atteint.\n")
+      break
+   } else {
+      pts_actuels <- pts_comb_du_jour
+      jour <- jour + 1
+   }
+}
+
+#------------------------------------------------------
+# 4. GRAPHIQUES RÉCAPITULATIFS FINAUX (SANS PATCHWORK)
+#------------------------------------------------------
+cat("\nGénération de la synthèse finale...\n")
+
+# Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
+df_union_finale <- as.data.frame(union_totale)
+
+# Sécurisation de l'identifiant de groupe pour geom_polygon
+nom_id <- grep("id", names(df_union_finale), value = TRUE)
+df_union_finale$group_id <- if(length(nom_id) > 0) df_union_finale[[nom_id]] else 1
+
+# Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
+p_map <- ggplot() +
+   geom_polygon(data = df_union_finale, 
+                aes(x = x, y = y, group = group_id), 
+                fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
+   coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+   labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
+   theme_minimal()
+
+# Graphe B : Courbe d'évolution des trois indicateurs géométriques
+p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   # 1. Courbe de la fraction d'aire
+   geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
+   geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
+   
+   # 2. Courbe de la frontière interne (Front de flamme)
+   geom_line(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), size = 2) +
+   
+   # 3. Courbe de la frontière externe globale
+   geom_line(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), linewidth = 1, linetype = "dotted") +
+   geom_point(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), size = 2) +
+   
+   scale_colour_manual(values = c(
+      "Fraction d'aire (AA)" = "darkred", 
+      "Front de flamme interne (LA)" = "darkblue",
+      "Frontière externe globale" = "darkgreen"
+   )) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeurs absolues", colour = "Indicateur") +
+   theme_minimal() +
+   theme(legend.position = "bottom", legend.box = "vertical")
+
+# Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+
+print(p_map, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_stats, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+
+print(suivi_mesures)
+
+
+
+
+```
+
+
+## Exemple 3 ($\theta$ petit et $\delta$ moyen)
+
+On répète les étapes, mais on utilise cette fois-ci $\theta_3=\frac{\theta_1}{3}$ et $\delta_1$.
+
+
+```{r}
+library(spatstat)
+library(ggplot2)
+library(ggforce)
+library(grid)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+
+w <- owin(c(0,1), c(0,1))
+aire_fenetre <- spatstat.geom::area(w)
+
+hotspot <- function(x,y){
+   6*x + 4*y
+}
+
+# --- THETA : Intensité des combustibles ---
+theta <- function(x,y){
+  ( 100 + 100*x + 100*y^3 + 100*y)/3
+}
+
+# --- DELTA : Dilatation géométrique déterministe ---
+delta <- function(x, y) {
+   floor(4 + 3 * x + 2 * y) / 100
+}
+
+# Feux initiaux (Jour 1)
+pts_actuels <- rpoispp(hotspot, win=w)
+
+# Structures pour l'historique et les graphiques
+historique_cercles_total <- data.frame()
+union_totale <- emptywindow(w)
+
+suivi_mesures <- data.frame(
+   jour = integer(),
+   fraction_aire = numeric(),
+   frontiere_interne = numeric(),
+   frontiere_externe = numeric() # <-- NOUVEAU
+)
+
+jour <- 1
+
+#--------------------------
+# BOUCLE PRINCIPALE
+#--------------------------
+
+while(TRUE){
+   
+   if(pts_actuels$n==0){
+      cat("Plus aucun feu actif.\n")
+      break
+   }
+   
+   # Calcul déterministe des rayons selon la position
+   r <- delta(pts_actuels$x, pts_actuels$y)
+   
+   cercles_du_jour <- data.frame(
+      x0 = pts_actuels$x,
+      y0 = pts_actuels$y,
+      r  = r,
+      jour = jour
+   )
+   
+   historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
+   
+   # Union des disques du jour
+   liste_disques <- vector("list", pts_actuels$n)
+   for(i in seq_len(pts_actuels$n)){
+      liste_disques[[i]] <- disc(r[i], centre=c(pts_actuels$x[i], pts_actuels$y[i]))
+   }
+   
+   union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+   
+   #------------------------------------------------------
+   # CORRECTION : Le feu ne se propage que sur le combustible restant
+   #------------------------------------------------------
+   # Zone encore intacte au début de la journée
+   zone_combustible_restant <- setminus.owin(w, union_totale)
+   
+   # Processus de Poisson généré UNIQUEMENT dans la zone non brûlée
+   pts_comb_tous <- rpoispp(theta, win = zone_combustible_restant)
+   
+   # Parmi les combustibles restants, lesquels sont touchés aujourd'hui ?
+   retenus <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_du_jour)
+   
+   pts_comb_du_jour <- ppp(pts_comb_tous$x[retenus], pts_comb_tous$y[retenus], window=w)
+   pts_comb_hors_zone <- ppp(pts_comb_tous$x[!retenus], pts_comb_tous$y[!retenus], window=w)
+   
+   # Mise à jour de la zone brûlée globale
+   union_totale <- union.owin(union_totale, union_du_jour)
+   
+   # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
+   fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
+   
+   # 1. Front de flamme interne (sans les bordures du carré w)
+   tous_les_contours <- edges(union_totale)
+   w_interne <- erosion(w, r = 1e-6)
+   contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+   frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
+   
+   # 2. Frontière externe globale (incluant les bordures du carré w) - NOUVEAU
+   frontiere_externe_totale <- spatstat.geom::perimeter(union_totale) / aire_fenetre
+   
+   # Sauvegarde des statistiques
+   suivi_mesures <- rbind(suivi_mesures, data.frame(
+      jour = jour,
+      fraction_aire = fraction_aire_cumulee,
+      frontiere_interne = frontiere_interne_totale,
+      frontiere_externe = frontiere_externe_totale # <-- NOUVEAU
+   ))
+   
+   #------------------------------------------------------
+   # Préparation des données pour le plot du jour
+   #------------------------------------------------------
+   df_combustibles <- as.data.frame(pts_comb_du_jour)
+   df_hors_zone <- as.data.frame(pts_comb_hors_zone)
+   
+   cercles_noirs <- historique_cercles_total[historique_cercles_total$jour < jour, ]
+   
+   p <- ggplot()
+   
+   if(nrow(cercles_noirs) > 0){
+      p <- p + geom_circle(data=cercles_noirs, aes(x0=x0,y0=y0,r=r), fill="black", alpha=0.15, colour=NA)
+   }
+   
+   p <- p +
+      geom_circle(data=cercles_du_jour, aes(x0=x0,y0=y0,r=r), fill="magenta", alpha=0.3, colour="red", linewidth=0.3) +
+      geom_point(data=df_combustibles, aes(x,y), colour="purple", size=0.5) +
+      geom_point(data=df_hors_zone, aes(x,y), colour="lightblue", alpha=0.3, size=0.35) +
+      coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+      theme_minimal() +
+      labs(
+         title=paste("Jour", jour),
+         subtitle=paste0("Aire : ", round(fraction_aire_cumulee * 100, 1), 
+                          "% | Front Int : ", round(frontiere_interne_totale, 2),
+                          " | Front Ext : ", round(frontiere_externe_totale, 2))
+      )
+   
+   print(p)
+   Sys.sleep(0.4)
+   
+   # Arrêt si le carré est couvert
+   if(fraction_aire_cumulee >= 0.999){
+      cat("Le carré est entièrement brûlé.\n")
+      break
+   }
+   
+   # Passage au lendemain
+   if(pts_comb_du_jour$n == 0){
+      cat("Plus aucun nouveau combustible atteint.\n")
+      break
+   } else {
+      pts_actuels <- pts_comb_du_jour
+      jour <- jour + 1
+   }
+}
+
+#------------------------------------------------------
+# 4. GRAPHIQUES RÉCAPITULATIFS FINAUX (SANS PATCHWORK)
+#------------------------------------------------------
+cat("\nGénération de la synthèse finale...\n")
+
+# Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
+df_union_finale <- as.data.frame(union_totale)
+
+# Sécurisation de l'identifiant de groupe pour geom_polygon
+nom_id <- grep("id", names(df_union_finale), value = TRUE)
+df_union_finale$group_id <- if(length(nom_id) > 0) df_union_finale[[nom_id]] else 1
+
+# Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
+p_map <- ggplot() +
+   geom_polygon(data = df_union_finale, 
+                aes(x = x, y = y, group = group_id), 
+                fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
+   coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+   labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
+   theme_minimal()
+
+# Graphe B : Courbe d'évolution des trois indicateurs géométriques
+p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   # 1. Courbe de la fraction d'aire
+   geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
+   geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
+   
+   # 2. Courbe de la frontière interne (Front de flamme)
+   geom_line(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), size = 2) +
+   
+   # 3. Courbe de la frontière externe globale
+   geom_line(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), linewidth = 1, linetype = "dotted") +
+   geom_point(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), size = 2) +
+   
+   scale_colour_manual(values = c(
+      "Fraction d'aire (AA)" = "darkred", 
+      "Front de flamme interne (LA)" = "darkblue",
+      "Frontière externe globale" = "darkgreen"
+   )) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeurs absolues", colour = "Indicateur") +
+   theme_minimal() +
+   theme(legend.position = "bottom", legend.box = "vertical")
+
+# Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+
+print(p_map, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_stats, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+
+print(suivi_mesures)
+
+
+
+
+```
+
+
+## Exemple 4 ($\theta$ grand et $\delta$ petit)
+
+On s'en prend maintenant à $\delta$. On prend $\delta_2=\frac{\delta_1}{3}$ et $\theta_2$.
+
+
+```{r}
+library(spatstat)
+library(ggplot2)
+library(ggforce)
+library(grid)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+
+w <- owin(c(0,1), c(0,1))
+aire_fenetre <- spatstat.geom::area(w)
+
+hotspot <- function(x,y){
+   6*x + 4*y
+}
+
+# --- THETA : Intensité des combustibles ---
+theta <- function(x,y){
+  5*( 100 + 100*x + 100*y^3 + 100*y)
+}
+
+# --- DELTA : Dilatation géométrique déterministe ---
+delta <- function(x, y) {
+   floor(4 + 3 * x + 2 * y) / 300
+}
+
+# Feux initiaux (Jour 1)
+pts_actuels <- rpoispp(hotspot, win=w)
+
+# Structures pour l'historique et les graphiques
+historique_cercles_total <- data.frame()
+union_totale <- emptywindow(w)
+
+suivi_mesures <- data.frame(
+   jour = integer(),
+   fraction_aire = numeric(),
+   frontiere_interne = numeric(),
+   frontiere_externe = numeric() # <-- NOUVEAU
+)
+
+jour <- 1
+
+#--------------------------
+# BOUCLE PRINCIPALE
+#--------------------------
+
+while(TRUE){
+   
+   if(pts_actuels$n==0){
+      cat("Plus aucun feu actif.\n")
+      break
+   }
+   
+   # Calcul déterministe des rayons selon la position
+   r <- delta(pts_actuels$x, pts_actuels$y)
+   
+   cercles_du_jour <- data.frame(
+      x0 = pts_actuels$x,
+      y0 = pts_actuels$y,
+      r  = r,
+      jour = jour
+   )
+   
+   historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
+   
+   # Union des disques du jour
+   liste_disques <- vector("list", pts_actuels$n)
+   for(i in seq_len(pts_actuels$n)){
+      liste_disques[[i]] <- disc(r[i], centre=c(pts_actuels$x[i], pts_actuels$y[i]))
+   }
+   
+   union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+   
+   #------------------------------------------------------
+   # CORRECTION : Le feu ne se propage que sur le combustible restant
+   #------------------------------------------------------
+   # Zone encore intacte au début de la journée
+   zone_combustible_restant <- setminus.owin(w, union_totale)
+   
+   # Processus de Poisson généré UNIQUEMENT dans la zone non brûlée
+   pts_comb_tous <- rpoispp(theta, win = zone_combustible_restant)
+   
+   # Parmi les combustibles restants, lesquels sont touchés aujourd'hui ?
+   retenus <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_du_jour)
+   
+   pts_comb_du_jour <- ppp(pts_comb_tous$x[retenus], pts_comb_tous$y[retenus], window=w)
+   pts_comb_hors_zone <- ppp(pts_comb_tous$x[!retenus], pts_comb_tous$y[!retenus], window=w)
+   
+   # Mise à jour de la zone brûlée globale
+   union_totale <- union.owin(union_totale, union_du_jour)
+   
+   # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
+   fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
+   
+   # 1. Front de flamme interne (sans les bordures du carré w)
+   tous_les_contours <- edges(union_totale)
+   w_interne <- erosion(w, r = 1e-6)
+   contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+   frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
+   
+   # 2. Frontière externe globale (incluant les bordures du carré w) - NOUVEAU
+   frontiere_externe_totale <- spatstat.geom::perimeter(union_totale) / aire_fenetre
+   
+   # Sauvegarde des statistiques
+   suivi_mesures <- rbind(suivi_mesures, data.frame(
+      jour = jour,
+      fraction_aire = fraction_aire_cumulee,
+      frontiere_interne = frontiere_interne_totale,
+      frontiere_externe = frontiere_externe_totale # <-- NOUVEAU
+   ))
+   
+   #------------------------------------------------------
+   # Préparation des données pour le plot du jour
+   #------------------------------------------------------
+   df_combustibles <- as.data.frame(pts_comb_du_jour)
+   df_hors_zone <- as.data.frame(pts_comb_hors_zone)
+   
+   cercles_noirs <- historique_cercles_total[historique_cercles_total$jour < jour, ]
+   
+   p <- ggplot()
+   
+   if(nrow(cercles_noirs) > 0){
+      p <- p + geom_circle(data=cercles_noirs, aes(x0=x0,y0=y0,r=r), fill="black", alpha=0.15, colour=NA)
+   }
+   
+   p <- p +
+      geom_circle(data=cercles_du_jour, aes(x0=x0,y0=y0,r=r), fill="magenta", alpha=0.3, colour="red", linewidth=0.3) +
+      geom_point(data=df_combustibles, aes(x,y), colour="purple", size=0.5) +
+      geom_point(data=df_hors_zone, aes(x,y), colour="lightblue", alpha=0.3, size=0.35) +
+      coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+      theme_minimal() +
+      labs(
+         title=paste("Jour", jour),
+         subtitle=paste0("Aire : ", round(fraction_aire_cumulee * 100, 1), 
+                          "% | Front Int : ", round(frontiere_interne_totale, 2),
+                          " | Front Ext : ", round(frontiere_externe_totale, 2))
+      )
+   
+   print(p)
+   Sys.sleep(0.4)
+   
+   # Arrêt si le carré est couvert
+   if(fraction_aire_cumulee >= 0.999){
+      cat("Le carré est entièrement brûlé.\n")
+      break
+   }
+   
+   # Passage au lendemain
+   if(pts_comb_du_jour$n == 0){
+      cat("Plus aucun nouveau combustible atteint.\n")
+      break
+   } else {
+      pts_actuels <- pts_comb_du_jour
+      jour <- jour + 1
+   }
+}
+
+#------------------------------------------------------
+# 4. GRAPHIQUES RÉCAPITULATIFS FINAUX (SANS PATCHWORK)
+#------------------------------------------------------
+cat("\nGénération de la synthèse finale...\n")
+
+# Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
+df_union_finale <- as.data.frame(union_totale)
+
+# Sécurisation de l'identifiant de groupe pour geom_polygon
+nom_id <- grep("id", names(df_union_finale), value = TRUE)
+df_union_finale$group_id <- if(length(nom_id) > 0) df_union_finale[[nom_id]] else 1
+
+# Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
+p_map <- ggplot() +
+   geom_polygon(data = df_union_finale, 
+                aes(x = x, y = y, group = group_id), 
+                fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
+   coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+   labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
+   theme_minimal()
+
+# Graphe B : Courbe d'évolution des trois indicateurs géométriques
+p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   # 1. Courbe de la fraction d'aire
+   geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
+   geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
+   
+   # 2. Courbe de la frontière interne (Front de flamme)
+   geom_line(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), size = 2) +
+   
+   # 3. Courbe de la frontière externe globale
+   geom_line(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), linewidth = 1, linetype = "dotted") +
+   geom_point(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), size = 2) +
+   
+   scale_colour_manual(values = c(
+      "Fraction d'aire (AA)" = "darkred", 
+      "Front de flamme interne (LA)" = "darkblue",
+      "Frontière externe globale" = "darkgreen"
+   )) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeurs absolues", colour = "Indicateur") +
+   theme_minimal() +
+   theme(legend.position = "bottom", legend.box = "vertical")
+
+# Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+
+print(p_map, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(p_stats, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+
+print(suivi_mesures)
+
+
+
+
+```
+
+
+## Exemple 1 ($\theta$ petit et $\delta$ grand)
+
+Finalement, on observe ce qui se passe avec $\delta_3=3\delta_1$ et $\theta_3$.
+
+```{r}
+library(spatstat)
+library(ggplot2)
+library(ggforce)
+library(grid)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+
+w <- owin(c(0,1), c(0,1))
+aire_fenetre <- spatstat.geom::area(w)
+
+hotspot <- function(x,y){
+   6*x + 4*y
+}
+
+# --- THETA : Intensité des combustibles ---
+theta <- function(x,y){
+  ( 100 + 100*x + 100*y^3 + 100*y)/3
+}
+
+# --- DELTA : Dilatation géométrique déterministe ---
+delta <- function(x, y) {
+   3*floor(4 + 3 * x + 2 * y) / 100
+}
+
+# Feux initiaux (Jour 1)
+pts_actuels <- rpoispp(hotspot, win=w)
+
+# Structures pour l'historique et les graphiques
+historique_cercles_total <- data.frame()
+union_totale <- emptywindow(w)
+
+suivi_mesures <- data.frame(
+   jour = integer(),
+   fraction_aire = numeric(),
+   frontiere_interne = numeric(),
+   frontiere_externe = numeric() # <-- NOUVEAU
+)
+
+jour <- 1
+
+#--------------------------
+# BOUCLE PRINCIPALE
+#--------------------------
+
+while(TRUE){
+   
+   if(pts_actuels$n==0){
+      cat("Plus aucun feu actif.\n")
+      break
+   }
+   
+   # Calcul déterministe des rayons selon la position
+   r <- delta(pts_actuels$x, pts_actuels$y)
+   
+   cercles_du_jour <- data.frame(
+      x0 = pts_actuels$x,
+      y0 = pts_actuels$y,
+      r  = r,
+      jour = jour
+   )
+   
+   historique_cercles_total <- rbind(historique_cercles_total, cercles_du_jour)
+   
+   # Union des disques du jour
+   liste_disques <- vector("list", pts_actuels$n)
+   for(i in seq_len(pts_actuels$n)){
+      liste_disques[[i]] <- disc(r[i], centre=c(pts_actuels$x[i], pts_actuels$y[i]))
+   }
+   
+   union_du_jour <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+   
+   #------------------------------------------------------
+   # CORRECTION : Le feu ne se propage que sur le combustible restant
+   #------------------------------------------------------
+   # Zone encore intacte au début de la journée
+   zone_combustible_restant <- setminus.owin(w, union_totale)
+   
+   # Processus de Poisson généré UNIQUEMENT dans la zone non brûlée
+   pts_comb_tous <- rpoispp(theta, win = zone_combustible_restant)
+   
+   # Parmi les combustibles restants, lesquels sont touchés aujourd'hui ?
+   retenus <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_du_jour)
+   
+   pts_comb_du_jour <- ppp(pts_comb_tous$x[retenus], pts_comb_tous$y[retenus], window=w)
+   pts_comb_hors_zone <- ppp(pts_comb_tous$x[!retenus], pts_comb_tous$y[!retenus], window=w)
+   
+   # Mise à jour de la zone brûlée globale
+   union_totale <- union.owin(union_totale, union_du_jour)
+   
+   # --- CALCUL DES MESURES GÉOMÉTRIQUES DU CUMUL ---
+   fraction_aire_cumulee <- spatstat.geom::area(union_totale) / aire_fenetre
+   
+   # 1. Front de flamme interne (sans les bordures du carré w)
+   tous_les_contours <- edges(union_totale)
+   w_interne <- erosion(w, r = 1e-6)
+   contours_internes <- clip.psp(tous_les_contours, window = w_interne)
+   frontiere_interne_totale <- sum(lengths_psp(contours_internes)) / aire_fenetre
+   
+   # 2. Frontière externe globale (incluant les bordures du carré w) - NOUVEAU
+   frontiere_externe_totale <- spatstat.geom::perimeter(union_totale) / aire_fenetre
+   
+   # Sauvegarde des statistiques
+   suivi_mesures <- rbind(suivi_mesures, data.frame(
+      jour = jour,
+      fraction_aire = fraction_aire_cumulee,
+      frontiere_interne = frontiere_interne_totale,
+      frontiere_externe = frontiere_externe_totale # <-- NOUVEAU
+   ))
+   
+   #------------------------------------------------------
+   # Préparation des données pour le plot du jour
+   #------------------------------------------------------
+   df_combustibles <- as.data.frame(pts_comb_du_jour)
+   df_hors_zone <- as.data.frame(pts_comb_hors_zone)
+   
+   cercles_noirs <- historique_cercles_total[historique_cercles_total$jour < jour, ]
+   
+   p <- ggplot()
+   
+   if(nrow(cercles_noirs) > 0){
+      p <- p + geom_circle(data=cercles_noirs, aes(x0=x0,y0=y0,r=r), fill="black", alpha=0.15, colour=NA)
+   }
+   
+   p <- p +
+      geom_circle(data=cercles_du_jour, aes(x0=x0,y0=y0,r=r), fill="magenta", alpha=0.3, colour="red", linewidth=0.3) +
+      geom_point(data=df_combustibles, aes(x,y), colour="purple", size=0.5) +
+      geom_point(data=df_hors_zone, aes(x,y), colour="lightblue", alpha=0.3, size=0.35) +
+      coord_fixed(xlim=c(0,1), ylim=c(0,1), expand=FALSE) +
+      theme_minimal() +
+      labs(
+         title=paste("Jour", jour),
+         subtitle=paste0("Aire : ", round(fraction_aire_cumulee * 100, 1), 
+                          "% | Front Int : ", round(frontiere_interne_totale, 2),
+                          " | Front Ext : ", round(frontiere_externe_totale, 2))
+      )
+   
+   print(p)
+   Sys.sleep(0.4)
+   
+   # Arrêt si le carré est couvert
+   if(fraction_aire_cumulee >= 0.999){
+      cat("Le carré est entièrement brûlé.\n")
+      break
+   }
+   
+   # Passage au lendemain
+   if(pts_comb_du_jour$n == 0){
+      cat("Plus aucun nouveau combustible atteint.\n")
+      break
+   } else {
+      pts_actuels <- pts_comb_du_jour
+      jour <- jour + 1
+   }
+}
+
+#------------------------------------------------------
+# 4. GRAPHIQUES RÉCAPITULATIFS FINAUX (SANS PATCHWORK)
+#------------------------------------------------------
+cat("\nGénération de la synthèse finale...\n")
+
+# Conversion de la forme géométrique finale de l'union en data.frame pour ggplot
+df_union_finale <- as.data.frame(union_totale)
+
+# Sécurisation de l'identifiant de groupe pour geom_polygon
+nom_id <- grep("id", names(df_union_finale), value = TRUE)
+df_union_finale$group_id <- if(length(nom_id) > 0) df_union_finale[[nom_id]] else 1
+
+# Graphe A : Cartographie de la RÉUNION des cercles (Silhouette calcinée finale)
+p_map <- ggplot() +
+   geom_polygon(data = df_union_finale, 
+                aes(x = x, y = y, group = group_id), 
+                fill = "grey20", colour = "black", linewidth = 0.5, alpha = 0.8) +
+   coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+   labs(title = "Zone calcinée finale (Réunion totale)", x = "x", y = "y") +
+   theme_minimal()
+
+# Graphe B : Courbe d'évolution des trois indicateurs géométriques
+p_stats <- ggplot(suivi_mesures, aes(x = jour)) +
+   # 1. Courbe de la fraction d'aire
+   geom_line(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), linewidth = 1) +
+   geom_point(aes(y = fraction_aire, colour = "Fraction d'aire (AA)"), size = 2) +
+   
+   # 2. Courbe de la frontière interne (Front de flamme)
+   geom_line(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), linewidth = 1, linetype = "dashed") +
+   geom_point(aes(y = frontiere_interne/max(frontiere_interne,1), colour = "Front de flamme interne (LA)"), size = 2) +
+   
+   # 3. Courbe de la frontière externe globale
+   geom_line(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), linewidth = 1, linetype = "dotted") +
+   geom_point(aes(y = frontiere_externe/max(frontiere_externe,1), colour = "Frontière externe globale"), size = 2) +
+   
+   scale_colour_manual(values = c(
+      "Fraction d'aire (AA)" = "darkred", 
+      "Front de flamme interne (LA)" = "darkblue",
+      "Frontière externe globale" = "darkgreen"
+   )) +
+   labs(title = "Cinétique de propagation", x = "Jour", y = "Valeurs absolues", colour = "Indicateur") +
+   theme_minimal() +
+   theme(legend.position = "bottom", legend.box = "vertical")
 
 # Affichage des deux graphiques côte à côte avec la bibliothèque standard grid
 grid.newpage()
