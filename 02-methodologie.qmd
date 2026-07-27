@@ -937,7 +937,7 @@ cat("Fraction d'aire (par unité d'aire)   :", fraction_aire, "\n")
 
 ```
 
-La fraction d'aire calculée est d'environ $0,096$ et la frontière moyenne est d'environ $2,08$. On a donc $$0,096=1-exp(- \lambda  \pi  R^2)$$ et $$2,08= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\bar\lambda \approx 4,17$ et $ \bar R \approx 0,087$. On avit choisi au préalable $R \sim  exp(20)$ et $N(A) \sim  Poisson(5 \vert A \vert)$ (où $A=[0,1] \times [0,1]$ et $\vert A \vert=1$). De telle sorte que $\mathbb{E}(R)= \frac{1}{20}=0,05$ et $\mathbb{E}(N(A))=5 \times 1=5$. Ce qui est ssez proche des résultats obtenus (respectivement $0,087$ et $4,17$).
+La fraction d'aire calculée est d'environ $0,096$ et la frontière moyenne est d'environ $2,08$. On a donc $$0,096=1-exp(- \lambda  \pi  R^2)$$ et $$2,08= \lambda exp(- \lambda  \pi  R^2) 2 \pi R$$. On obtient $\bar\lambda \approx 4,17$ et $ \bar R \approx 0,087$. On avit choisi au préalable $R \sim  exp( \nu)$ où $\nu=20$ et $N(A) \sim  Poisson( \lambda  A)$ où $\lambda=5$ et$A=[0,1] \times [0,1]$ et $\vert A \vert=1$. De telle sorte que $\mathbb{E}(R)= \frac{1}{ \nu}= \frac{1}{20}=0,05$ et $\mathbb{E}(N(A))= \lambda \times  \vert A \vert=5 \times \vert [0,1] \times[0,1] \vert=5$. Ce qui est ssez proche des résultats obtenus (respectivement $0,087$ et $4,17$).
 
 ### Estmation du maximum de vraisemblance
 
