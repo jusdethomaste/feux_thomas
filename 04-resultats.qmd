@@ -2,7 +2,7 @@
 
 ## La méthode de Serra
 
-La méthode de Serra fait une synthèse assez complète des concepts vus au chapitre 2. D'abord, on regarde les points chauds d'une région au temps $t=0$ (voir Figure 4.1),
+La méthode de Serra [@serra2010]fait une synthèse assez complète des concepts vus au chapitre 2. D'abord, on regarde les points chauds d'une région au temps $t=0$ (voir Figure 4.1),
 
 ```{r}
 library(ggplot2)

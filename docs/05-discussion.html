@@ -112,6 +112,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -435,8 +464,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="discussion" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="discussion"><span class="header-section-number">5.1</span> Discussion</h2>
-<p>Quand on regarde comment les choses se passent au Québec, on aperçoit qu’on fait affaire à un cas où les feux sont concentrés à une période particulière de l’année (se référer à la figure ci-dessous)</p>
-<div id="fig-crsng" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left" width="100%">
+<p>Quand on regarde comment les choses se passent au Québec, on aperçoit qu’on fait affaire à un cas où les feux sont concentrés à une période particulière de l’année (se référer à la figure ci-dessous).</p>
+<div id="fig-crsng" class="quarto-float quarto-figure quarto-figure-left anchored" width="100%" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-crsng-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/comparaison_qc_malaisie_2023.png" id="fig-crsng" class="img-fluid quarto-figure quarto-figure-left anchored figure-img" style="width:100.0%">
@@ -446,6 +475,7 @@ Figure&nbsp;5.1
 </figcaption>
 </figure>
 </div>
+<p>Pour le Québec, on aperçoit un pic de feux entre les mois de juin et de juillet, quand on compare au nombre de feux en malaisie, qui est assez uniforme, on se rend compte que les feux sont répartis très densément au Québec. Il est intuitif de voir la fonction <span class="math inline">\(k_Q(t)\)</span> comme une fonction qui atteint un sommet quelque part au début de l’été et qui est presque nulle partout ailleurs. Si on prend la moyenne des 10 dernières années, on obtient:</p>
 
 
 <!-- -->
@@ -933,9 +963,18 @@ Figure&nbsp;5.1
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Quand on regarde comment les choses se passent au Québec, on aperçoit qu'on fait affaire à un cas où les feux sont concentrés à une période particulière de l'année (se référer à la figure ci-dessous)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Quand on regarde comment les choses se passent au Québec, on aperçoit qu'on fait affaire à un cas où les feux sont concentrés à une période particulière de l'année (se référer à la figure ci-dessous).</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/comparaison_qc_malaisie_2023.png)</span>{#fig-crsng fig-align="left" width=100%}</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/comparaison_qc_malaisie_2023.png)</span>{#fig-crsng fig-align="left" width=100%}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Pour le Québec, on aperçoit un pic de feux entre les mois de juin et de juillet, quand on compare au nombre de feux en malaisie, qui est assez uniforme, on se rend compte que les feux sont répartis très densément au Québec. Il est intuitif de voir la fonction $k_Q(t)$ comme une fonction qui atteint un sommet quelque part au début de l'été et qui est presque nulle partout ailleurs. Si on prend la moyenne des 10 dernières années, on obtient:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+</code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
