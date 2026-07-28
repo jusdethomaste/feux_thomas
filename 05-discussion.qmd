@@ -8,10 +8,8 @@ Quand on regarde comment les choses se passent au Québec, on aperçoit qu'on fa
 
 Pour le Québec, on aperçoit un pic de feux entre les mois de juin et de juillet, quand on compare au nombre de feux en malaisie, qui est assez uniforme, on se rend compte que les feux sont répartis très densément au Québec. Il est intuitif de voir la fonction $k_Q(t)$ comme une fonction qui atteint un sommet quelque part au début de l'été et qui est presque nulle partout ailleurs. Si on prend la moyenne des 10 dernières années, on obtient:
 
-```{r}
+![](images/saison_feux_qc.png){#fig-saison-feux fig-align="center" width=95%}
 
-```
-
-
+Le sommet est clairement atteint vers la fin du mois de juin ou le début du mois de juillet.
 
 
