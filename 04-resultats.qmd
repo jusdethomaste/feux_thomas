@@ -257,7 +257,7 @@ ggplot() +
 jusqu'à ce qu'on arrive à un de deux scénarios. Le premier: la réunion de tous les feux recouvre entièrement la région étudiée. On arrête, car il n'y a plus de progression. Le deuxième: aucun combustible n'est généré dans les feux de la veille. On arrête, car la propagation est terminée. 
 
 
-## Exemple 1 ($\theta$ et $\delta$ moyens)
+### Exemple 1 ($\theta$ et $\delta$ moyens)
 
 Dans les images ci-dessous, un exemple a été réalisé avec la fonction d'intensité $\theta_1(x,y)=100+100x+100y+100y^3$ (à noter que k est constante dans ce cas-ci) et $\delta_1(x,y)=\frac{\lfloor 4+3x+2y\rfloor}{100}$. Une modification a été ajoutée à l'idée de base; les feux ne peuvent pas se propager à un endroit qui a été brûlé depuis un certain temps (2 jours dans ce cas-ci).
 
@@ -483,7 +483,7 @@ print(suivi_mesures)
 
 
 
-## Exemple 2 ($\theta$ grand et $\delta$ moyen)
+### Exemple 2 ($\theta$ grand et $\delta$ moyen)
 
 On refait la simulation, toutefois, on utilise $\theta_2=5\theta_1$ et $\delta_1$.
 
@@ -706,7 +706,7 @@ print(suivi_mesures)
 ```
 
 
-## Exemple 3 ($\theta$ petit et $\delta$ moyen)
+### Exemple 3 ($\theta$ petit et $\delta$ moyen)
 
 On répète les étapes, mais on utilise cette fois-ci $\theta_3=\frac{\theta_1}{3}$ et $\delta_1$.
 
@@ -930,7 +930,7 @@ print(suivi_mesures)
 ```
 
 
-## Exemple 4 ($\theta$ grand et $\delta$ petit)
+### Exemple 4 ($\theta$ grand et $\delta$ petit)
 
 On s'en prend maintenant à $\delta$. On prend $\delta_2=\frac{\delta_1}{3}$ et $\theta_2$.
 
@@ -1154,7 +1154,7 @@ print(suivi_mesures)
 ```
 
 
-## Exemple 5 ($\theta$ petit et $\delta$ grand)
+### Exemple 5 ($\theta$ petit et $\delta$ grand)
 
 Finalement, on observe ce qui se passe avec $\delta_3=3\delta_1$ et $\theta_3$.
 
@@ -1375,7 +1375,7 @@ print(suivi_mesures)
 ```
 
 
-## Exemple 6 ($\theta$ et $\delta$ grands)
+### Exemple 6 ($\theta$ et $\delta$ grands)
 
 On fait ici la simulation avec $\theta_2$ et $\delta_3$.
 
@@ -1595,6 +1595,806 @@ print(suivi_mesures)
 
 
 
-## Conclusion des résultats
+### Conclusion des résultats
 
 Avec ces simulations, on voit que la fonction qui a le plus grand effet sur l'aire couverte est la fonction $\delta$. Dans 4.6, on a une grande aire couverte, malgré un petit $\theta$. Au contraire, dans 4.5, on utilise un grand $\theta$, mais le petit $\delta$ empêche au feu de prendre beaucoup d'ampleur.
+
+## Probabilité que le feu s'éteigne après la première étape
+
+Notons par $h(n\vert x_0)$ la probabilité que le feu s'éteigne au plus à la n-ième étape, où $x_0$ est l'ensemble des points qui ont été générés à l'intérieur de la réunion des feux du jour précédent. Alors $h(1\vert x_0)$ représente la probabilité qu'aucun combustible ne soit généré au jour 2 dans $\delta(x_0)$. On a $h(1\vert x_0)=exp(-\theta(\delta(x_0)))$[@serra2010].
+
+### Exemple avec $\delta$ et $\theta$ constants
+
+On commence avec les points chauds qui sont situés au même endroit qu'à la Figure 2.8, on génère un processus de poisson d'intensité $\theta$ pour estimer l'intensité des combustibles (on assume la constance) et $\delta$ pour tous les points (on assume la constance, il suffit alors de calculer le rayon pour un des cercles)
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Points de départ imposés (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# Paramètres constants (Modèle homogène)
+delta_constant <- 0.04
+theta_constant <- 50
+
+#--------------------------
+# ÉTAPE 1 : PROPAGATION
+#--------------------------
+
+# 1. Génération des rayons fixes (delta constant)
+r <- rep(delta_constant, pts_actuels$n)
+
+df_cercles_jour1 <- data.frame(
+   x0 = pts_actuels$x,
+   y0 = pts_actuels$y,
+   r  = r
+)
+
+# 2. Union géométrique des disques restreinte au carré
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# 3. Processus de Poisson homogène pour les combustibles (theta constant)
+pts_comb_tous <- rpoispp(theta_constant, win = w)
+
+# 4. Détection des combustibles touchés (Futurs foyers du Jour 2)
+est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+
+df_comb_touches <- data.frame(
+   x = pts_comb_tous$x[est_touche],
+   y = pts_comb_tous$y[est_touche]
+)
+
+df_comb_intacts <- data.frame(
+   x = pts_comb_tous$x[!est_touche],
+   y = pts_comb_tous$y[!est_touche]
+)
+
+#--------------------------
+# GRAPHIOUE DE L'ÉTAPE 1 AVEC COMPTE DES POINTS
+#--------------------------
+ggplot() +
+   # Cercles de dilatation (Zone balayée au Jour 1)
+   geom_circle(data = df_cercles_jour1, aes(x0=x0, y0=y0, r=r),
+               fill = "magenta", alpha = 0.25, colour = "red", linewidth = 0.4) +
+   
+   # Combustibles non touchés (Hors des cercles)
+   geom_point(data = df_comb_intacts, aes(x, y), 
+              colour = "lightblue", alpha = 0.5, size = 0.6) +
+   
+   # Nouveaux foyers allumés (Dans les cercles, valides pour le Jour 2)
+   geom_point(data = df_comb_touches, aes(x, y), 
+              colour = "purple", size = 1) +
+   
+   # Germes initiaux du Jour 1
+   geom_point(data = data.frame(x=coordonnees_x, y=coordonnees_y), aes(x, y),
+              colour = "darkred", size = 1) +
+   
+   # --- AJOUT DU TEXTE SUR LE GRAPHIQUE ---
+   annotate("label", x = 0.05, y = 0.95, 
+            label = paste0("Total des combustibles : ", pts_comb_tous$n, 
+                           "\nNouveaux foyers : ", nrow(df_comb_touches)),
+            hjust = 0, vjust = 1, 
+            fill = "white", alpha = 0.8, colour = "black", size = 3.5) +
+   
+   coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+   labs(title = "Figure 2.9 : Première étape de propagation",
+        x = "x", y = "y") +
+   theme_minimal()
+
+
+```
+
+Puisqu'on assume la constance pour les deux paramètres, on a $\delta=0.04$ et $\theta=53$. Pour obtenir la probabilité que le feu s'éteigne à la première étape, il suffit de calculer $\int_{\hat\delta(x_0)}\hat\theta(x,y)dA$; on trouve $\int_{\hat\delta(x_0)}\hat\theta(x,y)dA\approx1,066$. Autrement dit, on a $\mathbb{E}(N(\hat\delta(x_0)))\approx1,066$, de telle sorte que $N(\hat\delta(x_0)) \sim Poisson(1,066)$ et que $\mathbb{P}(N(\hat\delta(x_0))=0)=e^{-1,066} \frac{1,066^0}{0!}= \frac{1}{e^{1,066}} \approx 0,344$, donc $\mathbb{P}(N (\hat\delta(x_0)) \geq 1)=1-\mathbb{P}(N(\delta(x_0))=0) \approx 0,656$.
+
+```{r}
+library(spatstat)
+library(ggplot2)
+
+set.seed(42)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Points de départ imposés (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# Paramètres constants
+delta_constant <- 0.04
+theta_constant <- 50
+n_simulations <- 250
+
+# Union géométrique fixe des disques du Jour 1
+r <- rep(delta_constant, pts_actuels$n)
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#--------------------------
+# BOUCLE DE MONTE-CARLO
+#--------------------------
+succes <- 0L # Compteur d'itérations avec au moins un point
+historique_comptes <- integer(n_simulations)
+
+for(sim in 1:n_simulations) {
+  
+  # 1. Génération d'une nouvelle réalisation du processus de Poisson homogène
+  pts_comb_tous <- rpoispp(theta_constant, win = w)
+  
+  # 2. Détection des combustibles capturés par la géométrie fixe
+  est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+  nb_touches <- sum(est_touche)
+  
+  # Stockage pour analyse statistique facultative
+  historique_comptes[sim] <- nb_touches
+  
+  # 3. Vérification de la condition : au moins un point présent
+  if(nb_touches >= 1) {
+    succes <- succes + 1L
+  }
+}
+
+#--------------------------
+# CALCUL DES PROBABILITÉS
+#--------------------------
+probabilite_empirique <- succes / n_simulations
+
+#--- AFFICHAGE STRICT DES RÉSULTATS ---
+cat("--- RÉSULTATS DES 250 SIMULATIONS ---\n")
+cat("Nombre de simulations avec au moins un foyer :", succes, "/", n_simulations, "\n")
+cat("Probabilité empirique (Monte-Carlo)          :", probabilite_empirique, "\n")
+
+```
+
+On arrive avec un résultat assez près du résultat attendu avec 0,644 lorsqu'on fait la simulation 250 fois. Les paramètres réels utilisés étaient $\delta=0,04$ et $\theta=50$.
+
+### Exemple avec $\delta$ de la forme $\delta=ax+by+c$ et $\theta$ constant
+
+On refait l'exemple précédent, on assume à nouveau que $\theta$ est constant, mais on assume que $\delta$ est de la forme $ax+by+c=0$:
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Points de départ imposés (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# --- NOUVEAU : FONCTION DELTA LINÉAIRE ax + by + c ---
+delta <- function(x, y) {
+  0.04 * x + 0.03 * y + 0.02
+}
+theta_constant <- 50
+
+#--------------------------
+# ÉTAPE 1 : PROPAGATION
+#--------------------------
+
+# 1. Calcul des rayons selon la position de chaque germe
+r <- delta(pts_actuels$x, pts_actuels$y)
+
+df_cercles_jour1 <- data.frame(
+   x0 = pts_actuels$x,
+   y0 = pts_actuels$y,
+   r  = r
+)
+
+# 2. Union géométrique des disques restreinte au carré
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# 3. Processus de Poisson homogène pour les combustibles
+pts_comb_tous <- rpoispp(theta_constant, win = w)
+
+# 4. Détection des combustibles touchés
+est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+
+df_comb_touches <- data.frame(
+   x = pts_comb_tous$x[est_touche],
+   y = pts_comb_tous$y[est_touche]
+)
+
+df_comb_intacts <- data.frame(
+   x = pts_comb_tous$x[!est_touche],
+   y = pts_comb_tous$y[!est_touche]
+)
+
+#--------------------------
+# GRAPHIQUE DE L'ÉTAPE 1
+#--------------------------
+ggplot() +
+   # Cercles de dilatation (Zone balayée au Jour 1 - Rayons variables)
+   geom_circle(data = df_cercles_jour1, aes(x0=x0, y0=y0, r=r),
+               fill = "magenta", alpha = 0.25, colour = "red", linewidth = 0.4) +
+   
+   # Combustibles non touchés
+   geom_point(data = df_comb_intacts, aes(x, y), 
+              colour = "lightblue", alpha = 0.5, size = 0.6) +
+   
+   # Nouveaux foyers allumés
+   geom_point(data = df_comb_touches, aes(x, y), 
+              colour = "purple", size = 1) +
+   
+   # Germes initiaux du Jour 1
+   geom_point(data = data.frame(x=coordonnees_x, y=coordonnees_y), aes(x, y),
+              colour = "darkred", size = 2.5) +
+   
+   # Annotation du nombre total et détails des points
+   annotate("label", x = 0.05, y = 0.95, 
+            label = paste0("Total des combustibles : ", pts_comb_tous$n,
+                           "\nDont touchés (violets) : ", nrow(df_comb_touches),
+                           "\nDont intacts (bleus)  : ", nrow(df_comb_intacts)),
+            hjust = 0, vjust = 1, 
+            fill = "white", alpha = 0.8, colour = "black", size = 3.5) +
+   
+   coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+   labs(title = " Première étape de propagation )",
+        x = "x", y = "y") +
+   theme_minimal()
+
+```
+
+On estime $\hat\theta=53$. En ce qui concerne $\delta$, il suffit d'un peu de résolution de systèmes d'équations linéaires avec les rayon qu'on peut facilement calculer. On obtient $\hat\delta = 0,04x+0,03y +0,02$. On a $\mathbb{E}(N(\hat\delta(x_0)))=\int_{\hat\delta(x_0)}\theta dA=\pi(0,039^2+0,045^2+0,054^2+0,076^2)53=2,038$, donc $N(\delta(x_0))\sim Poisson(2,038)$ et $\mathbb{P}(N(\delta(x_0))\geq 1)= 1-\mathbb{P}(N(\hat\delta(x_0))=0)=1-e^{-2,038}\approx 0,87$. Avec 250 simulations, on obtient:
+
+```{r}
+library(spatstat)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# --- FONCTION DELTA LINÉAIRE ax + by + c ---
+delta <- function(x, y) {
+  0.04 * x + 0.03 * y + 0.02
+}
+theta_constant <- 50
+n_simulations <- 250
+
+# Calcul des rayons déterministes basés sur la fonction delta linéaire
+r <- delta(pts_actuels$x, pts_actuels$y)
+
+# Union géométrique fixe des disques du Jour 1
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#--------------------------
+# BOUCLE DE MONTE-CARLO
+#--------------------------
+succes <- 0L 
+historique_comptes <- integer(n_simulations)
+
+for(sim in 1:n_simulations) {
+  
+  # Génération d'une nouvelle grille de combustibles (Poisson)
+  pts_comb_tous <- rpoispp(theta_constant, win = w)
+  
+  # Détection des captures
+  est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+  nb_touches <- sum(est_touche)
+  
+  historique_comptes[sim] <- nb_touches
+  
+  # Condition d'allumage réussi (au moins 1 point trouvé)
+  if(nb_touches >= 1) {
+    succes <- succes + 1L
+  }
+}
+
+#--------------------------
+# CALCUL DES PROBABILITÉS
+#--------------------------
+probabilite_empirique <- succes / n_simulations
+
+# Formule théorique : P(N >= 1) = 1 - exp(-theta * Aire de l'union à rayons variables)
+aire_union <- spatstat.geom::area(union_jour1)
+probabilite_theorique <- 1 - exp(-theta_constant * aire_union)
+
+#--- AFFICHAGE STRICT DES RÉSULTATS ---
+cat("--- RÉSULTATS DES 250 SIMULATIONS (DELTA LINÉAIRE) ---\n")
+cat("Nombre de simulations avec au moins un foyer :", succes, "/", n_simulations, "\n")
+cat("Probabilité empirique (Monte-Carlo)          :", probabilite_empirique, "\n")
+
+```
+
+On estime un probabilité de 0,832, ce qui est assez près de la probabilité calculée. Les paramètres utilisés sont $\theta=50$ et $\delta(x,y)=0,04x+0,03y+0,02$.
+
+
+### Exemple avec $\delta$ constant et $\theta$ de la forme $\theta=ax+by+c$
+
+On refait l'exemple, cette fois-ci avec $\delta$ constant et $\theta$ de la forme $\theta=ax+by+c$:
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Points de départ imposés (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# Paramètres du modèle
+delta_constant <- 0.04
+
+# --- NOUVEAU : FONCTION THETA LINÉAIRE ax + by + c ---
+theta <- function(x, y) {
+  100 * x + 50 * y + 25
+}
+
+#--------------------------
+# ÉTAPE 1 : PROPAGATION
+#--------------------------
+
+# 1. Génération des rayons fixes (delta constant)
+r <- rep(delta_constant, pts_actuels$n)
+
+df_cercles_jour1 <- data.frame(
+   x0 = pts_actuels$x,
+   y0 = pts_actuels$y,
+   r  = r
+)
+
+# 2. Union géométrique des disques restreinte au carré
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+# 3. Processus de Poisson non homogène pour les combustibles (intensité variable)
+pts_comb_tous <- rpoispp(theta, win = w)
+
+# 4. Détection des combustibles touchés
+est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+
+df_comb_touches <- data.frame(
+   x = pts_comb_tous$x[est_touche],
+   y = pts_comb_tous$y[est_touche]
+)
+
+df_comb_intacts <- data.frame(
+   x = pts_comb_tous$x[!est_touche],
+   y = pts_comb_tous$y[!est_touche]
+)
+
+#--------------------------
+# GRAPHIQUE DE L'ÉTAPE 1
+#--------------------------
+ggplot() +
+   # Cercles de dilatation (Zone balayée au Jour 1 - Rayons constants)
+   geom_circle(data = df_cercles_jour1, aes(x0=x0, y0=y0, r=r),
+               fill = "magenta", alpha = 0.25, colour = "red", linewidth = 0.4) +
+   
+   # Combustibles non touchés
+   geom_point(data = df_comb_intacts, aes(x, y), 
+              colour = "lightblue", alpha = 0.5, size = 0.6) +
+   
+   # Nouveaux foyers allumés
+   geom_point(data = df_comb_touches, aes(x, y), 
+              colour = "purple", size = 1) +
+   
+   # Germes initiaux du Jour 1
+   geom_point(data = data.frame(x=coordonnees_x, y=coordonnees_y), aes(x, y),
+              colour = "darkred", size = 2.5) +
+   
+   # Annotation du nombre total et détails des points
+   annotate("label", x = 0.05, y = 0.95, 
+            label = paste0("Total des combustibles : ", pts_comb_tous$n,
+                           "\nDont touchés (violets) : ", nrow(df_comb_touches),
+                           "\nDont intacts (bleus)  : ", nrow(df_comb_intacts)),
+            hjust = 0, vjust = 1, 
+            fill = "white", alpha = 0.8, colour = "black", size = 3.5) +
+   
+   coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+   labs(title = " Première étape de propagation",
+        x = "x", y = "y") +
+   theme_minimal()
+
+```
+
+
+Des  points générés par le processus de Poisson, on peut faire comme à la section 2.4.2 afin d'estimer une fonction d'intensité. On prendra les valeurs aux sommets (0,0), (1,0), (0,1) et (1,1) afin d'estimer le plan $\theta(x,y)$ en faisant la moyenne des taux de variation moyens (on prend le tvm dans la direction $\alpha=0$ à partir de $y=1$ et $y=0$, même chose avec $\beta=\frac{\pi}{2}$ et $x=1$ et $x=0$, en ce qui concerne c, on estime la fonction en (0,0)):
+
+```{r}
+library(spatstat.geom)
+library(spatstat.random)
+library(ggplot2)
+library(ggforce)
+
+set.seed(40)
+
+#------------------------------------------------------
+# 1. INITIALISATION ET CONFIGURATION DES FONCTIONS
+#------------------------------------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Foyers initiaux (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# --- CONFIGURATION DEMANDÉE : THETA LINÉAIRE ET DELTA CONSTANT ---
+theta <- function(x, y) {
+  50 * x + 50 * y + 50
+}
+delta_constant <- 0.04
+
+#------------------------------------------------------
+# 2. ÉTAPE 1 : PROPAGATION GÉOMÉTRIQUE
+#------------------------------------------------------
+# Rayons constants pour chaque germe
+r <- rep(delta_constant, pts_actuels$n)
+
+# Construction de la zone balayée (Union restreinte à la fenêtre)
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)) {
+  liste_disques[[i]] <- disc(delta_constant, centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#------------------------------------------------------
+# 3. POISSON & ESTIMATION DE L'INTENSITÉ PAR NOYAU
+#------------------------------------------------------
+# Génération des combustibles du jour selon la fonction d'intensité theta
+pts_comb_tous <- rpoispp(theta, win = w)
+
+# Lissage de noyau (Kernel Density) sur les points générés
+den <- density(pts_comb_tous, sigma = 0.3)
+den_f <- as.data.frame(den)
+
+# Filtrage pour différencier visuellement les points capturés
+est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+df_comb_touches <- data.frame(x = pts_comb_tous$x[est_touche], y = pts_comb_tous$y[est_touche])
+df_comb_intacts <- data.frame(x = pts_comb_tous$x[!est_touche], y = pts_comb_tous$y[!est_touche])
+
+
+# --- NOUVEAU : VALEURS D'INTENSITÉ AUX QUATRE COINS ---
+#------------------------------------------------------
+# Création des 4 points géométriques cibles
+points_coins <- ppp(x = c(0, 1, 0, 1), y = c(0, 0, 1, 1), window = w)
+
+# Extraction des valeurs interpolées depuis la grille de lissage den
+valeurs_coins <- safelookup(den, points_coins)
+
+
+#------------------------------------------------------
+# GRAPHIOUE 1 : INTENSITÉ ESTIMÉE EN 2D (ggplot2)
+#------------------------------------------------------
+ggplot() +
+  # Carte de chaleur de la densité estimée en arrière-plan
+  geom_raster(data = den_f, aes(x = x, y = y, fill = value)) +
+  scale_fill_gradientn(colours = c("white", "magenta"), name = "Densité") +
+  
+  # Superposition des cercles de dilatation delta constants
+  geom_circle(data = data.frame(x0 = coordonnees_x, y0 = coordonnees_y, r = r), 
+              aes(x0 = x0, y0 = y0, r = r),
+              fill = "magenta", alpha = 0.12, colour = "red", linewidth = 0.4) +
+  
+  # Points combustibles différenciés (cyan = intacts, orange = capturés par delta)
+  geom_point(data = df_comb_intacts, aes(x, y), colour = "cyan", alpha = 0.6, size = 0.6) +
+  geom_point(data = df_comb_touches, aes(x, y), colour = "orange", size = 1) +
+  
+  # Germes initiaux d'allumage
+  geom_point(data = data.frame(x = coordonnees_x, y = coordonnees_y), aes(x, y), 
+             colour = "black", size = 2.5) +
+  
+  coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+  labs(title = " Fonction d'intensité estimée ",
+       subtitle = paste0("Total des combustibles générés : ", pts_comb_tous$n)) +
+  theme_minimal()
+
+#------------------------------------------------------
+# 4. EXTRACTION ET CALCULS TVM AUX QUATRE COINS
+#------------------------------------------------------
+# Extraction des intensités estimées
+f_0_0 <- safelookup(den, ppp(0, 0, window = w)) # Sud-Ouest
+f_1_0 <- safelookup(den, ppp(1, 0, window = w)) # Sud-Est
+f_0_1 <- safelookup(den, ppp(0, 1, window = w)) # Nord-Ouest
+f_1_1 <- safelookup(den, ppp(1, 1, window = w)) # Nord-Est
+
+# Calculs TVM (Pentes moyennes globale suivant X et Y)
+# Formule Axe X : Moyenne des variations horizontales Nord et Sud
+tvm_x <- ((f_1_1 - f_0_1) + (f_1_0 - f_0_0)) / 2
+
+# Formule Axe Y : Moyenne des variations verticales Est et Ouest
+tvm_y <- ((f_1_1 - f_1_0) + (f_0_1 - f_0_0)) / 2
+
+# --- AFFICHAGE DES RÉSULTATS ---
+cat("\n--- VALEURS EXTRAITES POUR LE TVM ---\n")
+cat("f(0,0) =", f_0_0, " | f(1,0) =", f_1_0, "\n")
+cat("f(0,1) =", f_0_1, " | f(1,1) =", f_1_1, "\n\n")
+
+cat("--- RÉSULTATS DES CALCULS TVM ---\n")
+cat("Pente moyenne horizontale (Axe X) :", tvm_x, "(Théorique : 200)\n")
+cat("Pente moyenne verticale   (Axe Y) :", tvm_y, "(Théorique : 100)\n\n")
+
+# --- ESTIMATION DE LA CONSTANTE c ---
+
+# Méthode A : Évaluation directe au point d'origine (0,0)
+c_estime_direct <- f_0_0
+
+
+
+# --- AFFICHAGE DES RÉSULTATS ---
+cat("--- ESTIMATION DE LA CONSTANTE DE BASE (c) ---\n")
+cat("Estimation directe au point (0,0) [Méthode A]  :", c_estime_direct, "\n")
+
+
+#------------------------------------------------------
+# GRAPHIOUE 2 : SURFACE D'INTENSITÉ ESTIMÉE EN 3D (persp)
+#------------------------------------------------------
+# Rendu tridimensionnel basé sur la matrice de densité calculée
+persp(den$xcol, den$yrow, den$v, theta = 25, phi = 15, col = "magenta", shade = 0.5,
+      border = NA, xlab = "x", ylab = "y", zlab = "z")
+
+title(main = "Fonction d'intensité estimée en relief 3D")
+
+
+
+
+```
+
+On obtient $\hat{\theta}(x,y)\approx 34,84x+31,79y +69,30$. Pour $\hat\delta$, on estime de la même manière qu'au premier exemple, on obtient $\hat\delta=0,04$. Il ne reste plus qu'à faire les calculs; $\mathbb{E}(N(\hat\delta(x_0)))= \int_{\hat\delta(x_0)}\hat\theta(x,y)dA=\pi r^2(\hat\theta (0,1;0,4)+ \hat\theta(0,4;0,3) +\hat\theta(0,7;0,2)+ \hat\theta(0,8;0,8))= \pi(0,04)^2(88,68+92,77+100,05+122,6)\approx2,03$, de telle sorte que $N(\hat\delta(x_0))\sim Poisson(2,03)$ et donc, $\mathbb{P}(N(\hat\delta(x_0))\geq 1)= 1-\mathbb{P} (N(\hat\delta(x_0))=0) =1=e^{-2,03}\approx0,87$. Faisons la simulation:
+
+```{r}
+library(spatstat)
+
+set.seed(40)
+
+#--------------------------
+# INITIALISATION
+#--------------------------
+w <- owin(c(0,1), c(0,1))
+
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# Paramètres
+delta_constant <- 0.04
+n_simulations <- 250
+
+# --- FONCTION THETA LINÉAIRE ax + by + c ---
+theta <- function(x, y) {
+  50 * x + 50 * y + 50
+}
+
+# Union géométrique fixe des disques du Jour 1
+r <- rep(delta_constant, pts_actuels$n)
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#--------------------------
+# BOUCLE DE MONTE-CARLO
+#--------------------------
+succes <- 0L 
+historique_comptes <- integer(n_simulations)
+
+for(sim in 1:n_simulations) {
+  
+  # Génération d'une nouvelle grille de combustibles (Poisson non homogène via theta)
+  pts_comb_tous <- rpoispp(theta, win = w)
+  
+  # Détection des captures
+  est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+  nb_touches <- sum(est_touche)
+  
+  historique_comptes[sim] <- nb_touches
+  
+  # Condition d'allumage réussi (au moins 1 point trouvé)
+  if(nb_touches >= 1) {
+    succes <- succes + 1L
+  }
+}
+
+#--------------------------
+# CALCUL DES PROBABILITÉS
+#--------------------------
+probabilite_empirique <- succes / n_simulations
+
+# Formule théorique exacte pour un processus non homogène : P(N >= 1) = 1 - exp(- Intégrale de theta sur l'union)
+# Convertit la fonction theta et l'union en grille de pixels pour calculer l'intégrale spatiale numérique exacte
+image_theta <- as.im(theta, W = union_jour1)
+integrale_union <- integral.im(image_theta)
+probabilite_theorique <- 1 - exp(-integrale_union)
+
+#--- AFFICHAGE STRICT DES RÉSULTATS ---
+cat("--- RÉSULTATS DES 250 SIMULATIONS (THETA LINÉAIRE) ---\n")
+cat("Nombre de simulations avec au moins un foyer :", succes, "/", n_simulations, "\n")
+cat("Probabilité empirique (Monte-Carlo)          :", probabilite_empirique, "\n")
+
+
+```
+
+Avec la simulation qui a été faite, on obtient une probabilité de 0,892, ce qui est près de la probabilité estimée de 0,87. Les paramètres utilisés étaient $\delta=0,04$ t $\theta=50x+50y+50$.
+
+
+### Exemple avec $\delta$ et $\theta$ de la forme $ax+by+c$
+
+
+Finalement, on refait le test avec $\delta$ et $\theta$ (dont on assume la forme $ax+by+c$).
+
+
+```{r}
+library(ggplot2)
+library(ggforce)
+library(spatstat)
+
+set.seed(40)
+
+#------------------------------------------------------
+# 1. INITIALISATION ET FONCTIONS DU MODÈLE
+#------------------------------------------------------
+w <- owin(c(0,1), c(0,1))
+
+# Points de départ (Germes Jour 1)
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+# Modèle linéaire double (Theta et Delta variables)
+theta <- function(x, y) { 34.84 * x + 31.79 * y + 69.30 }
+delta <- function(x, y) { 0.04 * x + 0.03 * y + 0.04 }
+
+# Calcul des rayons déterministes et de la géométrie de propagation
+r <- delta(pts_actuels$x, pts_actuels$y)
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#------------------------------------------------------
+# 2. GÉNÉRATION DU PROCESSUS ET ANALYSE DES QUADRANTS
+#------------------------------------------------------
+pts_comb_tous <- rpoispp(theta, win = w)
+
+est_touche <- inside.owin(pts_comb_tous$x, pts_comb_tous$y, union_jour1)
+df_comb_touches <- data.frame(x = pts_comb_tous$x[est_touche], y = pts_comb_tous$y[est_touche])
+df_comb_intacts <- data.frame(x = pts_comb_tous$x[!est_touche], y = pts_comb_tous$y[!est_touche])
+
+#------------------------------------------------------
+# 3. RENDU DU RENDU GRAPHIQUE UNIQUE (SANS INTENSITÉ ESTIMÉE)
+#------------------------------------------------------
+ggplot() +
+   
+   # Cercles de dilatation géométrique (delta linéaire)
+   geom_circle(data = data.frame(x0=coordonnees_x, y0=coordonnees_y, r=r), 
+               aes(x0=x0, y0=y0, r=r),
+               fill = "magenta", alpha = 0.15, colour = "red", linewidth = 0.4) +
+   
+   # Points du processus de Poisson (cyan = intacts, orange = capturés par delta)
+   geom_point(data = df_comb_intacts, aes(x, y), colour = "cyan", alpha = 0.6, size = 0.8) +
+   geom_point(data = df_comb_touches, aes(x, y), colour = "orange", size = 1.2) +
+   
+   # Germes initiaux d'allumage (Jour 1)
+   geom_point(data = data.frame(x=coordonnees_x, y=coordonnees_y), aes(x, y), colour = "darkred", size = 2.5) +
+   
+   coord_fixed(xlim = c(0, 1), ylim = c(0, 1), expand = FALSE) +
+   labs(title = "Première étape de propagation ",
+        subtitle = paste0("Total des combustibles générés : ", pts_comb_tous$n), x = "x", y = "y") +
+   theme_minimal()
+
+
+
+```
+
+
+Le $\delta$ utilisé est le même que celui utilisé au deuxième essai et $\theta$ est le même qu'au troisième essai. On utilisera donc $\hat\delta = 0,04x+0,03y +0,02$ et $\hat{\theta}(x,y)\approx 34,84x+31,79y +69,30$. On a donc $\mathbb{E}(N(\hat\delta(x_0)))=\int_{\hat\delta(x_0)}\hat\theta(x,y)dA=\pi((\hat\delta(0,1;0,5))^2\theta(0,1;0,5)+(\hat\delta(0,4;0,3))^2\theta(0,4;0,3)+(\hat\delta(0,7;0,2))^2\theta(0,7;0,2)+(\hat\delta(0,8;0,8))^2\theta(0,8;0,8))\approx4,07$, de telle sorte que $\mathbb{P}(N(\hat\delta(x_0))\geq 1)= 1-\mathbb{P} (N(\hat\delta(x_0))=0) =1-e^{-4,07}\approx0,983$. Avec les simulations, on obtient;
+
+```{r}
+library(spatstat)
+
+set.seed(40)
+
+#------------------------------------------------------
+# 1. ENCAPSULATION DU CADRE GÉOMÉTRIQUE FIXE
+#------------------------------------------------------
+w <- owin(c(0,1), c(0,1))
+
+coordonnees_x <- c(0.1, 0.4, 0.7, 0.8)
+coordonnees_y <- c(0.5, 0.3, 0.2, 0.8)
+pts_actuels <- ppp(coordonnees_x, coordonnees_y, window = w)
+
+theta <- function(x, y) { 50 * x + 50 * y + 50 }
+delta <- function(x, y) { 0.04 * x + 0.03 * y + 0.02 }
+
+# Les positions des germes étant fixes, les rayons delta et l'union géométrique sont constants
+r <- delta(pts_actuels$x, pts_actuels$y)
+liste_disques <- vector("list", pts_actuels$n)
+for(i in seq_len(pts_actuels$n)){
+   liste_disques[[i]] <- disc(r[i], centre = c(pts_actuels$x[i], pts_actuels$y[i]))
+}
+union_jour1 <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+
+#------------------------------------------------------
+# 2. BOUCLE MONTE-CARLO CHRONOLOGIQUE (N = 250)
+#------------------------------------------------------
+n_simulations <- 250
+succes <- 0L 
+
+for(sim in 1:n_simulations) {
+  # Régénération spatiale indépendante du processus de Poisson non homogène via theta théorique
+  pts_simulation <- rpoispp(theta, win = w)
+  
+  # Analyse des points capturés
+  points_captures <- inside.owin(pts_simulation$x, pts_simulation$y, union_jour1)
+  
+  if(sum(points_captures) >= 1) {
+    succes <- succes + 1L
+  }
+}
+
+#------------------------------------------------------
+# 3. EXTRACTION DES PROBABILITÉS COMPARATIVES
+#------------------------------------------------------
+probabilite_empirique <- succes / n_simulations
+
+# Résolution numérique de l'intégrale de la fonction théorique theta sur l'union
+image_theta <- as.im(theta, W = union_jour1)
+integrale_union <- integral.im(image_theta)
+probabilite_theorique <- 1 - exp(-integrale_union)
+
+# Affichage formel dans la console
+cat("--- RÉSULTATS DE LA VALIDATION DE MONTE-CARLO (250 SIMULATIONS) ---\n")
+cat("Nombre de simulations avec propagation réussie :", succes, "/", n_simulations, "\n")
+cat("Probabilité empirique (Monte-Carlo)            :", probabilite_empirique, "\n")
+
+```
+
+
+On finit avec une probabilité estimée de 0,988; très près de la probabilité calculée de 0,983. Avec la simulation qui a été faite, on obtient une probabilité de 0,892, ce qui est près de la probabilité estimée de 0,87. Les paramètres utilisés étaient $\delta=0,04x+0,03y+0,02$ et $\theta=50x+50y+50$.
+
+

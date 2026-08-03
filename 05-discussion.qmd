@@ -10,6 +10,6 @@ Pour le Québec, on aperçoit un pic de feux entre les mois de juin et de juille
 
 ![](images/saison_feux_qc.png){#fig-saison-feux fig-align="center" width=95%}
 
-Le sommet est clairement atteint vers la fin du mois de juin ou le début du mois de juillet.
+Le sommet est clairement atteint entre la fin du mois de juin et le début du mois de juillet.
 
 
