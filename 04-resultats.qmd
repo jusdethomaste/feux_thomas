@@ -1770,7 +1770,7 @@ On arrive avec un résultat assez près du résultat attendu avec 0,644 lorsqu'o
 
 ### Exemple avec $\delta$ de la forme $\delta=ax+by+c$ et $\theta$ constant
 
-On refait l'exemple précédent, on assume à nouveau que $\theta$ est constant, mais on assume que $\delta$ est de la forme $ax+by+c=0$:
+On refait l'exemple précédent, on assume à nouveau que $\theta$ est constant, mais on assume que $\delta$ est de la forme $ax+by+c$:
 
 ```{r}
 library(ggplot2)
@@ -2398,3 +2398,202 @@ cat("Probabilité empirique (Monte-Carlo)            :", probabilite_empirique, 
 On finit avec une probabilité estimée de 0,988; très près de la probabilité calculée de 0,983. Avec la simulation qui a été faite, on obtient une probabilité de 0,892, ce qui est près de la probabilité estimée de 0,87. Les paramètres utilisés étaient $\delta=0,04x+0,03y+0,02$ et $\theta=50x+50y+50$.
 
 
+### Simulation permettant d'estimer $h(5\vert x_0)$
+
+
+Afin de réaliser cette simulation, on découpe le carré unité en 400 carrés de mêmes dimensions (on ne peut pas faire les simulations pour tous les points du carré unité; il y en a trop, mais on peut imaginer que la fonction ressemble à ce qui est obtenu avec notre nombre fini de points). On fait cinquante simulations pour chacun des points centraux des chaque carré. À chaque simulation, on fait comme aux exemples précedents, mais au plus cinq fois de suites. Si, au cours d'une des cinq étapes, la propagation cesse, il s'agit d'un échec, sinon (si le feu ne s'éteint pas en cinq étapes ou moins), c'est un succès. Pour estimer la probabilité en chaque point, on divise le nombre de succès par le nombre de simulations. Les paramètres utilisés sont $\theta(x,y)=50x+50y+50$ et $\delta(x,y)=0,04x+0,03y+0,04$. Notons qu'ici, on a $h(5\vert x_0)=q(x,y)$.
+
+
+
+```{r}
+library(spatstat)
+library(ggplot2)
+
+set.seed(40)
+
+#------------------------------------------------------
+# 1. PARAMÈTRES ET FONCTIONS LINÉAIRES DE L'ARTICLE
+#------------------------------------------------------
+w <- owin(c(0,1), c(0,1))
+
+theta <- function(x, y) { 50 * x + 50 * y + 50 }
+delta <- function(x, y) { 0.04 * x + 0.03 * y + 0.04 }
+
+# Configuration de la grille d'étude (ex: 15x15 points de départ pour le calcul)
+resolution_grille <- 20 
+n_simulations_par_point <- 50
+max_etapes <- 5
+
+# Création de la grille des coordonnées de départ (x_0)
+grille_departs <- expand.grid(
+  x0 = seq(0.025, 0.975, length.out = resolution_grille),
+  y0 = seq(0.025, 0.975, length.out = resolution_grille)
+)
+grille_departs$q_valeur <- numeric(nrow(grille_departs))
+
+#------------------------------------------------------
+# 2. DOUBLE BOUCLE DE MONTE-CARLO
+#------------------------------------------------------
+cat("Calcul de la fonction q(x,y) en cours (veuillez patienter)...\n")
+
+for(p in 1:nrow(grille_departs)) {
+  
+  # Point de départ courant
+  x_init <- grille_departs$x0[p]
+  y_init <- grille_departs$y0[p]
+  
+  compteur_extinctions <- 0L
+  
+  for(sim in 1:n_simulations_par_point) {
+    
+    # Étape 0 : Un unique foyer initial
+    pts_actifs <- ppp(x_init, y_init, window = w)
+    
+    # Évolution sur n étapes
+    for(etape in 1:max_etapes) {
+      
+      if(pts_actifs$n == 0) break # Le feu est déjà éteint
+      
+      # Propagation géométrique déterministe via delta
+      r <- delta(pts_actifs$x, pts_actifs$y)
+      liste_disques <- vector("list", pts_actifs$n)
+      for(i in seq_len(pts_actifs$n)) {
+        liste_disques[[i]] <- disc(r[i], centre = c(pts_actifs$x[i], pts_actifs$y[i]))
+      }
+      union_propagation <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+      
+      # Génération des combustibles via theta
+      combustibles_potentiels <- rpoispp(theta, win = w)
+      
+      # Les points capturés deviennent les foyers de l'étape suivante
+      captures <- inside.owin(combustibles_potentiels$x, combustibles_potentiels$y, union_propagation)
+      pts_actifs <- ppp(combustibles_potentiels$x[captures], combustibles_potentiels$y[captures], window = w)
+    }
+    
+    # Si à la fin (ou avant), le nombre de foyers est tombé à 0 : extinction réussie
+    if(pts_actifs$n == 0) {
+      compteur_extinctions <- compteur_extinctions + 1L
+    }
+  }
+  
+  # Stockage de la proportion d'extinction pour ce point (Valeur de la fonction q)
+  grille_departs$q_valeur[p] <- compteur_extinctions / n_simulations_par_point
+}
+
+#------------------------------------------------------
+# 3. CARTOGRAPHIE DE LA FONCTION q(x,y)
+#------------------------------------------------------
+cat("Génération de la carte de probabilité d'extinction...\n")
+
+ggplot(grille_departs, aes(x = x0, y = y0, fill = q_valeur)) +
+  geom_tile(colour = "white", linewidth = 0.1) +
+  scale_fill_viridis_c(name = "Probabilité\nd'extinction (q)", option = "A", direction = -1) +
+  coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+  labs(
+    title = "q(x,y)",
+    x = "X",
+    y = "Y"
+  ) +
+  theme_minimal()
+
+```
+
+
+On refait les mêmes simulations ici, on réutilise le même $\theta(x,y)$ qu'aux simulations précédentes, mais on utilise $\delta(x,y)=-0,02x-0,01x+0,06$.
+
+
+```{r}
+library(spatstat)
+library(ggplot2)
+
+set.seed(40)
+
+#------------------------------------------------------
+# 1. PARAMÈTRES ET FONCTIONS LINÉAIRES DE L'ARTICLE
+#------------------------------------------------------
+w <- owin(c(0,1), c(0,1))
+
+theta <- function(x, y) { 50 * x + 50 * y + 50 }
+delta <- function(x, y) { -0.02 * x - 0.01 * y + 0.08 }
+
+# Configuration de la grille d'étude (ex: 15x15 points de départ pour le calcul)
+resolution_grille <- 20
+n_simulations_par_point <- 50
+max_etapes <- 5
+
+# Création de la grille des coordonnées de départ (x_0)
+grille_departs <- expand.grid(
+  x0 = seq(0.025, 0.975, length.out = resolution_grille),
+  y0 = seq(0.025, 0.975, length.out = resolution_grille)
+)
+grille_departs$q_valeur <- numeric(nrow(grille_departs))
+
+#------------------------------------------------------
+# 2. DOUBLE BOUCLE DE MONTE-CARLO
+#------------------------------------------------------
+cat("Calcul de la fonction q(x,y) en cours (veuillez patienter)...\n")
+
+for(p in 1:nrow(grille_departs)) {
+  
+  # Point de départ courant
+  x_init <- grille_departs$x0[p]
+  y_init <- grille_departs$y0[p]
+  
+  compteur_extinctions <- 0L
+  
+  for(sim in 1:n_simulations_par_point) {
+    
+    # Étape 0 : Un unique foyer initial
+    pts_actifs <- ppp(x_init, y_init, window = w)
+    
+    # Évolution sur n étapes
+    for(etape in 1:max_etapes) {
+      
+      if(pts_actifs$n == 0) break # Le feu est déjà éteint
+      
+      # Propagation géométrique déterministe via delta
+      r <- delta(pts_actifs$x, pts_actifs$y)
+      liste_disques <- vector("list", pts_actifs$n)
+      for(i in seq_len(pts_actifs$n)) {
+        liste_disques[[i]] <- disc(r[i], centre = c(pts_actifs$x[i], pts_actifs$y[i]))
+      }
+      union_propagation <- intersect.owin(union.owin(as.solist(liste_disques)), w)
+      
+      # Génération des combustibles via theta
+      combustibles_potentiels <- rpoispp(theta, win = w)
+      
+      # Les points capturés deviennent les foyers de l'étape suivante
+      captures <- inside.owin(combustibles_potentiels$x, combustibles_potentiels$y, union_propagation)
+      pts_actifs <- ppp(combustibles_potentiels$x[captures], combustibles_potentiels$y[captures], window = w)
+    }
+    
+    # Si à la fin (ou avant), le nombre de foyers est tombé à 0 : extinction réussie
+    if(pts_actifs$n == 0) {
+      compteur_extinctions <- compteur_extinctions + 1L
+    }
+  }
+  
+  # Stockage de la proportion d'extinction pour ce point (Valeur de la fonction q)
+  grille_departs$q_valeur[p] <- compteur_extinctions / n_simulations_par_point
+}
+
+#------------------------------------------------------
+# 3. CARTOGRAPHIE DE LA FONCTION q(x,y)
+#------------------------------------------------------
+cat("Génération de la carte de probabilité d'extinction...\n")
+
+ggplot(grille_departs, aes(x = x0, y = y0, fill = q_valeur)) +
+  geom_tile(colour = "white", linewidth = 0.1) +
+  scale_fill_viridis_c(name = "Probabilité\nd'extinction (q)", option = "A", direction = -1) +
+  coord_fixed(xlim = c(0,1), ylim = c(0,1), expand = FALSE) +
+  labs(
+    title = "q(x,y)",
+    x = "X",
+    y = "Y"
+  ) +
+  theme_minimal()
+```
+
+
+
+À l'aide de ces deux simulations, il est assez facile de remarquer que lorsqu'on s'approche des bordures du carré unité. Par exemple, dans la première simualtion, on a, tout en haut à droite, la probabilité d'extinction semble être d'environ 0,25, toutefois, il existe des points avec des $\delta$ et $\theta$ moins élevés qui ont une probabilité d'extinction près de 0. l'explication est assez intuitive; quand $x_0$ approche des bords et surtout des coins, il est possible qu'une partie de $\delta(x_0)$ soit à l'extérieur de la région étudiée. Ainsi, l'espérance du nombre de points diminue, puisque l'aire diminue (probabilité plus basse qu'un point choisi au hasard tombe dans $\delta(x_0)$). 
